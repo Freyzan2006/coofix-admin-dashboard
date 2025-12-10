@@ -11,5 +11,5 @@ build:
 clear:
 	bun run knip
 
-test: format lint build
+test: format lint build clear
 

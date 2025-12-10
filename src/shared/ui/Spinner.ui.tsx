@@ -7,10 +7,10 @@ interface LoadingSpinnerProps {
 	className?: string;
 }
 
-export const LoadingSpinner = ({
+export const Spinner = ({
 	size = "md",
 	fullScreen = false,
-	text = "Загрузка...",
+	text = "",
 	className,
 }: LoadingSpinnerProps) => {
 	const sizeClasses = {

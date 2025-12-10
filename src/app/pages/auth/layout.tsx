@@ -1,13 +1,10 @@
-import { Footer } from "@shared/widgets/Footer.component";
-import { Header } from "@shared/widgets/Header.component";
+import { Screen } from "@shared/widgets/Screen.component";
 import { Outlet } from "react-router";
 
 export default function AuthLayout() {
 	return (
-		<div>
-			<Header />
+		<Screen>
 			<Outlet />
-			<Footer />
-		</div>
+		</Screen>
 	);
 }

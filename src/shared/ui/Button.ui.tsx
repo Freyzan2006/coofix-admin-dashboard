@@ -8,7 +8,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 		| "ghost"
 		| "danger"
 		| "success"
-		| "warning";
+		| "warning"
+		| "neutral";
 	size?: "xs" | "sm" | "md" | "lg" | "xl";
 	loading?: boolean;
 	fullWidth?: boolean;
@@ -39,6 +40,7 @@ export const Button = ({
 		danger: "btn-error",
 		success: "btn-success",
 		warning: "btn-warning",
+		neutral: "btn-neutral",
 	};
 
 	const sizes = {
