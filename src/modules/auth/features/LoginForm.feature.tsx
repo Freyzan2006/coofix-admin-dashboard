@@ -1,5 +1,4 @@
 import { Button } from "@shared/ui/Button.ui";
-import { Input } from "@shared/ui/fields/Input.ui";
 
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
@@ -10,7 +9,7 @@ import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 
 import { Alert } from "@shared/ui/Alert.ui";
 import { useLoginLocal } from "../hooks/login.hook";
-import { LinkApp } from "@shared/ui/Link.ui";
+import { Input } from "@shared/ui/fields";
 
 export const LoginForm: React.FC = () => {
 	const {
@@ -87,10 +86,6 @@ export const LoginForm: React.FC = () => {
 				<Image src="/images/google.png" alt="Google" width={50} />
 				Войти с помощью Google
 			</Button>
-
-			<LinkApp variant="primary" to="/auth/register">
-				Зарегистрироваться
-			</LinkApp>
 		</Form>
 	);
 };

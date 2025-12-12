@@ -5,20 +5,13 @@ import { lazy } from "react";
 import type { RouteObject } from "react-router";
 import NotFoundPage from "@app/pages/not-found";
 
-const HomePage = lazy(() => import("@pages/page"));
-const DashboardPage = lazy(() => import("@pages/dashboard/page"));
-const LoginPage = lazy(() => import("@pages/auth/login/page"));
-const RegisterPage = lazy(() => import("@pages/auth/register/page"));
-const UsersPage = lazy(() => import("@pages/dashboard/users/page"));
-const UserDetailPage = lazy(() => import("@pages/dashboard/users/[id]/page"));
-
 export const paths: RouteObject[] = [
 	{
 		Component: RootLayout,
 		children: [
 			{
 				path: "/",
-				Component: HomePage,
+				Component: lazy(() => import("@pages/page")),
 			},
 			{
 				path: "/auth",
@@ -26,11 +19,7 @@ export const paths: RouteObject[] = [
 				children: [
 					{
 						path: "login",
-						Component: LoginPage,
-					},
-					{
-						path: "register",
-						Component: RegisterPage,
+						Component: lazy(() => import("@pages/auth/login/page")),
 					},
 				],
 			},
@@ -40,18 +29,29 @@ export const paths: RouteObject[] = [
 				children: [
 					{
 						index: true,
-						Component: DashboardPage,
+						Component: lazy(() => import("@pages/dashboard/page")),
 					},
 					{
 						path: "users",
 						children: [
 							{
 								index: true,
-								Component: UsersPage,
+								Component: lazy(() => import("@pages/dashboard/users/page")),
 							},
 							{
 								path: ":userId",
-								Component: UserDetailPage,
+								Component: lazy(
+									() => import("@pages/dashboard/users/[id]/page"),
+								),
+							},
+						],
+					},
+					{
+						path: "products",
+						children: [
+							{
+								index: true,
+								Component: lazy(() => import("@pages/dashboard/products/page")),
 							},
 						],
 					},

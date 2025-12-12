@@ -5,7 +5,7 @@ export const Container: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 	className,
 	...props
 }) => {
-	const baseClass = cn("container mx-auto min-h-screen", className);
+	const baseClass = cn("container mx-auto my-4 min-h-screen", className);
 	return (
 		<div {...props} className={baseClass}>
 			{children}

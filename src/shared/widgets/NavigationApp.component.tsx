@@ -1,6 +1,9 @@
+import { Heading } from "@shared/ui/text";
 import { TableOfContents } from "lucide-react";
 
 export const NavigationApp: React.FC = () => {
+	const urlPage = window.location.pathname;
+
 	return (
 		<nav className="navbar w-full bg-base-300">
 			<label
@@ -10,7 +13,9 @@ export const NavigationApp: React.FC = () => {
 			>
 				<TableOfContents />
 			</label>
-			<div className="px-4">Navbar Title</div>
+			<div className="px-4">
+				<Heading variant="primary">{urlPage}</Heading>
+			</div>
 		</nav>
 	);
 };
