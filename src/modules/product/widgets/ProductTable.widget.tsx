@@ -41,7 +41,7 @@ export const ProductTable: React.FC = () => {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
-	if (products.length === 0) return <Alert variant="primary">Нет данных</Alert>;
+	// if (products.length === 0) return <Alert variant="primary">Нет данных</Alert>;
 
 	const handlerPageChange = (page: number) => {
 		setCurrentPage(page);
