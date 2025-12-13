@@ -28,11 +28,3 @@ export const useProducts = () => {
 		limit,
 	};
 };
-
-export const useAddProduct = () => {
-	const handlerAddProduct = () => {};
-
-	return {
-		handlerAddProduct,
-	};
-};
