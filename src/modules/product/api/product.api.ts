@@ -2,7 +2,7 @@ import type { AxiosInstance } from "axios";
 import type { ProductsModel } from "../model/product.model";
 
 interface IProductApi {
-	findAll(): Promise<ProductsModel>;
+	findAll(page: number, limit: number): Promise<ProductsModel>;
 }
 
 class ProductRestApi implements IProductApi {
@@ -12,8 +12,13 @@ class ProductRestApi implements IProductApi {
 		this.client = client;
 	}
 
-	public async findAll(): Promise<ProductsModel> {
-		const response = await this.client.get<ProductsModel>("/products");
+	public async findAll(page: number, limit: number): Promise<ProductsModel> {
+		const response = await this.client.get<ProductsModel>("/products", {
+			params: {
+				page,
+				limit,
+			},
+		});
 		return response.data;
 	}
 }

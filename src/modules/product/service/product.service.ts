@@ -2,7 +2,7 @@ import type { ProductsModel } from "../model/product.model";
 import type { IProductApi } from "../api/product.api";
 
 interface IProductService {
-	allProducts(): Promise<ProductsModel>;
+	allProducts(page: number, limit: number): Promise<ProductsModel>;
 }
 
 class ProductService implements IProductService {
@@ -10,8 +10,11 @@ class ProductService implements IProductService {
 	constructor(productApi: IProductApi) {
 		this.productApi = productApi;
 	}
-	public async allProducts(): Promise<ProductsModel> {
-		const products = await this.productApi.findAll();
+	public async allProducts(
+		page: number,
+		limit: number,
+	): Promise<ProductsModel> {
+		const products = await this.productApi.findAll(page, limit);
 		console.log("products", products);
 		return products;
 	}

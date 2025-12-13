@@ -29,10 +29,8 @@ export const TableSkeleton: React.FC<ITableSkeletonProps> = ({
 		}[variant],
 	);
 
-	// --- Стабильные id для колонок ---
 	const colIds = useMemo(() => createStableIds(col), [col]);
 
-	// --- Стабильные id для таблицы (строки + колонки) ---
 	const { rowIds, colIds: matrixColIds } = useMemo(
 		() => createMatrixIds(row, col),
 		[row, col],

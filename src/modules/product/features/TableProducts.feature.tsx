@@ -1,4 +1,8 @@
-import { Card } from "@shared/ui/Card.ui";
+import { Alert } from "@shared/ui/Alert.ui";
+import { useProducts } from "../hooks/useProducts.hook";
+import { PackageSearch } from "lucide-react";
+import { CopyText, Heading } from "@shared/ui/text";
+import { Pagination } from "@shared/ui/Pagination.ui";
 import {
 	Table,
 	TableData,
@@ -8,47 +12,27 @@ import {
 	Tbody,
 	Thead,
 } from "@shared/ui/table";
-import { CopyText, Heading } from "@shared/ui/text";
-import { PackageSearch } from "lucide-react";
+import { useAtom } from "@reatom/npm-react";
+import { ProductStore } from "../store/product.store";
 
-import { useProducts } from "../hooks/useProducts.hook";
-import { Alert } from "@shared/ui/Alert.ui";
-import { Pagination } from "@shared/ui/Pagination.ui";
-import { useState } from "react";
+export const TableProducts: React.FC = () => {
+	const [headerTable] = useAtom(ProductStore.headerTableAtom);
 
-const headerTable = [
-	"ID",
-	"name",
-	"slug",
-	"description",
-	"price",
-	"oldPrice",
-	"category",
-	"brand",
-	"images",
-	"characteristics",
-	"inStock",
-	"quantity",
-	"isNew",
-	"isSale",
-	"ratingAvg",
-	"ratingCount",
-	"createdAt",
-];
-
-export const ProductTable: React.FC = () => {
-	const { products, total, isError, isLoading, error } = useProducts();
-	const [currentPage, setCurrentPage] = useState<number>(1);
+	const {
+		products,
+		total,
+		isError,
+		isLoading,
+		error,
+		currentPage,
+		handlerPageChange,
+		limit,
+	} = useProducts();
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
-	// if (products.length === 0) return <Alert variant="primary">Нет данных</Alert>;
-
-	const handlerPageChange = (page: number) => {
-		setCurrentPage(page);
-	};
 
 	return (
-		<Card className="gap-3">
+		<>
 			<div className="flex items-center gap-3 justify-between">
 				<div className="flex items-center gap-3">
 					<PackageSearch />
@@ -62,7 +46,7 @@ export const ProductTable: React.FC = () => {
 			</div>
 
 			{isLoading ? (
-				<TableSkeleton row={5} />
+				<TableSkeleton row={limit + 1} />
 			) : (
 				<Table>
 					<Thead>
@@ -163,6 +147,6 @@ export const ProductTable: React.FC = () => {
 					</Tbody>
 				</Table>
 			)}
-		</Card>
+		</>
 	);
 };

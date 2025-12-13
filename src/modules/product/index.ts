@@ -1,1 +1,1 @@
-export { ProductTable } from "./widgets/ProductTable.widget";
+export { ProductFrame } from "./widgets/ProductFrame.widget";
