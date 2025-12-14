@@ -10,10 +10,6 @@ export const paths: RouteObject[] = [
 		Component: RootLayout,
 		children: [
 			{
-				path: "/",
-				Component: lazy(() => import("@pages/page")),
-			},
-			{
 				path: "/auth",
 				Component: AuthLayout,
 				children: [

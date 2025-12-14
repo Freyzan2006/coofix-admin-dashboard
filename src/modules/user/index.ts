@@ -1,1 +1,1 @@
-export { ProductList } from "./components/ProductList.component";
+export type { UserEntity } from "./entities/user.entity";

@@ -1,4 +1,4 @@
-import type { UserEntity } from "@modules/user/entities/user.entity";
+import type { UserEntity } from "@modules/user";
 
 export interface LoginLocalDtoRequest {
 	email: string;
