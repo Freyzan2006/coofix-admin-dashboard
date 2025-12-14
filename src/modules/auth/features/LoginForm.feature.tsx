@@ -10,8 +10,14 @@ import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 import { Alert } from "@shared/ui/Alert.ui";
 import { useLoginLocal } from "../hooks/login.hook";
 import { Input } from "@shared/ui/fields";
+import { environmentConfig } from "@shared/config";
 
 export const LoginForm: React.FC = () => {
+	const mode = environmentConfig.get<"development" | "prod">("MODE");
+
+	const username = mode === "development" ? "ilhomovabubakir12@gmail.com" : "";
+	const password = mode === "development" ? "admin" : "";
+
 	const {
 		register,
 		handleSubmit,
@@ -33,12 +39,14 @@ export const LoginForm: React.FC = () => {
 
 	const onSubmit: SubmitHandler<LoginLocalDtoRequest> = async (
 		data: LoginLocalDtoRequest,
-	) => await LoginLocal(data);
+	) => {
+		await LoginLocal(data);
+	};
 
 	return (
 		<Form title="Вход" onSubmit={handleSubmit(onSubmit)}>
 			<Input
-				value={"Krasavchikxj@gmail.com"}
+				value={username}
 				error={errors.email?.message}
 				title="Почта"
 				variant="default"
@@ -53,7 +61,7 @@ export const LoginForm: React.FC = () => {
 			/>
 
 			<Input
-				value={"jasur"}
+				value={password}
 				error={errors.password?.message}
 				variant="default"
 				title="Пароль"
