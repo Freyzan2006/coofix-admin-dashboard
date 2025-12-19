@@ -1,6 +1,6 @@
 import { Alert } from "@shared/ui/Alert.ui";
 import { useProducts } from "../hooks/useProducts.hook";
-import { PackageSearch } from "lucide-react";
+import { PackageSearchIcon } from "lucide-react";
 import { CopyText, Heading } from "@shared/ui/text";
 import { Pagination } from "@shared/ui/Pagination.ui";
 import {
@@ -12,11 +12,11 @@ import {
 	Tbody,
 	Thead,
 } from "@shared/ui/table";
-import { useAtom } from "@reatom/npm-react";
-import { ProductStore } from "../store/product.store";
+
+import { useProductStore } from "../store/product.store";
 
 export const TableProducts: React.FC = () => {
-	const [headerTable] = useAtom(ProductStore.headerTableAtom);
+	const { headerTable } = useProductStore();
 
 	const {
 		products,
@@ -31,18 +31,22 @@ export const TableProducts: React.FC = () => {
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 
+	const totalPages = Math.ceil(total / limit) || 1;
+
 	return (
 		<>
 			<div className="flex items-center gap-3 justify-between">
 				<div className="flex items-center gap-3">
-					<PackageSearch />
+					<PackageSearchIcon />
 					<Heading>Таблица с продуктами</Heading>
 				</div>
-				<Pagination
-					current={currentPage}
-					total={total}
-					onChange={handlerPageChange}
-				/>
+				{totalPages > 1 && (
+					<Pagination
+						current={currentPage}
+						total={totalPages}
+						onChange={handlerPageChange}
+					/>
+				)}
 			</div>
 
 			{isLoading ? (
@@ -51,7 +55,7 @@ export const TableProducts: React.FC = () => {
 				<Table>
 					<Thead>
 						<TableRow>
-							{headerTable.map((item) => (
+							{headerTable.map((item: string) => (
 								<TableHeader key={item.toString()}>{item}</TableHeader>
 							))}
 						</TableRow>

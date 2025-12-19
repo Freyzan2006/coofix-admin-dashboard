@@ -1,9 +1,9 @@
-import { atom } from "@reatom/framework";
+import { create } from "zustand";
 
-const pageAtom = atom(1, "pageAtom");
-const limitAtom = atom(2, "limitAtom");
-const headerTableAtom = atom(
-	[
+const ProductState = {
+	page: 1,
+	limit: 2,
+	headerTable: [
 		"ID",
 		"name",
 		"slug",
@@ -22,11 +22,18 @@ const headerTableAtom = atom(
 		"ratingCount",
 		"createdAt",
 	],
-	"headerTableAtom",
-);
-
-export const ProductStore = {
-	pageAtom,
-	limitAtom,
-	headerTableAtom,
 };
+
+interface IProductStore {
+	page: number;
+	limit: number;
+	headerTable: string[];
+	setPage: (page: number) => void;
+	setLimit: (limit: number) => void;
+}
+
+export const useProductStore = create<IProductStore>((set) => ({
+	...ProductState,
+	setPage: (page: number) => set({ page }),
+	setLimit: (limit: number) => set({ limit }),
+}));

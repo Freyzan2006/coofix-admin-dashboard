@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "../di/product.di";
-import { ProductStore } from "../store/product.store";
-
-import { useAtom } from "@reatom/npm-react";
+import { useProductStore } from "../store/product.store";
 
 export const useProducts = () => {
-	const [page, setPage] = useAtom(ProductStore.pageAtom);
-	const [limit] = useAtom(ProductStore.limitAtom);
+	const { page, setPage, limit } = useProductStore();
 
 	const { data, isError, isLoading, error, isPending } = useQuery({
 		queryKey: ["products", page, limit],
