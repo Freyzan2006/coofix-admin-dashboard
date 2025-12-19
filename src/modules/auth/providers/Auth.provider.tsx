@@ -1,25 +1,26 @@
 import { useEffect, type PropsWithChildren } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useAuthStore } from "../store/auth.store";
+import { bootstrapAuth } from "../store/auth.bootstrap";
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-	const currentPath = useLocation();
-	const nav = useNavigate();
-
-	const isAuth = false;
-
 	useEffect(() => {
-		if (isAuth && currentPath.pathname === "/") {
-			nav("/dashboard");
-		}
+		(async () => {
+			const store = useAuthStore.getState();
 
-		if (isAuth && currentPath.pathname === "/auth/login") {
-			nav("/dashboard");
-		}
+			if (store.accessToken) {
+				store.setAuthInitialized(true);
+				return;
+			}
 
-		if (!isAuth && currentPath.pathname !== "/auth/login") {
-			nav("/auth/login");
-		}
-	}, [currentPath.pathname, nav]);
+			const token = await bootstrapAuth();
+
+			if (token) {
+				store.setAccessToken(token);
+			}
+
+			store.setAuthInitialized(true);
+		})();
+	}, []);
 
 	return <>{children}</>;
 };

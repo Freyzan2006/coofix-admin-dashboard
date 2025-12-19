@@ -3,6 +3,7 @@ import { RouterAppProvider } from "./RouterAppProvider";
 import { ThemeProvider } from "./ThemeProvider";
 import { TanStackProvider } from "./TanStackProvider";
 import { StateManagerProvider } from "./StateManagerProvider";
+import { AuthProvider } from "@modules/auth";
 
 export function createProviderApp() {
 	return (
@@ -10,7 +11,9 @@ export function createProviderApp() {
 			<ThemeProvider>
 				<TanStackProvider>
 					<StateManagerProvider>
-						<RouterAppProvider />
+						<AuthProvider>
+							<RouterAppProvider />
+						</AuthProvider>
 					</StateManagerProvider>
 				</TanStackProvider>
 			</ThemeProvider>

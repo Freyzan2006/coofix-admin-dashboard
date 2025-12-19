@@ -10,7 +10,7 @@ export const useProducts = () => {
 
 	const { data, isError, isLoading, error, isPending } = useQuery({
 		queryKey: ["products", page, limit],
-		queryFn: () => productService.allProducts(page, limit),
+		queryFn: async () => await productService.allProducts(page, limit),
 	});
 
 	const handlerPageChange = (page: number) => setPage(page);

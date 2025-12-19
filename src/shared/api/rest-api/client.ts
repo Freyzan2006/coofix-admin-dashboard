@@ -1,15 +1,23 @@
-import axios from "axios";
+// shared/api/newRestApiCli.ts
+import axios, { type AxiosInstance } from "axios";
+import { authRequestMiddleware, authResponseMiddleware } from "./middleware";
 
-export function newRestApiCli(
+export async function newRestApiCli(
 	baseURL: string = "https://coofix-server.onrender.com/api",
 	timeout: number = 25000,
 	headers: Record<string, string> = {
 		"Content-Type": "application/json",
 	},
-) {
-	return axios.create({
+): Promise<AxiosInstance> {
+	const client = axios.create({
 		baseURL,
+		withCredentials: true,
 		timeout,
 		headers,
 	});
+
+	await authRequestMiddleware(client);
+	await authResponseMiddleware(client);
+
+	return client;
 }

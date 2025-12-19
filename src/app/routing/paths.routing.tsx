@@ -1,9 +1,23 @@
-import AuthLayout from "@pages/auth/layout";
-import RootLayout from "@pages/layout";
-import DashboardLayout from "@pages/dashboard/layout";
 import { lazy } from "react";
 import type { RouteObject } from "react-router";
+import { ProtectedRoute } from "@modules/auth";
+import DashboardLayout from "@pages/dashboard/layout";
+import RootLayout from "@pages/layout";
+import AuthLayout from "@pages/auth/layout";
 import NotFoundPage from "@app/pages/not-found";
+
+function withProtected(
+	importFn: () => Promise<{
+		default: React.ComponentType<React.PropsWithChildren>;
+	}>,
+) {
+	const LazyComponent = lazy(importFn);
+	return () => (
+		<ProtectedRoute>
+			<LazyComponent />
+		</ProtectedRoute>
+	);
+}
 
 export const paths: RouteObject[] = [
 	{
@@ -25,18 +39,20 @@ export const paths: RouteObject[] = [
 				children: [
 					{
 						index: true,
-						Component: lazy(() => import("@pages/dashboard/page")),
+						Component: withProtected(() => import("@pages/dashboard/page")),
 					},
 					{
 						path: "users",
 						children: [
 							{
 								index: true,
-								Component: lazy(() => import("@pages/dashboard/users/page")),
+								Component: withProtected(
+									() => import("@pages/dashboard/users/page"),
+								),
 							},
 							{
 								path: ":userId",
-								Component: lazy(
+								Component: withProtected(
 									() => import("@pages/dashboard/users/[id]/page"),
 								),
 							},
@@ -47,7 +63,9 @@ export const paths: RouteObject[] = [
 						children: [
 							{
 								index: true,
-								Component: lazy(() => import("@pages/dashboard/products/page")),
+								Component: withProtected(
+									() => import("@pages/dashboard/products/page"),
+								),
 							},
 						],
 					},

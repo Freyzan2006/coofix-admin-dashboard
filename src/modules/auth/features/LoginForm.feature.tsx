@@ -11,6 +11,7 @@ import { Alert } from "@shared/ui/Alert.ui";
 import { useLoginLocal } from "../hooks/login.hook";
 import { Input } from "@shared/ui/fields";
 import { environmentConfig } from "@shared/config";
+import { useNavigate } from "react-router";
 
 export const LoginForm: React.FC = () => {
 	const mode = environmentConfig.get<"development" | "prod">("MODE");
@@ -18,12 +19,17 @@ export const LoginForm: React.FC = () => {
 	const username = mode === "development" ? "ilhomovabubakir12@gmail.com" : "";
 	const password = mode === "development" ? "admin" : "";
 
+	const nav = useNavigate();
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<LoginLocalDtoRequest>({
-		defaultValues: {},
+		defaultValues: {
+			email: username,
+			password: password,
+		},
 		mode: "onChange",
 		criteriaMode: "firstError",
 		reValidateMode: "onChange",
@@ -41,12 +47,12 @@ export const LoginForm: React.FC = () => {
 		data: LoginLocalDtoRequest,
 	) => {
 		await LoginLocal(data);
+		nav("/dashboard", { replace: true });
 	};
 
 	return (
-		<Form title="Вход" onSubmit={handleSubmit(onSubmit)}>
+		<Form title="Вход в админ панель" onSubmit={handleSubmit(onSubmit)}>
 			<Input
-				value={username}
 				error={errors.email?.message}
 				title="Почта"
 				variant="default"
@@ -61,7 +67,6 @@ export const LoginForm: React.FC = () => {
 			/>
 
 			<Input
-				value={password}
 				error={errors.password?.message}
 				variant="default"
 				title="Пароль"
@@ -77,7 +82,7 @@ export const LoginForm: React.FC = () => {
 
 			{isLoginError && (
 				<Alert variant="danger">
-					<span>{errorLogin?.response?.data?.message || "Ошибка входа"}</span>
+					<span>{errorLogin?.message || "Ошибка входа"}</span>
 				</Alert>
 			)}
 

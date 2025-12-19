@@ -1,31 +1,22 @@
 import { useMutation } from "@tanstack/react-query";
+import { useAuthStore } from "../store/auth.store";
 import { authApi } from "../di/auth.di";
-import type {
-	LoginLocalDtoRequest,
-	LoginLocalDtoResponse,
-} from "../api/dto/login.dto";
-import type { ApiAxiosError } from "@shared/api/rest-api/types";
+import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 
 export const useLoginLocal = () => {
-	const { mutateAsync, isError, isSuccess, isPending, error } = useMutation<
-		LoginLocalDtoResponse,
-		ApiAxiosError,
-		LoginLocalDtoRequest
-	>({
+	const mutation = useMutation({
 		mutationFn: (data: LoginLocalDtoRequest) => authApi.loginLocal(data),
 		onSuccess: (data) => {
-			console.log("Успешный вход:", data);
-		},
-		onError: (error: ApiAxiosError) => {
-			console.error("Ошибка входа:", error);
+			useAuthStore.getState().setAccessToken(data.accessToken);
+			useAuthStore.getState().setRefreshToken(data.refreshToken);
 		},
 	});
 
 	return {
-		LoginLocal: mutateAsync,
-		isLoginError: isError,
-		isLoginSuccess: isSuccess,
-		isLoginPending: isPending,
-		errorLogin: error,
+		LoginLocal: mutation.mutateAsync,
+		errorLogin: mutation.error,
+		isLoginError: mutation.isError,
+		isLoginPending: mutation.isPending,
+		isLoginSuccess: mutation.isSuccess,
 	};
 };
