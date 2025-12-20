@@ -1,9 +1,6 @@
 import type { BrandModel } from "@modules/brand";
 import type { CategoryModel } from "@modules/category";
-
-type CharacteristicsType = {
-	[key: string]: string;
-};
+import type { CharacteristicsType } from "./types";
 
 export interface ProductModel {
 	_id: string;

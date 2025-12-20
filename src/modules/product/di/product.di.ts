@@ -1,4 +1,4 @@
-import { newRestApiCli } from "@shared/api";
+import { newRestApiCli } from "@shared/api/rest-api/client";
 import { environmentConfig } from "@shared/config";
 import { ProductRestApi } from "../api/product.api";
 import { ProductService } from "../service/product.service";
