@@ -1,27 +1,5 @@
 import { create } from "zustand";
 
-// interface AuthState {
-//   accessToken: string | null;
-//   refreshToken: string | null;
-//   isAuthInitialized: boolean;
-//   setAccessToken: (token: string | null) => void;
-//   setRefreshToken: (token: string | null) => void;
-//   setAuthInitialized: (value: boolean) => void;
-//   isAuth: boolean;
-// }
-
-// export const useAuthStore = create<AuthState>((set, get) => ({
-//   accessToken: null,
-//   refreshToken: null,
-//   isAuthInitialized: false,
-//   setAccessToken: (accessToken) => set({ accessToken }),
-//   setRefreshToken: (refreshToken) => set({ refreshToken }),
-//   setAuthInitialized: (value) => set({ isAuthInitialized: value }),
-//   get isAuth() {
-//     return !!get().accessToken;
-//   },
-// }));
-
 interface AuthState {
 	accessToken: string | null;
 	refreshToken: string | null;

@@ -1,9 +1,10 @@
 import { LoginWidget } from "@modules/auth";
+import { Space } from "@shared/ui/Space.ui";
 
 export default function LoginPage() {
 	return (
-		<div className="flex items-center justify-center h-screen">
+		<Space align="center" justify="center" fullYScreen>
 			<LoginWidget />
-		</div>
+		</Space>
 	);
 }

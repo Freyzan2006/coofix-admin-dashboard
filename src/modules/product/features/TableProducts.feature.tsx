@@ -14,6 +14,7 @@ import {
 } from "@shared/ui/table";
 
 import { useProductStore } from "../store/product.store";
+import { Space } from "@shared/ui/Space.ui";
 
 export const TableProducts: React.FC = () => {
 	const { headerTable } = useProductStore();
@@ -35,11 +36,11 @@ export const TableProducts: React.FC = () => {
 
 	return (
 		<>
-			<div className="flex items-center gap-3 justify-between">
-				<div className="flex items-center gap-3">
+			<Space align="center" justify="between" gap={3}>
+				<Space align="center" gap={3}>
 					<PackageSearchIcon />
 					<Heading>Таблица с продуктами</Heading>
-				</div>
+				</Space>
 				{totalPages > 1 && (
 					<Pagination
 						current={currentPage}
@@ -47,7 +48,7 @@ export const TableProducts: React.FC = () => {
 						onChange={handlerPageChange}
 					/>
 				)}
-			</div>
+			</Space>
 
 			{isLoading ? (
 				<TableSkeleton row={limit + 1} />
