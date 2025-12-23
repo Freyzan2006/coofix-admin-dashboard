@@ -4,7 +4,7 @@ import { ProtectedRoute } from "@modules/auth";
 import DashboardLayout from "@pages/dashboard/layout";
 import RootLayout from "@pages/layout";
 import AuthLayout from "@pages/auth/layout";
-import NotFoundPage from "@app/pages/not-found";
+
 
 function withProtected(
 	importFn: () => Promise<{
@@ -72,12 +72,8 @@ export const paths: RouteObject[] = [
 				],
 			},
 			{
-				path: "/",
-				Component: withProtected(() => import("@pages/dashboard/page")),
-			},
-			{
 				path: "*",
-				Component: NotFoundPage,
+				Component: withProtected(() => import("@pages/not-found")),
 			},
 		],
 	},

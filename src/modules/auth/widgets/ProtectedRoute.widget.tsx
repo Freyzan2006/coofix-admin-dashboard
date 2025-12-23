@@ -8,11 +8,10 @@ export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
 	const isAuth = useAuthStore((s) => s.isAuth);
 	const isAuthInitialized = useAuthStore((s) => s.isAuthInitialized);
 
-	console.log("isAuth", isAuth);
 
-	if (!isAuthInitialized) return <Spinner />; // пока bootstrapAuth не завершён
+	if (!isAuthInitialized) return <Spinner />; 
 
-	if (!isAuth) return <Navigate to="/auth/login" replace />; // редирект на login
+	if (!isAuth) return <Navigate to="/auth/login" replace />; 
 
 	return <>{children}</>;
 };
