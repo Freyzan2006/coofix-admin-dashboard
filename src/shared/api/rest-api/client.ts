@@ -4,7 +4,7 @@ import { authRequestMiddleware, authResponseMiddleware } from "./middleware";
 
 export async function newRestApiCli(
 	baseURL: string = "https://coofix-server.onrender.com/api",
-	timeout: number = 25000,
+	timeout: number = 60000,
 	headers: Record<string, string> = {
 		"Content-Type": "application/json",
 	},

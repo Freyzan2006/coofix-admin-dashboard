@@ -72,6 +72,10 @@ export const paths: RouteObject[] = [
 				],
 			},
 			{
+				path: "/",
+				Component: withProtected(() => import("@pages/dashboard/page")),
+			},
+			{
 				path: "*",
 				Component: NotFoundPage,
 			},
