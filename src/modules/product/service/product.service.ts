@@ -1,5 +1,5 @@
-import type { ProductsModel } from "../model/product.model";
 import type { IProductApi } from "../api/product.api";
+import type { ProductsModel } from "../model/product.model";
 
 interface IProductService {
 	allProducts(page: number, limit: number): Promise<ProductsModel>;

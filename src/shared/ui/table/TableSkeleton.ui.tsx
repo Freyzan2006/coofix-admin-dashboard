@@ -1,12 +1,12 @@
+import { createMatrixIds } from "@shared/lib/createMatrixIds.lib";
+import { createStableIds } from "@shared/lib/createStableIds.lib";
 import { cn } from "@shared/lib/utils";
-import { Thead } from "./Thead.ui";
-import { TableRow } from "./TableRow.ui";
-import { TableHeader } from "./TableHeader.ui";
-import { Tbody } from "./Tbody.ui";
 import { useMemo } from "react";
 import { Spinner } from "../Spinner.ui";
-import { createStableIds } from "@shared/lib/createStableIds.lib";
-import { createMatrixIds } from "@shared/lib/createMatrixIds.lib";
+import { TableHeader } from "./TableHeader.ui";
+import { TableRow } from "./TableRow.ui";
+import { Tbody } from "./Tbody.ui";
+import { Thead } from "./Thead.ui";
 
 interface ITableSkeletonProps extends React.HTMLAttributes<HTMLTableElement> {
 	variant?: "primary" | "secondary";

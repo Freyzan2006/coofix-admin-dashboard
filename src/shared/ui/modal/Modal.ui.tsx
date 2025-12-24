@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ModalContext, type ModalContextType } from "./modal.context";
 
 interface ModalProps {

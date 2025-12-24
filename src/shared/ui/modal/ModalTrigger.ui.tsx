@@ -1,6 +1,7 @@
 // ModalTrigger.tsx
-import React, { type ReactNode } from "react";
+
 import { cn } from "@shared/lib/utils";
+import React, { type ReactNode } from "react";
 import { useModal } from "./useModal.hook";
 
 interface ModalTriggerProps

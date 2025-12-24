@@ -1,8 +1,6 @@
 import { Alert } from "@shared/ui/Alert.ui";
-import { useProducts } from "../hooks/useProducts.hook";
-import { PackageSearchIcon } from "lucide-react";
-import { CopyText, Heading } from "@shared/ui/text";
 import { Pagination } from "@shared/ui/Pagination.ui";
+import { Space } from "@shared/ui/Space.ui";
 import {
 	Table,
 	TableData,
@@ -12,9 +10,10 @@ import {
 	Tbody,
 	Thead,
 } from "@shared/ui/table";
-
+import { CopyText, Heading } from "@shared/ui/text";
+import { PackageSearchIcon } from "lucide-react";
+import { useProducts } from "../hooks/useProducts.hook";
 import { useProductStore } from "../store/product.store";
-import { Space } from "@shared/ui/Space.ui";
 
 export const TableProducts: React.FC = () => {
 	const { headerTable } = useProductStore();

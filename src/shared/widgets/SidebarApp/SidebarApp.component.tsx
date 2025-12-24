@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
-import { SidebarContent } from "./ui/SidebarContent.ui";
 import { NavigationApp } from "../NavigationApp.component";
+import { SidebarContent } from "./ui/SidebarContent.ui";
 
 export const SidebarApp: React.FC<PropsWithChildren> = ({ children }) => {
 	return (

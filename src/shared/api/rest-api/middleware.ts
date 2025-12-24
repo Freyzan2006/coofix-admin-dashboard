@@ -1,5 +1,4 @@
-import { useAuthStore } from "@modules/auth";
-import { authApi } from "@modules/auth";
+import { authApi, useAuthStore } from "@modules/auth";
 import type { AxiosInstance } from "axios";
 
 async function authRequestMiddleware(client: AxiosInstance) {

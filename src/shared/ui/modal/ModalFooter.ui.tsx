@@ -1,5 +1,5 @@
-import type React from "react";
 import { cn } from "@shared/lib/utils";
+import type React from "react";
 
 interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 	align?: "start" | "center" | "end" | "between";

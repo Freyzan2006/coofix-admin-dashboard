@@ -1,7 +1,7 @@
+import { cn } from "@shared/lib/utils";
 import type React from "react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "@shared/lib/utils";
 import { useModal } from "./useModal.hook";
 
 interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {

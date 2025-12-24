@@ -1,6 +1,5 @@
-import type { PropsWithChildren } from "react";
-
 import { motion } from "motion/react";
+import type { PropsWithChildren } from "react";
 
 export const SmoothAppearance: React.FC<PropsWithChildren> = ({ children }) => {
 	return (

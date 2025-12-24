@@ -1,5 +1,5 @@
-import { Link, type LinksProps } from "react-router-dom";
 import { cn } from "@shared/lib/utils";
+import { Link, type LinksProps } from "react-router-dom";
 
 interface IconLinkButtonProps extends React.HTMLAttributes<LinksProps> {
 	variant?:

@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { cn } from "@shared/lib/utils";
 import { Check, Copy } from "lucide-react";
+import { useState } from "react";
 
 interface ICopyTextProps extends React.HTMLAttributes<HTMLPreElement> {
 	text: string;

@@ -7,7 +7,7 @@ export interface CreateProductModel {
 	oldPrice: number;
 	category: string;
 	brand: string;
-	images: string[];
+	images: File[];
 	characteristics: CharacteristicsType;
 	quantity: number;
 	isNew: boolean;

@@ -27,9 +27,9 @@
 // 	);
 // };
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
 // Pagination.ui.tsx - улучшенная версия
 import { Button } from "./Button.ui";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface IPaginationProps {
 	current: number;

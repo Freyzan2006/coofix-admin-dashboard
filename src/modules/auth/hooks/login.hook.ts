@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAuthStore } from "../store/auth.store";
-import { authApi } from "../di/auth.di";
 import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
+import { authApi } from "../di/auth.di";
+import { useAuthStore } from "../store/auth.store";
 
 export const useLoginLocal = () => {
 	const mutation = useMutation({

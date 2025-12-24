@@ -1,10 +1,9 @@
-import { lazy } from "react";
-import type { RouteObject } from "react-router";
 import { ProtectedRoute } from "@modules/auth";
+import AuthLayout from "@pages/auth/layout";
 import DashboardLayout from "@pages/dashboard/layout";
 import RootLayout from "@pages/layout";
-import AuthLayout from "@pages/auth/layout";
-
+import { lazy } from "react";
+import type { RouteObject } from "react-router";
 
 function withProtected(
 	importFn: () => Promise<{

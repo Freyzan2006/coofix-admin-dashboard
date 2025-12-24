@@ -1,8 +1,8 @@
+import { AuthProvider } from "@modules/auth";
 import { ModeProvider } from "./ModeProvider";
 import { RouterAppProvider } from "./RouterAppProvider";
-import { ThemeProvider } from "./ThemeProvider";
 import { TanStackProvider } from "./TanStackProvider";
-import { AuthProvider } from "@modules/auth";
+import { ThemeProvider } from "./ThemeProvider";
 
 export function createProviderApp() {
 	return (

@@ -1,6 +1,6 @@
 import { useTheme } from "@app/providers/ThemeProvider";
 import { cn } from "@shared/lib/utils";
-import { Sun, Moon, Monitor } from "lucide-react";
+import { Monitor, Moon, Sun } from "lucide-react";
 
 interface ThemeSwitcherProps {
 	variant?: "primary" | "secondary";

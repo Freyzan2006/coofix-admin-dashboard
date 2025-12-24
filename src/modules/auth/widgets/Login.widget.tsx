@@ -1,6 +1,6 @@
 import { ThemeSwitcher } from "@shared/features/ThemeSwitcher";
-import { LoginForm } from "../features/LoginForm.feature";
 import { Space } from "@shared/ui/Space.ui";
+import { LoginForm } from "../features/LoginForm.feature";
 
 export const LoginWidget: React.FC = () => {
 	return (

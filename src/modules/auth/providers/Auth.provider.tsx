@@ -1,6 +1,6 @@
-import { useEffect, type PropsWithChildren } from "react";
-import { useAuthStore } from "../store/auth.store";
+import { type PropsWithChildren, useEffect } from "react";
 import { bootstrapAuth } from "../store/auth.bootstrap";
+import { useAuthStore } from "../store/auth.store";
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	useEffect(() => {

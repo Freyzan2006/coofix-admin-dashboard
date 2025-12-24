@@ -1,6 +1,6 @@
 import { PageLoader } from "@app/pages/loader";
 
-import { Suspense, type PropsWithChildren } from "react";
+import { type PropsWithChildren, Suspense } from "react";
 
 export const Screen: React.FC<PropsWithChildren> = ({ children }) => {
 	return (

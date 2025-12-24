@@ -1,5 +1,5 @@
-import React from "react";
 import { cn } from "@shared/lib/utils";
+import React from "react";
 import { useModal } from "./useModal.hook";
 
 interface ModalCloseProps

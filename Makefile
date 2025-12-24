@@ -1,4 +1,7 @@
 
+check: 
+	bun run check
+
 format:
 	bun run format
 
@@ -11,5 +14,5 @@ build:
 clear:
 	bun run knip
 
-test: format lint build clear
+test: check format lint build clear
 

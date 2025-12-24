@@ -1,17 +1,14 @@
-import { Button } from "@shared/ui/Button.ui";
-
-import { useForm } from "react-hook-form";
-import type { SubmitHandler } from "react-hook-form";
-import { Image } from "@shared/ui/Image.ui";
-import { Form } from "@shared/ui/Form.ui";
-
-import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
-
-import { Alert } from "@shared/ui/Alert.ui";
-import { useLoginLocal } from "../hooks/login.hook";
-import { Input } from "@shared/ui/fields";
 import { environmentConfig } from "@shared/config";
+import { Alert } from "@shared/ui/Alert.ui";
+import { Button } from "@shared/ui/Button.ui";
+import { Form } from "@shared/ui/Form.ui";
+import { Input } from "@shared/ui/fields";
+import { Image } from "@shared/ui/Image.ui";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
+import { useLoginLocal } from "../hooks/login.hook";
 
 export const LoginForm: React.FC = () => {
 	const mode = environmentConfig.get<"development" | "prod">("MODE");

@@ -1,23 +1,236 @@
-import { Button } from "@shared/ui/Button.ui";
-import { Checkbox, Input, Textarea } from "@shared/ui/fields";
+// import { Button } from "@shared/ui/Button.ui";
+// import { Checkbox, Input, Textarea } from "@shared/ui/fields";
 
+// import {
+// 	Modal,
+// 	ModalClose,
+// 	ModalContent,
+// 	ModalFooter,
+// 	ModalHeader,
+// 	ModalTrigger,
+// } from "@shared/ui/modal";
+
+// import { useForm, type SubmitHandler } from "react-hook-form";
+// import type { CreateProductModel } from "../model/create-product.model";
+// import { Form } from "@shared/ui/Form.ui";
+// import { ImageDropzone } from "@shared/features/UploadFile";
+
+// export const CreateProductModal: React.FC = () => {
+// 	const {
+// 		register,
+// 		handleSubmit,
+// 		formState: { errors },
+// 	} = useForm<CreateProductModel>({
+// 		defaultValues: {
+// 			name: "",
+// 			description: "",
+// 			price: 0,
+// 			oldPrice: 0,
+// 			category: "",
+// 			brand: "",
+// 			images: [],
+// 			characteristics: {},
+// 			quantity: 0,
+// 			isNew: false,
+// 			isSale: false,
+// 		},
+// 		mode: "onChange",
+// 		criteriaMode: "firstError",
+// 		reValidateMode: "onChange",
+// 	});
+
+// 	const onSubmit: SubmitHandler<CreateProductModel> = (data) =>
+// 		console.log(data);
+
+// 	console.log(errors.description?.message);
+
+// 	return (
+// 		<Modal>
+// 			<ModalTrigger className="btn btn-primary">Создать продукт</ModalTrigger>
+
+// 			<ModalContent size="lg">
+// 				<ModalHeader
+// 					title="Создание продукта"
+// 					description="Заполните все необходимые поля"
+// 				/>
+
+// 				<Form title="Вход в админ панель" onSubmit={handleSubmit(onSubmit)}>
+// 					<Input
+// 						title="Название продукта"
+// 						placeholder="Название"
+// 						type="text"
+// 						fullWidth
+// 						{...register("name", {
+// 							required: "Название обязательно",
+// 							minLength: {
+// 								value: 1,
+// 								message: "Минимум 1 символ",
+// 							},
+// 							maxLength: {
+// 								value: 255,
+// 								message: "Максимум 255 символов",
+// 							},
+// 						})}
+// 						error={errors.name?.message}
+// 					/>
+// 					<Textarea
+// 						fullWidth
+// 						title="Описание продукта"
+// 						placeholder="Описание"
+// 						variant="primary"
+// 						{...register("description", {
+// 							required: "Описание обязательно",
+// 							minLength: {
+// 								value: 5,
+// 								message: "Минимум 5 символ",
+// 							},
+// 							maxLength: {
+// 								value: 2000,
+// 								message: "Максимум 2000 символов",
+// 							},
+// 						})}
+// 						error={errors.description?.message}
+// 					/>
+
+// 					<section className="flex flex-row gap-4 items-center">
+// 						<Input
+// 							title="Цена продукта"
+// 							type="number"
+// 							variant="primary"
+// 							{...register("price", {
+// 								required: "Цена обязательно",
+// 								minLength: {
+// 									value: 0.1,
+// 									message: "Минимальная 0.1 цена",
+// 								},
+// 								maxLength: {
+// 									value: 1000000,
+// 									message: "Максимальная 1000000 цена",
+// 								},
+// 							})}
+// 							error={errors.price?.message}
+// 						/>
+// 						<Input
+// 							title="Старая цена продукта"
+// 							type="number"
+// 							variant="primary"
+// 							{...register("oldPrice", {
+// 								required: "Старая цена обязательно",
+// 								minLength: {
+// 									value: 0.1,
+// 									message: "Минимальная 0.1 цена",
+// 								},
+// 								maxLength: {
+// 									value: 1000000,
+// 									message: "Максимальная 1000000 цена",
+// 								},
+// 							})}
+// 							error={errors.oldPrice?.message}
+// 						/>
+
+// 						<Input
+// 							title="Количество"
+// 							type="number"
+// 							variant="primary"
+// 							{...register("quantity", {
+// 								required: "Количество обязательно",
+// 								minLength: {
+// 									value: 1,
+// 									message: "Минимум 1 количество",
+// 								},
+// 								maxLength: {
+// 									value: 10000,
+// 									message: "Максимум 10000 количество",
+// 								},
+// 							})}
+// 							error={errors.quantity?.message}
+// 						/>
+// 					</section>
+
+// 					<section className="flex flex-row gap-4 items-center">
+// 						<Input
+// 							title="Категория продукта"
+// 							type="text"
+// 							variant="primary"
+// 							{...register("category", {
+// 								required: "Категория обязательно",
+// 								minLength: {
+// 									value: 1,
+// 									message: "Минимум 1 символ",
+// 								},
+// 								maxLength: {
+// 									value: 255,
+// 									message: "Максимум 255 символов",
+// 								},
+// 							})}
+// 							error={errors.category?.message}
+// 						/>
+// 						<Input
+// 							title="Бренд продукта"
+// 							type="text"
+// 							variant="primary"
+// 							{...register("brand", {
+// 								required: "Бренд обязательно",
+// 								minLength: {
+// 									value: 1,
+// 									message: "Минимум 1 символ",
+// 								},
+// 								maxLength: {
+// 									value: 255,
+// 									message: "Максимум 255 символов",
+// 								},
+// 							})}
+// 							error={errors.brand?.message}
+// 						/>
+// 					</section>
+
+// 					<section className="flex flex-row gap-4 items-center">
+
+// 						<Checkbox title="Новый продукт ?" variant="primary" />
+
+// 						<Checkbox
+// 							title="Распродажа продукта ?"
+// 							type="checkbox"
+// 							variant="primary"
+// 						/>
+// 					</section>
+
+// 					<Input title="Картинки массив" type="file" variant="primary" />
+// 					<ImageDropzone />
+
+// 					<Input title="Характеристики" type="text" />
+
+// 					<Button type="submit" variant="success">
+// 						Создать
+// 					</Button>
+// 				</Form>
+
+// 				<ModalFooter>
+// 					<ModalClose>Закрыть</ModalClose>
+// 				</ModalFooter>
+// 			</ModalContent>
+// 		</Modal>
+// 	);
+// };
+
+import { ImageDropzone } from "@shared/features/UploadFile";
+import { Button } from "@shared/ui/Button.ui";
+import { Form } from "@shared/ui/Form.ui";
+import { Checkbox, Input, Textarea } from "@shared/ui/fields";
 import {
 	Modal,
+	ModalClose,
 	ModalContent,
+	ModalFooter,
 	ModalHeader,
 	ModalTrigger,
 } from "@shared/ui/modal";
-
-import { useForm, type SubmitHandler } from "react-hook-form";
+import type React from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import type { CreateProductModel } from "../model/create-product.model";
-import { Form } from "@shared/ui/Form.ui";
 
 export const CreateProductModal: React.FC = () => {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<CreateProductModel>({
+	const methods = useForm<CreateProductModel>({
 		defaultValues: {
 			name: "",
 			description: "",
@@ -36,103 +249,61 @@ export const CreateProductModal: React.FC = () => {
 		reValidateMode: "onChange",
 	});
 
-	const onSubmit: SubmitHandler<CreateProductModel> = (data) =>
-		console.log(data);
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = methods;
 
-	console.log(errors.description?.message);
+	const onSubmit: SubmitHandler<CreateProductModel> = async (data) => {
+		console.log("Form data:", data);
+
+		// Создаем FormData для отправки файлов
+		const formData = new FormData();
+
+		// Добавляем текстовые поля
+		Object.keys(data).forEach((key) => {
+			if (key !== "images") {
+				formData.append(key, String(data[key as keyof CreateProductModel]));
+			}
+		});
+
+		// Добавляем файлы
+		if (data.images && data.images.length > 0) {
+			data.images.forEach((file, index) => {
+				formData.append(`images[${index}]`, file);
+			});
+		}
+
+		// Здесь можно отправить formData на сервер
+		// Пример:
+		// await fetch('/api/products', {
+		//   method: 'POST',
+		//   body: formData
+		// });
+
+		console.log("FormData ready for upload:", formData);
+	};
 
 	return (
-		<Modal>
-			<ModalTrigger className="btn btn-primary">Создать продукт</ModalTrigger>
+		<FormProvider {...methods}>
+			<Modal>
+				<ModalTrigger className="btn btn-primary">Создать продукт</ModalTrigger>
 
-			<ModalContent size="lg">
-				<ModalHeader
-					title="Создание продукта"
-					description="Заполните все необходимые поля"
-				/>
-
-				<Form title="Вход в админ панель" onSubmit={handleSubmit(onSubmit)}>
-					<Input
-						title="Название продукта"
-						placeholder="Название"
-						type="text"
-						fullWidth
-						{...register("name", {
-							required: "Название обязательно",
-							minLength: {
-								value: 1,
-								message: "Минимум 1 символ",
-							},
-							maxLength: {
-								value: 255,
-								message: "Максимум 255 символов",
-							},
-						})}
-						error={errors.name?.message}
-					/>
-					<Textarea
-						fullWidth
-						title="Описание продукта"
-						placeholder="Описание"
-						variant="primary"
-						{...register("description", {
-							required: "Описание обязательно",
-							minLength: {
-								value: 5,
-								message: "Минимум 5 символ",
-							},
-							maxLength: {
-								value: 2000,
-								message: "Максимум 2000 символов",
-							},
-						})}
-						error={errors.description?.message}
+				<ModalContent size="lg">
+					<ModalHeader
+						title="Создание продукта"
+						description="Заполните все необходимые поля"
 					/>
 
-					<section className="flex flex-row gap-4 items-center">
+					<Form title="Создание продукта" onSubmit={handleSubmit(onSubmit)}>
 						<Input
-							title="Цена продукта"
-							type="number"
-							variant="primary"
-							{...register("price", {
-								required: "Цена обязательно",
-								minLength: {
-									value: 0.1,
-									message: "Минимальная 0.1 цена",
-								},
-								maxLength: {
-									value: 1000000,
-									message: "Максимальная 1000000 цена",
-								},
-							})}
-							error={errors.price?.message}
-						/>
-						<Input
-							title="Старая цена продукта"
-							type="number"
-							variant="primary"
-							{...register("oldPrice", {
-								required: "Старая цена обязательно",
-								minLength: {
-									value: 0.1,
-									message: "Минимальная 0.1 цена",
-								},
-								maxLength: {
-									value: 1000000,
-									message: "Максимальная 1000000 цена",
-								},
-							})}
-							error={errors.oldPrice?.message}
-						/>
-					</section>
-
-					<section className="flex flex-row gap-4 items-center">
-						<Input
-							title="Категория продукта"
+							title="Название продукта"
+							placeholder="Название"
 							type="text"
-							variant="primary"
-							{...register("category", {
-								required: "Категория обязательно",
+							fullWidth
+							{...register("name", {
+								required: "Название обязательно",
 								minLength: {
 									value: 1,
 									message: "Минимум 1 символ",
@@ -142,64 +313,169 @@ export const CreateProductModal: React.FC = () => {
 									message: "Максимум 255 символов",
 								},
 							})}
-							error={errors.category?.message}
+							error={errors.name?.message}
 						/>
-						<Input
-							title="Бренд продукта"
-							type="text"
+
+						<Textarea
+							fullWidth
+							title="Описание продукта"
+							placeholder="Описание"
 							variant="primary"
-							{...register("brand", {
-								required: "Бренд обязательно",
+							{...register("description", {
+								required: "Описание обязательно",
 								minLength: {
-									value: 1,
-									message: "Минимум 1 символ",
+									value: 5,
+									message: "Минимум 5 символ",
 								},
 								maxLength: {
-									value: 255,
-									message: "Максимум 255 символов",
+									value: 2000,
+									message: "Максимум 2000 символов",
 								},
 							})}
-							error={errors.brand?.message}
-						/>
-					</section>
-
-					<section className="flex flex-row gap-4 items-center">
-						<Input
-							title="Количество"
-							type="number"
-							variant="primary"
-							{...register("quantity", {
-								required: "Количество обязательно",
-								minLength: {
-									value: 1,
-									message: "Минимум 1 количество",
-								},
-								maxLength: {
-									value: 10000,
-									message: "Максимум 10000 количество",
-								},
-							})}
-							error={errors.quantity?.message}
+							error={errors.description?.message}
 						/>
 
-						<Checkbox title="Новый продукт ?" variant="primary" />
+						<section className="flex flex-row gap-4 items-center">
+							<Input
+								title="Цена продукта"
+								type="number"
+								variant="primary"
+								{...register("price", {
+									required: "Цена обязательно",
+									min: {
+										value: 0.1,
+										message: "Минимальная 0.1 цена",
+									},
+									max: {
+										value: 1000000,
+										message: "Максимальная 1000000 цена",
+									},
+									valueAsNumber: true,
+								})}
+								error={errors.price?.message}
+							/>
+							<Input
+								title="Старая цена продукта"
+								type="number"
+								variant="primary"
+								{...register("oldPrice", {
+									required: "Старая цена обязательно",
+									min: {
+										value: 0.1,
+										message: "Минимальная 0.1 цена",
+									},
+									max: {
+										value: 1000000,
+										message: "Максимальная 1000000 цена",
+									},
+									valueAsNumber: true,
+								})}
+								error={errors.oldPrice?.message}
+							/>
 
-						<Checkbox
-							title="Распродажа продукта ?"
-							type="checkbox"
-							variant="primary"
+							<Input
+								title="Количество"
+								type="number"
+								variant="primary"
+								{...register("quantity", {
+									required: "Количество обязательно",
+									min: {
+										value: 1,
+										message: "Минимум 1 количество",
+									},
+									max: {
+										value: 10000,
+										message: "Максимум 10000 количество",
+									},
+									valueAsNumber: true,
+								})}
+								error={errors.quantity?.message}
+							/>
+						</section>
+
+						<section className="flex flex-row gap-4 items-center">
+							<Input
+								title="Категория продукта"
+								type="text"
+								variant="primary"
+								{...register("category", {
+									required: "Категория обязательно",
+									minLength: {
+										value: 1,
+										message: "Минимум 1 символ",
+									},
+									maxLength: {
+										value: 255,
+										message: "Максимум 255 символов",
+									},
+								})}
+								error={errors.category?.message}
+							/>
+							<Input
+								title="Бренд продукта"
+								type="text"
+								variant="primary"
+								{...register("brand", {
+									required: "Бренд обязательно",
+									minLength: {
+										value: 1,
+										message: "Минимум 1 символ",
+									},
+									maxLength: {
+										value: 255,
+										message: "Максимум 255 символов",
+									},
+								})}
+								error={errors.brand?.message}
+							/>
+						</section>
+
+						<section className="flex flex-row gap-4 items-center">
+							<Checkbox
+								title="Новый продукт ?"
+								variant="primary"
+								{...register("isNew")}
+							/>
+							<Checkbox
+								title="Распродажа продукта ?"
+								variant="primary"
+								{...register("isSale")}
+							/>
+						</section>
+
+						<ImageDropzone
+							name="images"
+							maxFiles={5}
+							maxSize={10 * 1024 * 1024} // 10MB
+							onFilesChange={(files) => console.log("Files changed:", files)}
 						/>
-					</section>
 
-					<Input title="Картинки массив" type="text" variant="primary" />
+						<Input title="Характеристики" type="text" />
 
-					<Input title="Характеристики" type="text" />
+						<div className="mt-6">
+							<Button
+								type="submit"
+								variant="success"
+								disabled={isSubmitting}
+								className="w-full"
+							>
+								{isSubmitting ? (
+									<>
+										<span className="loading loading-spinner"></span>
+										Создание...
+									</>
+								) : (
+									"Создать продукт"
+								)}
+							</Button>
+						</div>
+					</Form>
 
-					<Button type="submit" variant="success">
-						Создать
-					</Button>
-				</Form>
-			</ModalContent>
-		</Modal>
+					<ModalFooter>
+						<ModalClose>Закрыть</ModalClose>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+		</FormProvider>
 	);
 };

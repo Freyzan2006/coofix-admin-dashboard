@@ -1,7 +1,7 @@
-import { useMemo } from "react";
-import { SidebarItem } from "./SidebarItem.ui";
 import { sideBarLinks } from "@app/routing/config.routing";
 import { Space } from "@shared/ui/Space.ui";
+import { useMemo } from "react";
+import { SidebarItem } from "./SidebarItem.ui";
 
 export const SidebarContent: React.FC = () => {
 	const renderItems = useMemo(() => {
