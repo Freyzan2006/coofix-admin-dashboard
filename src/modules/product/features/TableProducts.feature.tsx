@@ -1,6 +1,4 @@
 import { Alert } from "@shared/ui/Alert.ui";
-import { Pagination } from "@shared/ui/Pagination.ui";
-import { Space } from "@shared/ui/Space.ui";
 import {
 	Table,
 	TableData,
@@ -10,44 +8,26 @@ import {
 	Tbody,
 	Thead,
 } from "@shared/ui/table";
-import { CopyText, Heading } from "@shared/ui/text";
-import { PackageSearchIcon } from "lucide-react";
+import { CopyText } from "@shared/ui/text";
+
 import { useProducts } from "../hooks/useProducts.hook";
 import { useProductStore } from "../store/product.store";
+import { useProductActionsStore } from "../store/product-actions.store";
+import { ProductActions } from "../widgets/ProductActions.widget";
+import { PaginationProducts } from "./PaginationProducts.feature";
 
 export const TableProducts: React.FC = () => {
 	const { headerTable } = useProductStore();
+	const { openModal } = useProductActionsStore();
 
-	const {
-		products,
-		total,
-		isError,
-		isLoading,
-		error,
-		currentPage,
-		handlerPageChange,
-		limit,
-	} = useProducts();
+	const { products, isError, isLoading, error, limit } = useProducts();
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 
-	const totalPages = Math.ceil(total / limit) || 1;
-
 	return (
 		<>
-			<Space align="center" justify="between" gap={3}>
-				<Space align="center" gap={3}>
-					<PackageSearchIcon />
-					<Heading>Таблица с продуктами</Heading>
-				</Space>
-				{totalPages > 1 && (
-					<Pagination
-						current={currentPage}
-						total={totalPages}
-						onChange={handlerPageChange}
-					/>
-				)}
-			</Space>
+			<PaginationProducts />
+			<ProductActions />
 
 			{isLoading ? (
 				<TableSkeleton row={limit + 1} />
@@ -56,13 +36,17 @@ export const TableProducts: React.FC = () => {
 					<Thead>
 						<TableRow>
 							{headerTable.map((item: string) => (
-								<TableHeader key={item.toString()}>{item}</TableHeader>
+								<TableHeader key={item}>{item}</TableHeader>
 							))}
 						</TableRow>
 					</Thead>
 					<Tbody>
 						{products.map((item) => (
-							<TableRow key={item._id}>
+							<TableRow
+								key={item._id}
+								className="hover:bg-base-200 cursor-pointer"
+								onClick={() => openModal(item, "details")}
+							>
 								<TableData>
 									<CopyText title={item._id} slice={20} text={item._id} />
 								</TableData>
@@ -91,7 +75,6 @@ export const TableProducts: React.FC = () => {
 										text={String(item.oldPrice || "-")}
 									/>
 								</TableData>
-
 								<TableData>
 									<CopyText
 										title={item.category?.name}
@@ -106,7 +89,6 @@ export const TableProducts: React.FC = () => {
 										slice={20}
 									/>
 								</TableData>
-
 								<TableData>
 									<CopyText
 										title={item.images.join(", ")}
@@ -114,13 +96,11 @@ export const TableProducts: React.FC = () => {
 										text={String(item.images)}
 									/>
 								</TableData>
-
 								<TableData>
 									{Object.entries(item.characteristics ?? {})
 										.map(([key, value]) => `${key}: ${value}`)
 										.join(", ")}
 								</TableData>
-
 								<TableData>{item.inStock ? "Yes" : "No"}</TableData>
 								<TableData>
 									<CopyText
@@ -142,7 +122,6 @@ export const TableProducts: React.FC = () => {
 										text={String(item.ratingCount)}
 									/>
 								</TableData>
-
 								<TableData>
 									{new Date(item.createdAt).toLocaleString()}
 								</TableData>
