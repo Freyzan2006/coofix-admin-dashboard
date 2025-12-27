@@ -7,7 +7,7 @@ import {
 } from "@shared/ui/modal";
 import { AnimatePresence, motion } from "motion/react";
 import { DeleteConfirmation } from "../features/DeleteConfirmation.feature";
-import { DetailsProduct } from "../features/DetailsProduct.feature";
+import { DetailsProduct } from "../features/details";
 import { EditProductForm } from "../features/EditProductForm.feature";
 import type { ProductModel } from "../model/product.model";
 import { useProductActionsStore } from "../store/product-actions.store";

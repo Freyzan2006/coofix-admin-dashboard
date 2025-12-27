@@ -7,6 +7,7 @@ interface ISpaceProps extends React.HTMLAttributes<HTMLDivElement> {
 	align?: "start" | "center" | "end" | "stretch" | "baseline";
 	fullYScreen?: boolean;
 	fullXScreen?: boolean;
+	fullWidth?: boolean;
 }
 
 export const Space: React.FC<ISpaceProps> = ({
@@ -17,6 +18,7 @@ export const Space: React.FC<ISpaceProps> = ({
 	align = "stretch",
 	fullYScreen = false,
 	fullXScreen = false,
+	fullWidth = false,
 	...props
 }) => {
 	const baseClass = "flex";
@@ -47,6 +49,7 @@ export const Space: React.FC<ISpaceProps> = ({
 		`gap-${gap}`,
 		fullYScreen ? "h-screen" : "",
 		fullXScreen ? "w-screen" : "",
+		fullWidth ? "w-full" : "",
 	);
 
 	return (

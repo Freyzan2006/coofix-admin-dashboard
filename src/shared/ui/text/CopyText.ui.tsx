@@ -29,16 +29,16 @@ export const CopyText: React.FC<ICopyTextProps> = ({
 		lg: "text-lg",
 	};
 
-	const className = cn(props.className, sizeClasses[size]);
+	const className = cn(props.className, sizeClasses[size], "text-wrap");
 	const preparedText = slice > 0 ? text.slice(0, slice) : text;
 
 	return (
-		<pre className="flex items-center gap-2" {...props}>
+		<pre className="flex items-center justify-start gap-2" {...props}>
 			{copied ? (
-				<Check className="text-green-500" size={17} />
+				<Check className="text-green-500 shrink-0" size={17} />
 			) : (
 				<Copy
-					className="cursor-pointer text-gray-500"
+					className="cursor-pointer text-gray-500 shrink-0"
 					onClick={handlerCopy}
 					size={17}
 				/>
