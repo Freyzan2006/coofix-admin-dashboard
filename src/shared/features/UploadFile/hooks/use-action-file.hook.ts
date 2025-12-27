@@ -29,7 +29,6 @@ export function useActionFile({
 	onFilesChange,
 	setValue,
 }: useActionFileProps) {
-	// Удаление файла
 	const handleRemoveFile = (id: string) => {
 		const fileToRemove = uploadedFiles.find((file) => file.id === id);
 		if (fileToRemove) {

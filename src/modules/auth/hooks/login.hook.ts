@@ -8,7 +8,6 @@ export const useLoginLocal = () => {
 		mutationFn: (data: LoginLocalDtoRequest) => authApi.loginLocal(data),
 		onSuccess: (data) => {
 			useAuthStore.getState().setAccessToken(data.accessToken);
-			useAuthStore.getState().setRefreshToken(data.refreshToken);
 		},
 	});
 

@@ -34,11 +34,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 			const systemTheme = systemDark ? "dark" : "light";
 			const finalTheme = themeToApply === "system" ? systemTheme : themeToApply;
 
-			// Применяем к документу
+			
 			document.documentElement.setAttribute("data-theme", finalTheme);
 			setResolvedTheme(finalTheme);
 
-			// Для Tailwind v4
+		
 			if (finalTheme === "dark") {
 				document.documentElement.classList.add("dark");
 			} else {

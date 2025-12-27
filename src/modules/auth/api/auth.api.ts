@@ -9,9 +9,7 @@ import type {
 interface IAuthApi {
 	loginLocal(dto: LoginLocalDtoRequest): Promise<LoginLocalDtoResponse>;
 	loginGoogle(dto: LoginGoogleDtoRequest): Promise<LoginGoogleDtoResponse>;
-	refresh(
-		oldRefreshToken: string,
-	): Promise<{ success: boolean; accessToken: string; refreshToken: string }>;
+	refresh(): Promise<{ success: boolean; accessToken: string; refreshToken: string }>;
 }
 
 class AuthRestApi implements IAuthApi {
@@ -33,13 +31,13 @@ class AuthRestApi implements IAuthApi {
 		return this.client.post("/auth/google", dto);
 	}
 
-	public async refresh(
-		oldRefreshToken: string,
-	): Promise<{ success: boolean; accessToken: string; refreshToken: string }> {
-		const res = await this.client.post("/auth/refresh", {
-			refreshToken: oldRefreshToken,
-		});
+	public async refresh(): Promise<{ success: boolean; accessToken: string; refreshToken: string }> {
+		const res = await this.client.post("/auth/refresh");
 		return res.data;
+	}
+
+	public async logout() {
+		await this.client.post("/auth/logout");
 	}
 }
 

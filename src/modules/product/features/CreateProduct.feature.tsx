@@ -1,218 +1,3 @@
-// import { Button } from "@shared/ui/Button.ui";
-// import { Checkbox, Input, Textarea } from "@shared/ui/fields";
-
-// import {
-// 	Modal,
-// 	ModalClose,
-// 	ModalContent,
-// 	ModalFooter,
-// 	ModalHeader,
-// 	ModalTrigger,
-// } from "@shared/ui/modal";
-
-// import { useForm, type SubmitHandler } from "react-hook-form";
-// import type { CreateProductModel } from "../model/create-product.model";
-// import { Form } from "@shared/ui/Form.ui";
-// import { ImageDropzone } from "@shared/features/UploadFile";
-
-// export const CreateProductModal: React.FC = () => {
-// 	const {
-// 		register,
-// 		handleSubmit,
-// 		formState: { errors },
-// 	} = useForm<CreateProductModel>({
-// 		defaultValues: {
-// 			name: "",
-// 			description: "",
-// 			price: 0,
-// 			oldPrice: 0,
-// 			category: "",
-// 			brand: "",
-// 			images: [],
-// 			characteristics: {},
-// 			quantity: 0,
-// 			isNew: false,
-// 			isSale: false,
-// 		},
-// 		mode: "onChange",
-// 		criteriaMode: "firstError",
-// 		reValidateMode: "onChange",
-// 	});
-
-// 	const onSubmit: SubmitHandler<CreateProductModel> = (data) =>
-// 		console.log(data);
-
-// 	console.log(errors.description?.message);
-
-// 	return (
-// 		<Modal>
-// 			<ModalTrigger className="btn btn-primary">Создать продукт</ModalTrigger>
-
-// 			<ModalContent size="lg">
-// 				<ModalHeader
-// 					title="Создание продукта"
-// 					description="Заполните все необходимые поля"
-// 				/>
-
-// 				<Form title="Вход в админ панель" onSubmit={handleSubmit(onSubmit)}>
-// 					<Input
-// 						title="Название продукта"
-// 						placeholder="Название"
-// 						type="text"
-// 						fullWidth
-// 						{...register("name", {
-// 							required: "Название обязательно",
-// 							minLength: {
-// 								value: 1,
-// 								message: "Минимум 1 символ",
-// 							},
-// 							maxLength: {
-// 								value: 255,
-// 								message: "Максимум 255 символов",
-// 							},
-// 						})}
-// 						error={errors.name?.message}
-// 					/>
-// 					<Textarea
-// 						fullWidth
-// 						title="Описание продукта"
-// 						placeholder="Описание"
-// 						variant="primary"
-// 						{...register("description", {
-// 							required: "Описание обязательно",
-// 							minLength: {
-// 								value: 5,
-// 								message: "Минимум 5 символ",
-// 							},
-// 							maxLength: {
-// 								value: 2000,
-// 								message: "Максимум 2000 символов",
-// 							},
-// 						})}
-// 						error={errors.description?.message}
-// 					/>
-
-// 					<section className="flex flex-row gap-4 items-center">
-// 						<Input
-// 							title="Цена продукта"
-// 							type="number"
-// 							variant="primary"
-// 							{...register("price", {
-// 								required: "Цена обязательно",
-// 								minLength: {
-// 									value: 0.1,
-// 									message: "Минимальная 0.1 цена",
-// 								},
-// 								maxLength: {
-// 									value: 1000000,
-// 									message: "Максимальная 1000000 цена",
-// 								},
-// 							})}
-// 							error={errors.price?.message}
-// 						/>
-// 						<Input
-// 							title="Старая цена продукта"
-// 							type="number"
-// 							variant="primary"
-// 							{...register("oldPrice", {
-// 								required: "Старая цена обязательно",
-// 								minLength: {
-// 									value: 0.1,
-// 									message: "Минимальная 0.1 цена",
-// 								},
-// 								maxLength: {
-// 									value: 1000000,
-// 									message: "Максимальная 1000000 цена",
-// 								},
-// 							})}
-// 							error={errors.oldPrice?.message}
-// 						/>
-
-// 						<Input
-// 							title="Количество"
-// 							type="number"
-// 							variant="primary"
-// 							{...register("quantity", {
-// 								required: "Количество обязательно",
-// 								minLength: {
-// 									value: 1,
-// 									message: "Минимум 1 количество",
-// 								},
-// 								maxLength: {
-// 									value: 10000,
-// 									message: "Максимум 10000 количество",
-// 								},
-// 							})}
-// 							error={errors.quantity?.message}
-// 						/>
-// 					</section>
-
-// 					<section className="flex flex-row gap-4 items-center">
-// 						<Input
-// 							title="Категория продукта"
-// 							type="text"
-// 							variant="primary"
-// 							{...register("category", {
-// 								required: "Категория обязательно",
-// 								minLength: {
-// 									value: 1,
-// 									message: "Минимум 1 символ",
-// 								},
-// 								maxLength: {
-// 									value: 255,
-// 									message: "Максимум 255 символов",
-// 								},
-// 							})}
-// 							error={errors.category?.message}
-// 						/>
-// 						<Input
-// 							title="Бренд продукта"
-// 							type="text"
-// 							variant="primary"
-// 							{...register("brand", {
-// 								required: "Бренд обязательно",
-// 								minLength: {
-// 									value: 1,
-// 									message: "Минимум 1 символ",
-// 								},
-// 								maxLength: {
-// 									value: 255,
-// 									message: "Максимум 255 символов",
-// 								},
-// 							})}
-// 							error={errors.brand?.message}
-// 						/>
-// 					</section>
-
-// 					<section className="flex flex-row gap-4 items-center">
-
-// 						<Checkbox title="Новый продукт ?" variant="primary" />
-
-// 						<Checkbox
-// 							title="Распродажа продукта ?"
-// 							type="checkbox"
-// 							variant="primary"
-// 						/>
-// 					</section>
-
-// 					<Input title="Картинки массив" type="file" variant="primary" />
-// 					<ImageDropzone />
-
-// 					<Input title="Характеристики" type="text" />
-
-// 					<Button type="submit" variant="success">
-// 						Создать
-// 					</Button>
-// 				</Form>
-
-// 				<ModalFooter>
-// 					<ModalClose>Закрыть</ModalClose>
-// 				</ModalFooter>
-// 			</ModalContent>
-// 		</Modal>
-// 	);
-// };
-
 import { ImageDropzone } from "@shared/features/UploadFile";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
@@ -232,16 +17,18 @@ import type { CreateProductModel } from "../model/create-product.model";
 export const CreateProductModal: React.FC = () => {
 	const methods = useForm<CreateProductModel>({
 		defaultValues: {
-			name: "",
-			description: "",
-			price: 0,
-			oldPrice: 0,
-			category: "",
-			brand: "",
-			images: [],
-			characteristics: {},
-			quantity: 0,
-			isNew: false,
+			name: "Product test. name",
+			description: "Product test. description",
+			price: 300,
+			oldPrice: 200,
+			category: "Product test. category",
+			brand: "Product test. brand",
+			images: ["https://images.hello", "https://images.hello"],
+			characteristics: {
+				color: "Product test. color",
+			},
+			quantity: 30,
+			isNew: true,
 			isSale: false,
 		},
 		mode: "onChange",
@@ -258,29 +45,20 @@ export const CreateProductModal: React.FC = () => {
 	const onSubmit: SubmitHandler<CreateProductModel> = async (data) => {
 		console.log("Form data:", data);
 
-		// Создаем FormData для отправки файлов
 		const formData = new FormData();
 
-		// Добавляем текстовые поля
 		Object.keys(data).forEach((key) => {
 			if (key !== "images") {
 				formData.append(key, String(data[key as keyof CreateProductModel]));
 			}
 		});
 
-		// Добавляем файлы
 		if (data.images && data.images.length > 0) {
 			data.images.forEach((file, index) => {
 				formData.append(`images[${index}]`, file);
 			});
 		}
 
-		// Здесь можно отправить formData на сервер
-		// Пример:
-		// await fetch('/api/products', {
-		//   method: 'POST',
-		//   body: formData
-		// });
 
 		console.log("FormData ready for upload:", formData);
 	};

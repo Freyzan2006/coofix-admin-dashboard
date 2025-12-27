@@ -1,3 +1,4 @@
+import { Logout } from "@modules/auth";
 import { ThemeSwitcher } from "@shared/features/ThemeSwitcher";
 import { Heading } from "@shared/ui/text";
 import { TableOfContents } from "lucide-react";
@@ -17,6 +18,7 @@ export const NavigationApp: React.FC = () => {
 			<div className="px-4 flex w-full items-center justify-between">
 				<Heading variant="primary">{urlPage}</Heading>
 				<ThemeSwitcher variant="secondary" />
+				<Logout />
 			</div>
 		</nav>
 	);

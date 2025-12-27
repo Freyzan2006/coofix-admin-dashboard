@@ -1,8 +1,10 @@
 import type { IProductApi } from "../api/product.api";
-import type { ProductsModel } from "../model/product.model";
+import type { CreateProductModel } from "../model/create-product.model";
+import type { ProductModel, ProductsModel } from "../model/product.model";
 
 interface IProductService {
 	allProducts(page: number, limit: number): Promise<ProductsModel>;
+	createProduct(product: CreateProductModel): Promise<ProductModel>;
 }
 
 class ProductService implements IProductService {
@@ -17,6 +19,13 @@ class ProductService implements IProductService {
 		const products = await this.productApi.findAll(page, limit);
 		console.log("products", products);
 		return products;
+	}
+
+	public async createProduct(
+		product: CreateProductModel,
+	): Promise<ProductModel> {
+		const newProduct = await this.productApi.create(product);
+		return newProduct;
 	}
 }
 

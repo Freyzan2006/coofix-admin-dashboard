@@ -1,8 +1,10 @@
 import type { AxiosInstance } from "axios";
-import type { ProductsModel } from "../model/product.model";
+import type { CreateProductModel } from "../model/create-product.model";
+import type { ProductModel, ProductsModel } from "../model/product.model";
 
 interface IProductApi {
 	findAll(page: number, limit: number): Promise<ProductsModel>;
+	create(product: CreateProductModel): Promise<ProductModel>;
 }
 
 class ProductRestApi implements IProductApi {
@@ -19,6 +21,14 @@ class ProductRestApi implements IProductApi {
 				limit,
 			},
 		});
+		return response.data;
+	}
+
+	public async create(product: CreateProductModel): Promise<ProductModel> {
+		const response = await this.client.post<ProductModel>(
+			"/admin/products",
+			product,
+		);
 		return response.data;
 	}
 }
