@@ -34,11 +34,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 			const systemTheme = systemDark ? "dark" : "light";
 			const finalTheme = themeToApply === "system" ? systemTheme : themeToApply;
 
-			
 			document.documentElement.setAttribute("data-theme", finalTheme);
 			setResolvedTheme(finalTheme);
 
-		
 			if (finalTheme === "dark") {
 				document.documentElement.classList.add("dark");
 			} else {

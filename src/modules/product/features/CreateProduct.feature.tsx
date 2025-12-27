@@ -59,7 +59,6 @@ export const CreateProductModal: React.FC = () => {
 			});
 		}
 
-
 		console.log("FormData ready for upload:", formData);
 	};
 
@@ -250,7 +249,7 @@ export const CreateProductModal: React.FC = () => {
 					</Form>
 
 					<ModalFooter>
-						<ModalClose>Закрыть</ModalClose>
+						<ModalClose>Отменить</ModalClose>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

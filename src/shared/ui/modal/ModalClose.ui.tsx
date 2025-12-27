@@ -1,42 +1,25 @@
 import { cn } from "@shared/lib/utils";
 import React from "react";
-import { useModal } from "./useModal.hook";
+import { ModalContext } from "./modal.context";
 
-interface ModalCloseProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	asChild?: boolean;
-	children?: React.ReactNode;
+interface ModalCloseProps extends React.HTMLAttributes<HTMLButtonElement> {
+	children: React.ReactNode;
 }
 
 export const ModalClose: React.FC<ModalCloseProps> = ({
-	asChild = false,
 	children,
-	className,
-	onClick,
 	...props
 }) => {
-	const { closeModal } = useModal();
-
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		onClick?.(e);
-		closeModal();
-	};
-
-	if (asChild && React.isValidElement(children)) {
-		return React.cloneElement(children, {
-			onClick: handleClick,
-			...props,
-		} as React.ButtonHTMLAttributes<HTMLButtonElement>);
-	}
-
+	const ctx = React.useContext(ModalContext);
+	if (!ctx) throw new Error("ModalClose must be used inside Modal");
 	return (
 		<button
 			type="button"
-			className={cn("btn", className)}
-			onClick={handleClick}
+			className={cn("btn", props.className)}
+			onClick={ctx.closeModal}
 			{...props}
 		>
-			{children || "Закрыть"}
+			{children}
 		</button>
 	);
 };

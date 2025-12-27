@@ -1,12 +1,10 @@
-import { createContext } from "react";
+import React from "react";
 
-export interface ModalContextType {
+interface ModalContextType {
 	isOpen: boolean;
 	openModal: () => void;
 	closeModal: () => void;
 	toggleModal: () => void;
 }
 
-export const ModalContext = createContext<ModalContextType | undefined>(
-	undefined,
-);
+export const ModalContext = React.createContext<ModalContextType | null>(null);

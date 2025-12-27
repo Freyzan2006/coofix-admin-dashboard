@@ -7,10 +7,8 @@ export const ProtectedRoute: React.FC<PropsWithChildren> = ({ children }) => {
 	const accessToken = useAuthStore((s) => s.accessToken);
 	const isAuthInitialized = useAuthStore((s) => s.isAuthInitialized);
 
-	
 	if (!isAuthInitialized) return <Spinner />;
 
-	
 	if (!accessToken) return <Navigate to="/auth/login" replace />;
 
 	return <>{children}</>;
