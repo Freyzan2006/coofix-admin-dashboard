@@ -1,5 +1,6 @@
 import { Logout } from "@modules/auth";
 import { ThemeSwitcher } from "@shared/features/ThemeSwitcher";
+import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { TableOfContents } from "lucide-react";
 
@@ -17,8 +18,10 @@ export const NavigationApp: React.FC = () => {
 			</label>
 			<div className="px-4 flex w-full items-center justify-between">
 				<Heading variant="primary">{urlPage}</Heading>
-				<ThemeSwitcher variant="secondary" />
-				<Logout />
+				<Space align="center">
+					<ThemeSwitcher variant="secondary" />
+					<Logout />
+				</Space>
 			</div>
 		</nav>
 	);

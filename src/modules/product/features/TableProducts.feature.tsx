@@ -1,4 +1,5 @@
 import { Alert } from "@shared/ui/Alert.ui";
+import { Space } from "@shared/ui/Space.ui";
 import {
 	Table,
 	TableData,
@@ -9,12 +10,9 @@ import {
 	Thead,
 } from "@shared/ui/table";
 import { CopyText } from "@shared/ui/text";
-
-import { useProducts } from "../hooks/useProducts.hook";
+import { useProducts } from "../adapters/useProducts.hook";
 import { useProductStore } from "../store/product.store";
 import { useProductActionsStore } from "../store/product-actions.store";
-import { ProductActions } from "../widgets/ProductActions.widget";
-import { PaginationProducts } from "./PaginationProducts.feature";
 
 export const TableProducts: React.FC = () => {
 	const { headerTable } = useProductStore();
@@ -25,10 +23,7 @@ export const TableProducts: React.FC = () => {
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 
 	return (
-		<>
-			<PaginationProducts />
-			<ProductActions />
-
+		<Space className="w-full">
 			{isLoading ? (
 				<TableSkeleton row={limit + 1} />
 			) : (
@@ -130,6 +125,6 @@ export const TableProducts: React.FC = () => {
 					</Tbody>
 				</Table>
 			)}
-		</>
+		</Space>
 	);
 };

@@ -57,12 +57,12 @@ export const TableSkeleton: React.FC<ITableSkeletonProps> = ({
 	);
 
 	return (
-		<div className="overflow-x-auto relative">
+		<div className="overflow-x-auto relative w-full">
 			<Spinner
 				className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 				size="lg"
 			/>
-			<table className={className} {...props}>
+			<table {...props} className={className}>
 				<Thead>
 					<TableRow>{colSkeleton}</TableRow>
 				</Thead>

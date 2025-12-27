@@ -5,13 +5,11 @@ import { Monitor, Moon, Sun } from "lucide-react";
 interface ThemeSwitcherProps {
 	variant?: "primary" | "secondary";
 	className?: string;
-	showLabel?: boolean;
 }
 
 export function ThemeSwitcher({
 	variant = "primary",
 	className,
-	showLabel = true,
 }: ThemeSwitcherProps) {
 	const { theme, setTheme } = useTheme();
 
@@ -63,9 +61,6 @@ export function ThemeSwitcher({
 			title={`Сменить тему на следующую (текущая: ${currentTheme.label})`}
 		>
 			<currentTheme.icon className="h-4 w-4" />
-			{showLabel && (
-				<span className="hidden sm:inline">{currentTheme.label}</span>
-			)}
 		</button>
 	);
 }

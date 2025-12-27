@@ -2,7 +2,7 @@ import { Pagination } from "@shared/ui/Pagination.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { PackageSearchIcon } from "lucide-react";
-import { useProducts } from "../hooks/useProducts.hook";
+import { useProducts } from "../adapters/useProducts.hook";
 
 export const PaginationProducts: React.FC = () => {
 	const { total, currentPage, handlerPageChange, limit } = useProducts();

@@ -1,60 +1,60 @@
-import { LayoutDashboard, PackageSearch, UserSearch } from "lucide-react";
+import {
+	BookCheckIcon,
+	ChartBarStackedIcon,
+	LayoutDashboardIcon,
+	type LucideIcon,
+	MessageSquareDiffIcon,
+	PackageSearchIcon,
+	SendToBackIcon,
+	StarIcon,
+	UserSearchIcon,
+} from "lucide-react";
 
-export const sideBarLinks = [
+interface ISideBarLink {
+	to: string;
+	label: string;
+	icon: LucideIcon;
+}
+
+export const sideBarLinks: ISideBarLink[] = [
 	{
 		to: "/dashboard",
-		label: "Dashboard",
-		icon: LayoutDashboard,
+		label: "Доска",
+		icon: LayoutDashboardIcon,
 	},
 	{
 		to: "/dashboard/products",
-		label: "Products",
-		icon: PackageSearch,
+		label: "Продукты",
+		icon: PackageSearchIcon,
 	},
 	{
 		to: "/dashboard/users",
-		label: "Users",
-		icon: UserSearch,
-	},
-];
-
-export const footerLinks = [
-	{
-		title: "Dashboard",
-		items: [
-			{
-				to: "/dashboard",
-				label: "Dashboard",
-			},
-			{
-				to: "/dashboard/products",
-				label: "Products",
-			},
-			{
-				to: "/dashboard/users",
-				label: "Users",
-			},
-		],
+		label: "Пользователи",
+		icon: UserSearchIcon,
 	},
 	{
-		title: "Company",
-		items: [
-			{
-				to: "/",
-				label: "About us",
-			},
-			{
-				to: "/",
-				label: "Contact",
-			},
-			{
-				to: "/",
-				label: "Jobs",
-			},
-			{
-				to: "/",
-				label: "Press kit",
-			},
-		],
+		to: "/dashboard/reviews",
+		label: "Отзывы",
+		icon: MessageSquareDiffIcon,
+	},
+	{
+		to: "/dashboard/orders",
+		label: "Заказы",
+		icon: SendToBackIcon,
+	},
+	{
+		to: "/dashboard/favorites",
+		label: "Избранное",
+		icon: StarIcon,
+	},
+	{
+		to: "/dashboard/categories",
+		label: "Категории",
+		icon: ChartBarStackedIcon,
+	},
+	{
+		to: "/dashboard/brands",
+		label: "Бренды",
+		icon: BookCheckIcon,
 	},
 ];
