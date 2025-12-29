@@ -14,6 +14,7 @@ interface ProductActionsStore {
 	openModal: (product: ProductModel, frame?: string) => void;
 	setIsModalOpen: (v: boolean) => void;
 	setActiveTab: (tabsId: string) => void;
+	closeModal: () => void;
 }
 
 const useProductActionsStore = create<ProductActionsStore>((set) => ({

@@ -5,6 +5,7 @@ import type { ProductModel, ProductsModel } from "../model/product.model";
 interface IProductApi {
 	findAll(page: number, limit: number): Promise<ProductsModel>;
 	create(product: CreateProductModel): Promise<ProductModel>;
+	delete(id: string): Promise<void>;
 }
 
 class ProductRestApi implements IProductApi {
@@ -30,6 +31,10 @@ class ProductRestApi implements IProductApi {
 			product,
 		);
 		return response.data;
+	}
+
+	public async delete(id: string): Promise<void> {
+		await this.client.delete(`/admin/products/${id}`);
 	}
 }
 

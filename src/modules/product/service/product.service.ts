@@ -5,6 +5,7 @@ import type { ProductModel, ProductsModel } from "../model/product.model";
 interface IProductService {
 	allProducts(page: number, limit: number): Promise<ProductsModel>;
 	createProduct(product: CreateProductModel): Promise<ProductModel>;
+	deleteProductById(id: string): Promise<void>;
 }
 
 class ProductService implements IProductService {
@@ -26,6 +27,10 @@ class ProductService implements IProductService {
 	): Promise<ProductModel> {
 		const newProduct = await this.productApi.create(product);
 		return newProduct;
+	}
+
+	public async deleteProductById(id: string): Promise<void> {
+		this.productApi.delete(id);
 	}
 }
 
