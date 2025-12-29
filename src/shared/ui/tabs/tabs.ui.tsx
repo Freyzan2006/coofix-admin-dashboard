@@ -1,6 +1,8 @@
 import { cn } from "@shared/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import type React from "react";
+import { Suspense } from "react";
+import { Loading } from "../Loading.ui";
 
 export type TabItem = {
 	id: string;
@@ -89,11 +91,13 @@ export const Tabs: React.FC<TabsProps> = ({
 							exit={{ opacity: 0, y: -10 }}
 							transition={{ duration: 0.2 }}
 						>
-							{activeTabItem?.content}
+							<Suspense fallback={<Loading />}>
+								{activeTabItem?.content}
+							</Suspense>
 						</motion.div>
 					</AnimatePresence>
 				) : (
-					activeTabItem?.content
+					<Suspense fallback={<Loading />}>{activeTabItem?.content}</Suspense>
 				)}
 			</div>
 		</div>
