@@ -1,7 +1,7 @@
 import { cn } from "@shared/lib/utils";
 
 interface IParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {
-	variant?: "primary" | "secondary" | "success" | "danger";
+	variant?: "primary" | "secondary" | "success" | "danger" | "default";
 	size?: "sm" | "md" | "lg";
 }
 
@@ -18,6 +18,7 @@ export const Paragraph: React.FC<IParagraphProps> = ({
 		secondary: "text-secondary",
 		success: "text-success",
 		danger: "text-error",
+		default: "text-base-content",
 	} as const;
 
 	const sizes = {

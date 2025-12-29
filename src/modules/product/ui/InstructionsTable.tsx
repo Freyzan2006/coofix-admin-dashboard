@@ -1,11 +1,16 @@
+import { Alert } from "@shared/ui/Alert.ui";
 import { Paragraph } from "@shared/ui/text";
+import { MessageSquareDotIcon, MousePointerClickIcon } from "lucide-react";
 
 export const InstructionsTable: React.FC = () => {
 	return (
-		<div>
-			<Paragraph variant="success">
-				Чтобы взаимодействовать с элементами из таблицы, нажмите на них
+		<Alert variant="info">
+			<Paragraph variant="default" className="flex gap-3">
+				<MessageSquareDotIcon /> Чтобы взаимодействовать с элементами из таблицы,
 			</Paragraph>
-		</div>
+			<Paragraph variant="default" className="flex gap-3">
+				<MousePointerClickIcon /> нажмите на них
+			</Paragraph>
+		</Alert>
 	);
 };
