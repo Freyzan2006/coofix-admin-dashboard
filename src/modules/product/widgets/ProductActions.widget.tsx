@@ -5,11 +5,13 @@ import {
 	ModalFooter,
 	ModalHeader,
 } from "@shared/ui/modal";
-import { AnimatePresence, motion } from "motion/react";
+import { type TabItem, Tabs } from "@shared/ui/tabs";
+import { InfoIcon, SquarePenIcon, TrashIcon } from "lucide-react";
+import type React from "react";
 import { DeleteConfirmation } from "../features/DeleteConfirmation.feature";
 import { DetailsProduct } from "../features/details";
 import { EditProductForm } from "../features/EditProductForm.feature";
-import type { ProductModel } from "../model/product.model";
+
 import { useProductActionsStore } from "../store/product-actions.store";
 
 /**
@@ -22,63 +24,50 @@ export const ProductActions: React.FC = () => {
 		isModalOpen,
 		setIsModalOpen,
 		selectedProduct,
-		activeFrame,
-		setActiveFrame,
-		closeModal,
+		activeTab,
+		setActiveTab,
 	} = useProductActionsStore();
 
-	const handleDelete = (product: ProductModel) => {
-		console.log("Deleting", product);
-		// TODO: добавить логику удаления
-	};
+	const tabs: TabItem[] = [
+		{
+			id: "details",
+			label: "Подробнее",
+			icon: <InfoIcon />,
+			content: selectedProduct && <DetailsProduct product={selectedProduct} />,
+		},
+		{
+			id: "edit",
+			label: "Редактировать",
+			icon: <SquarePenIcon />,
+			content: selectedProduct && <EditProductForm product={selectedProduct} />,
+		},
+		{
+			id: "delete",
+			label: "Удалить",
+			icon: <TrashIcon />,
+			content: selectedProduct && (
+				<DeleteConfirmation product={selectedProduct} />
+			),
+		},
+	];
 
 	return (
 		<Modal controlledOpen={isModalOpen} onOpenChange={(v) => setIsModalOpen(v)}>
-			<ModalContent size="lg">
+			<ModalContent size="lg" className="min-h-[750px]">
 				<ModalHeader
 					title={selectedProduct ? selectedProduct.name : "Продукт"}
 					description="Выберите действие"
 				/>
 
-				{/* Навигация между фреймами */}
-				<div className="flex gap-2 mb-4">
-					{(["details", "edit", "delete"] as const).map((frame) => (
-						<button
-							type="button"
-							key={frame}
-							className={`px-3 py-1 rounded ${activeFrame === frame ? "bg-primary text-white" : "bg-gray-200"}`}
-							onClick={() => setActiveFrame(frame)}
-						>
-							{frame.toUpperCase()}
-						</button>
-					))}
-				</div>
-
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={activeFrame}
-						initial={{ opacity: 0, x: 50 }}
-						animate={{ opacity: 1, x: 0 }}
-						exit={{ opacity: 0, x: -50 }}
-						transition={{ duration: 0.2 }}
-					>
-						{activeFrame === "details" && selectedProduct && (
-							<DetailsProduct product={selectedProduct} />
-						)}
-						{activeFrame === "edit" && selectedProduct && (
-							<EditProductForm product={selectedProduct} />
-						)}
-						{activeFrame === "delete" && selectedProduct && (
-							<DeleteConfirmation
-								product={selectedProduct}
-								onConfirm={() => {
-									handleDelete(selectedProduct);
-									closeModal();
-								}}
-							/>
-						)}
-					</motion.div>
-				</AnimatePresence>
+				<Tabs
+					items={tabs}
+					activeTab={activeTab}
+					onChange={setActiveTab}
+					variant="lifted"
+					size="md"
+					animated
+					className="mb-8"
+				/>
 
 				<ModalFooter>
 					<ModalClose>Закрыть</ModalClose>
