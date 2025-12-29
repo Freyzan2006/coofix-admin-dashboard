@@ -3,7 +3,7 @@ import { Alert } from "@shared/ui/Alert.ui";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
 import { Input } from "@shared/ui/fields";
-import { Image } from "@shared/ui/Image.ui";
+import { UserCheckIcon } from "lucide-react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -89,12 +89,8 @@ export const LoginForm: React.FC = () => {
 				</Alert>
 			)}
 
-			<Button variant="neutral" type="submit" loading={isLoginPending}>
-				Войти
-			</Button>
-			<Button variant="ghost" loading={isLoginPending}>
-				<Image src="/images/google.png" alt="Google" width={50} />
-				Войти с помощью Google
+			<Button variant="success" type="submit" loading={isLoginPending}>
+				<UserCheckIcon /> Войти
 			</Button>
 		</Form>
 	);

@@ -28,7 +28,7 @@ export const ModalContent: React.FC<ModalContentProps> = ({
 		<AnimatePresence>
 			{ctx.isOpen && (
 				<motion.div
-					className={cn("modal modal-open")}
+					className={cn("modal modal-open", "bg-black/50 backdrop-blur-md")}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
@@ -44,8 +44,12 @@ export const ModalContent: React.FC<ModalContentProps> = ({
 						transition={{ duration: 0.2 }}
 					>
 						<div className="absolute top-1 right-1">
-							<button type="button" onClick={ctx.closeModal}>
-								<Kbd value="X(Esc)" />
+							<button
+								className="hover:text-error hover:cursor-pointer"
+								type="button"
+								onClick={ctx.closeModal}
+							>
+								<Kbd value="Esc" />
 							</button>
 						</div>
 						{children}
