@@ -9,9 +9,7 @@ export const authPaths: RouteObject[] = [
 		children: [
 			{
 				path: "login",
-				Component: wrapperPublicOnly(
-					() => import("@pages/auth/login/page")
-				),
+				Component: wrapperPublicOnly(() => import("@pages/auth/login/page")),
 			},
 		],
 	},

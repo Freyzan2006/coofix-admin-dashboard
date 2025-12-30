@@ -15,17 +15,16 @@ export function wrapperProtected(
 	);
 }
 
-
 export function wrapperPublicOnly(
-  importFn: () => Promise<{
-    default: React.ComponentType;
-  }>
+	importFn: () => Promise<{
+		default: React.ComponentType;
+	}>,
 ) {
-  const LazyComponent = lazy(importFn);
+	const LazyComponent = lazy(importFn);
 
-  return () => (
-    <PublicOnlyRoute>
-      <LazyComponent />
-    </PublicOnlyRoute>
-  );
+	return () => (
+		<PublicOnlyRoute>
+			<LazyComponent />
+		</PublicOnlyRoute>
+	);
 }

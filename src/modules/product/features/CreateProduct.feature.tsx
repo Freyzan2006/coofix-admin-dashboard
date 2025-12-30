@@ -10,10 +10,10 @@ import {
 	ModalHeader,
 	ModalTrigger,
 } from "@shared/ui/modal";
+import { PlusIcon } from "lucide-react";
 import type React from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import type { CreateProductModel } from "../model/create-product.model";
-import { PlusIcon } from "lucide-react";
 
 export const CreateProductModal: React.FC = () => {
 	const methods = useForm<CreateProductModel>({
@@ -66,7 +66,9 @@ export const CreateProductModal: React.FC = () => {
 	return (
 		<FormProvider {...methods}>
 			<Modal>
-				<ModalTrigger className="btn btn-primary"><PlusIcon /> Создать продукт</ModalTrigger>
+				<ModalTrigger className="btn btn-primary">
+					<PlusIcon /> Создать продукт
+				</ModalTrigger>
 
 				<ModalContent size="lg">
 					<ModalHeader
