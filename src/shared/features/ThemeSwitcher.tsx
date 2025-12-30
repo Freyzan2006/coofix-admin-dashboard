@@ -1,5 +1,6 @@
 import { useTheme } from "@app/providers/ThemeProvider";
 import { cn } from "@shared/lib/utils";
+import { toast } from "@shared/ui/toast";
 import { Monitor, Moon, Sun } from "lucide-react";
 
 interface ThemeSwitcherProps {
@@ -47,6 +48,7 @@ export function ThemeSwitcher({
 		const currentIndex = themes.findIndex((t) => t.value === theme);
 		const nextIndex = (currentIndex + 1) % themes.length;
 		setTheme(themes[nextIndex].value);
+		toast.success(`Тема успешно изменена на ${themes[nextIndex].label}`);
 	};
 
 	return (
