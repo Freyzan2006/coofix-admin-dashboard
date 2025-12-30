@@ -22,7 +22,7 @@ export default defineConfig({
 					if (id.includes("node_modules/react")) return "react-vendor";
 					if (id.includes("node_modules/lucide-react")) return "icons-vendor";
 					if (id.includes("node_modules/motion")) return "motion-vendor";
-					if (id.includes("node_modules")) return "vendor";
+					// if (id.includes("node_modules")) return "vendor";
 				},
 			},
 		},
