@@ -1,11 +1,16 @@
 import RootLayout from "@pages/layout";
 import type { RouteObject } from "react-router";
 import { dashboardPaths } from "./paths/dashboard.path";
-import { rootPaths } from "./paths/root.path";
+import { authPaths } from "./paths/auth.path";
+import { basePaths } from "./paths/base.path";
 
 export const paths: RouteObject[] = [
 	{
 		Component: RootLayout,
-		children: [...rootPaths, ...dashboardPaths],
+		children: [
+			...basePaths,
+			...authPaths, 
+			...dashboardPaths
+		],
 	},
 ];

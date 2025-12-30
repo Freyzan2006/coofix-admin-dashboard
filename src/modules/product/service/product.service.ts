@@ -18,7 +18,6 @@ class ProductService implements IProductService {
 		limit: number,
 	): Promise<ProductsModel> {
 		const products = await this.productApi.findAll(page, limit);
-		console.log("products", products);
 		return products;
 	}
 

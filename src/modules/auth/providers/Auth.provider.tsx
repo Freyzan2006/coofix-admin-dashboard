@@ -1,8 +1,9 @@
-import { Spinner } from "@shared/ui/Spinner.ui";
 import { type PropsWithChildren, useEffect } from "react";
 import { authApi } from "../di/auth.di";
 
 import { useAuthStore } from "../store/auth.store";
+import { Loading } from "@shared/ui/Loading.ui";
+import { Space } from "@shared/ui/Space.ui";
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const setAccessToken = useAuthStore((s) => s.setAccessToken);
@@ -22,7 +23,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 		})();
 	}, [setAccessToken, setAuthInitialized]);
 
-	if (!isAuthInitialized) return <Spinner />;
+	if (!isAuthInitialized) return <Space align="center" justify="center" fullYScreen><Loading size="xl" /></Space>;
 
 	return <>{children}</>;
 };

@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { ProtectedRoute } from "../widgets/ProtectedRoute.widget";
+import { PublicOnlyRoute } from "../widgets/PublicOnlyRoute.widget";
 
 export function wrapperProtected(
 	importFn: () => Promise<{
@@ -12,4 +13,19 @@ export function wrapperProtected(
 			<LazyComponent />
 		</ProtectedRoute>
 	);
+}
+
+
+export function wrapperPublicOnly(
+  importFn: () => Promise<{
+    default: React.ComponentType;
+  }>
+) {
+  const LazyComponent = lazy(importFn);
+
+  return () => (
+    <PublicOnlyRoute>
+      <LazyComponent />
+    </PublicOnlyRoute>
+  );
 }
