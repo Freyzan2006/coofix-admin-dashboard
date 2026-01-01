@@ -31,9 +31,6 @@ export function useCreateProduct() {
 		};
 	});
 
-	console.log(categories);
-	console.log(categoriesForForm);
-
 	const brandsForForm = brands.map((brand: BrandModel) => {
 		return {
 			label: brand.name,

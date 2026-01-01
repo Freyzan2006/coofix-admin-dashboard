@@ -128,28 +128,6 @@ export const CreateProduct: React.FC = () => {
 		// ---------- 7. SEND ----------
 		await doCreateAsync(payload);
 	};
-	console.log(categories);
-	// const categories = [
-	// 	{
-	// 		label: "Категория 1",
-	// 		value: "category-1",
-	// 	},
-	// 	{
-	// 		label: "Категория 2",
-	// 		value: "category-2",
-	// 	},
-	// ];
-
-	// const brands = [
-	// 	{
-	// 		label: "Бренд 1",
-	// 		value: "brand-1",
-	// 	},
-	// 	{
-	// 		label: "Бренд 2",
-	// 		value: "brand-2",
-	// 	},
-	// ];
 
 	return (
 		<FormProvider {...methods}>
