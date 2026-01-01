@@ -3,7 +3,7 @@ export interface CategoryModel {
 	name: string;
 	slug: string;
 	parent: string;
-	image: URL;
+	image: string;
 	createdAt: Date;
 	updatedAt: Date;
 }

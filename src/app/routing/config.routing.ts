@@ -28,6 +28,16 @@ export const sideBarLinks: ISideBarLink[] = [
 		icon: PackageSearchIcon,
 	},
 	{
+		to: "/dashboard/categories",
+		label: "Категории",
+		icon: ChartBarStackedIcon,
+	},
+	{
+		to: "/dashboard/brands",
+		label: "Бренды",
+		icon: BookCheckIcon,
+	},
+	{
 		to: "/dashboard/users",
 		label: "Пользователи",
 		icon: UserSearchIcon,
@@ -46,15 +56,5 @@ export const sideBarLinks: ISideBarLink[] = [
 		to: "/dashboard/favorites",
 		label: "Избранное",
 		icon: StarIcon,
-	},
-	{
-		to: "/dashboard/categories",
-		label: "Категории",
-		icon: ChartBarStackedIcon,
-	},
-	{
-		to: "/dashboard/brands",
-		label: "Бренды",
-		icon: BookCheckIcon,
 	},
 ];
