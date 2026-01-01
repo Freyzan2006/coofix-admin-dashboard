@@ -1,6 +1,6 @@
 import { Card } from "@shared/ui/Card.ui";
 
-import { CreateProductModal } from "../features/CreateProduct.feature";
+import { CreateProduct } from "../features/create";
 import { PaginationProducts } from "../features/PaginationProducts.feature";
 import { TableProducts } from "../features/TableProducts.feature";
 import { InstructionsTable } from "../ui/InstructionsTable";
@@ -13,7 +13,7 @@ export const ProductFrame: React.FC = () => {
 			<TableProducts />
 			<InstructionsTable />
 			<ProductActions />
-			<CreateProductModal />
+			<CreateProduct />
 		</Card>
 	);
 };

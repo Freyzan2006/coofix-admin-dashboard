@@ -28,7 +28,11 @@ export const ModalContent: React.FC<ModalContentProps> = ({
 		<AnimatePresence>
 			{ctx.isOpen && (
 				<motion.div
-					className={cn("modal modal-open", "bg-black/50 backdrop-blur-md")}
+					className={cn(
+						"modal modal-open",
+						"bg-black/50 backdrop-blur-md",
+						"z-50",
+					)}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}

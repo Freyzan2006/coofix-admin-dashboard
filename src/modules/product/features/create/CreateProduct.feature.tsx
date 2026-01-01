@@ -1,7 +1,9 @@
 import { ImageDropzone } from "@shared/features/UploadFile";
+import { Alert } from "@shared/ui/Alert.ui";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
-import { Checkbox, Input, Textarea } from "@shared/ui/fields";
+import { Checkbox, Input, Select, Textarea } from "@shared/ui/fields";
+import { Loading } from "@shared/ui/Loading.ui";
 import {
 	Modal,
 	ModalClose,
@@ -10,12 +12,23 @@ import {
 	ModalHeader,
 	ModalTrigger,
 } from "@shared/ui/modal";
-import { PlusIcon } from "lucide-react";
+import { Space } from "@shared/ui/Space.ui";
+import { Heading } from "@shared/ui/text";
+import { PlusIcon, XIcon } from "lucide-react";
 import type React from "react";
-import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
-import type { CreateProductModel } from "../model/create-product.model";
+import {
+	FormProvider,
+	type SubmitHandler,
+	useFieldArray,
+	useForm,
+} from "react-hook-form";
+import { useCreateProduct } from "../../adapters/useCreateProduct.hook";
+import type {
+	CreateProductDto,
+	CreateProductModel,
+} from "../../model/create-product.model";
 
-export const CreateProductModal: React.FC = () => {
+export const CreateProduct: React.FC = () => {
 	const methods = useForm<CreateProductModel>({
 		defaultValues: {
 			name: "Product test. name",
@@ -25,9 +38,7 @@ export const CreateProductModal: React.FC = () => {
 			category: "Product test. category",
 			brand: "Product test. brand",
 			images: ["https://images.hello", "https://images.hello"],
-			characteristics: {
-				color: "Product test. color",
-			},
+			characteristics: [{ name: "Частота", value: "33Гц" }],
 			quantity: 30,
 			isNew: true,
 			isSale: false,
@@ -37,31 +48,96 @@ export const CreateProductModal: React.FC = () => {
 		reValidateMode: "onChange",
 	});
 
+	const { doCreateAsync, isError, isPending, isSuccess } = useCreateProduct();
+
 	const {
 		register,
 		handleSubmit,
+		control,
 		formState: { errors, isSubmitting },
 	} = methods;
 
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: "characteristics",
+	});
+
 	const onSubmit: SubmitHandler<CreateProductModel> = async (data) => {
-		console.log("Form data:", data);
+		// ---------- 1. Валидация характеристик ----------
+		const names = data.characteristics.map((c) => c.name.trim());
 
-		const formData = new FormData();
-
-		Object.keys(data).forEach((key) => {
-			if (key !== "images") {
-				formData.append(key, String(data[key as keyof CreateProductModel]));
-			}
-		});
-
-		if (data.images && data.images.length > 0) {
-			data.images.forEach((file, index) => {
-				formData.append(`images[${index}]`, file);
-			});
+		if (new Set(names).size !== names.length) {
+			alert("Названия характеристик должны быть уникальны");
+			return;
 		}
 
-		console.log("FormData ready for upload:", formData);
+		// ---------- 2. characteristics: array → object ----------
+		const characteristics: Record<string, string> = Object.fromEntries(
+			data.characteristics
+				.filter((c) => c.name.trim())
+				.map((c) => [c.name.trim(), c.value]),
+		);
+
+		// ---------- 3. Финальный payload ----------
+		const payload: CreateProductDto = {
+			...data,
+			characteristics,
+		};
+
+		// ---------- 4. FormData ----------
+		const formData = new FormData();
+
+		// обычные поля
+		Object.entries(payload).forEach(([key, value]) => {
+			if (key === "images") return;
+			if (key === "characteristics") {
+				// backend ждёт object → отправляем JSON
+				formData.append("characteristics", JSON.stringify(value));
+				return;
+			}
+
+			// boolean / number → string
+			formData.append(key, String(value));
+		});
+
+		// ---------- 5. images ----------
+		payload.images.forEach((file) => {
+			formData.append("images", file); // ⬅️ ВАЖНО: без индексов
+		});
+
+		// ---------- 6. DEBUG ----------
+
+		for (const [k, v] of formData.entries()) {
+			console.log(k, v);
+		}
+
+		console.log("Final payload:", payload);
+
+		// ---------- 7. SEND ----------
+		await doCreateAsync(payload);
 	};
+
+	const categories = [
+		{
+			label: "Категория 1",
+			value: "category-1",
+		},
+		{
+			label: "Категория 2",
+			value: "category-2",
+		},
+	];
+
+	const brands = [
+		{
+			label: "Бренд 1",
+			value: "brand-1",
+		},
+		{
+			label: "Бренд 2",
+			value: "brand-2",
+		},
+	];
 
 	return (
 		<FormProvider {...methods}>
@@ -115,7 +191,7 @@ export const CreateProductModal: React.FC = () => {
 							error={errors.description?.message}
 						/>
 
-						<section className="flex flex-row gap-4 items-center">
+						<Space align="center" axis="horizontal" gap={4}>
 							<Input
 								title="Цена продукта"
 								type="number"
@@ -171,46 +247,23 @@ export const CreateProductModal: React.FC = () => {
 								})}
 								error={errors.quantity?.message}
 							/>
-						</section>
+						</Space>
 
-						<section className="flex flex-row gap-4 items-center">
-							<Input
-								title="Категория продукта"
-								type="text"
-								variant="primary"
-								{...register("category", {
-									required: "Категория обязательно",
-									minLength: {
-										value: 1,
-										message: "Минимум 1 символ",
-									},
-									maxLength: {
-										value: 255,
-										message: "Максимум 255 символов",
-									},
-								})}
-								error={errors.category?.message}
+						<Space align="center" axis="horizontal">
+							<Select
+								items={categories}
+								defaultValue={categories[0].value}
+								{...register("category", { required: true })}
 							/>
-							<Input
-								title="Бренд продукта"
-								type="text"
-								variant="primary"
-								{...register("brand", {
-									required: "Бренд обязательно",
-									minLength: {
-										value: 1,
-										message: "Минимум 1 символ",
-									},
-									maxLength: {
-										value: 255,
-										message: "Максимум 255 символов",
-									},
-								})}
-								error={errors.brand?.message}
-							/>
-						</section>
 
-						<section className="flex flex-row gap-4 items-center">
+							<Select
+								defaultValue={categories[0].value}
+								items={brands}
+								{...register("brand", { required: true })}
+							/>
+						</Space>
+
+						<Space axis="horizontal" gap={4} fullWidth align="center">
 							<Checkbox
 								title="Новый продукт ?"
 								variant="primary"
@@ -221,7 +274,7 @@ export const CreateProductModal: React.FC = () => {
 								variant="primary"
 								{...register("isSale")}
 							/>
-						</section>
+						</Space>
 
 						<ImageDropzone
 							name="images"
@@ -230,25 +283,71 @@ export const CreateProductModal: React.FC = () => {
 							onFilesChange={(files) => console.log("Files changed:", files)}
 						/>
 
-						<Input title="Характеристики" type="text" />
+						<Space
+							axis="vertical"
+							gap={3}
+							fullWidth
+							className="overflow-y-scroll max-h-[200px]"
+						>
+							<Heading variant="primary">Характеристики:</Heading>
 
-						<div className="mt-6">
+							{fields.map((field, index) => (
+								<Space
+									key={field.id}
+									axis="horizontal"
+									align="center"
+									justify="center"
+									gap={5}
+								>
+									<Input
+										{...register(`characteristics.${index}.name`, {
+											required: true,
+										})}
+										placeholder="Название (Частота)"
+									/>
+
+									<Input
+										{...register(`characteristics.${index}.value`, {
+											required: true,
+										})}
+										placeholder="Значение (33Гц)"
+									/>
+									<Button variant="danger" onClick={() => remove(index)}>
+										<XIcon />
+									</Button>
+								</Space>
+							))}
+
+							<Button
+								className="max-w-[280px]"
+								variant="success"
+								onClick={() => append({ name: "", value: "" })}
+							>
+								<PlusIcon /> Добавить характеристику
+							</Button>
+						</Space>
+
+						{isError && (
+							<Alert variant="danger">
+								Произошла ошибка при создании продукта
+							</Alert>
+						)}
+
+						{isSuccess && (
+							<Alert variant="success">Продукт успешно создан</Alert>
+						)}
+
+						<Space className="mt-6">
 							<Button
 								type="submit"
 								variant="success"
 								disabled={isSubmitting}
 								className="w-full"
 							>
-								{isSubmitting ? (
-									<>
-										<span className="loading loading-spinner"></span>
-										Создание...
-									</>
-								) : (
-									"Создать продукт"
-								)}
+								<PlusIcon />
+								{isSubmitting || isPending ? <Loading /> : "Создать продукт"}
 							</Button>
-						</div>
+						</Space>
 					</Form>
 
 					<ModalFooter>

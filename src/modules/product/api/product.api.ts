@@ -1,10 +1,10 @@
 import type { AxiosInstance } from "axios";
-import type { CreateProductModel } from "../model/create-product.model";
+import type { CreateProductDto } from "../model/create-product.model";
 import type { ProductModel, ProductsModel } from "../model/product.model";
 
 interface IProductApi {
 	findAll(page: number, limit: number): Promise<ProductsModel>;
-	create(product: CreateProductModel): Promise<ProductModel>;
+	create(product: CreateProductDto): Promise<ProductModel>;
 	delete(id: string): Promise<void>;
 }
 
@@ -25,7 +25,7 @@ class ProductRestApi implements IProductApi {
 		return response.data;
 	}
 
-	public async create(product: CreateProductModel): Promise<ProductModel> {
+	public async create(product: CreateProductDto): Promise<ProductModel> {
 		const response = await this.client.post<ProductModel>(
 			"/admin/products",
 			product,

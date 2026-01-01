@@ -1,4 +1,11 @@
-import type { CharacteristicsType } from "./types";
+type CharacteristicItem = {
+	name: string;
+	value: string;
+};
+
+// export type CharacteristicsType = {
+// 	[key: string]: string;
+// };
 
 export interface CreateProductModel {
 	name: string;
@@ -8,8 +15,12 @@ export interface CreateProductModel {
 	category: string;
 	brand: string;
 	images: string[];
-	characteristics: CharacteristicsType;
+	characteristics: CharacteristicItem[];
 	quantity: number;
 	isNew: boolean;
 	isSale: boolean;
 }
+
+export type CreateProductDto = Omit<CreateProductModel, "characteristics"> & {
+	characteristics: Record<string, string>;
+};
