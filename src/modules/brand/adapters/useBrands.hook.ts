@@ -9,7 +9,7 @@ export function useBrands() {
 
 	return {
 		brands: data || [],
-		BrandsIsError: isError,
-		BrandsIsLoading: isLoading,
+		brandsIsError: isError,
+		brandsIsLoading: isLoading,
 	};
 }

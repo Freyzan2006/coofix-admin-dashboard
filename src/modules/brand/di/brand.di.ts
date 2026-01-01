@@ -1,10 +1,15 @@
 import { newRestApiCli } from "@shared/api/rest-api/client";
 import { environmentConfig } from "@shared/config";
-import { BrandApi } from "../api/brand.api";
-import { BrandService } from "../service/brand.service";
+import { BrandRestApi } from "../api/brand.api";
+import { BrandService, type IBrandService } from "../service/brand.service";
 
-const clientRestApi = await newRestApiCli(
-	environmentConfig.get<string>("VITE_API_URL"),
-);
-const brandApi = new BrandApi(clientRestApi);
-export const brandService = new BrandService(brandApi);
+async function factoryBrandService(): Promise<IBrandService> {
+	const clientRestApi = await newRestApiCli(
+		environmentConfig.get<string>("VITE_API_URL"),
+	);
+	const brandApi = new BrandRestApi(clientRestApi);
+	const brandService = new BrandService(brandApi);
+	return brandService;
+}
+
+export const brandService = await factoryBrandService();

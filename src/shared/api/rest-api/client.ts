@@ -8,7 +8,7 @@ export async function newRestApiCli(
 	headers: Record<string, string> = {
 		"Content-Type": "application/json",
 	},
-): Promise<AxiosInstance> {
+): Promise<RestApiCliType> {
 	const client = axios.create({
 		baseURL,
 		withCredentials: true,
@@ -21,3 +21,5 @@ export async function newRestApiCli(
 
 	return client;
 }
+
+export type RestApiCliType = AxiosInstance;

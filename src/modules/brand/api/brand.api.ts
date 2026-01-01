@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "axios";
+import type { RestApiCliType } from "@shared/api/rest-api/client";
 import type { BrandModel } from "../model/brand.model";
 import type { BrandsDto } from "./brand.dto";
 
@@ -7,11 +7,8 @@ export interface IBrandApi {
 	findBySlug(slug: string): Promise<BrandModel>;
 }
 
-export class BrandApi implements IBrandApi {
-	private readonly client: AxiosInstance;
-	constructor(client: AxiosInstance) {
-		this.client = client;
-	}
+export class BrandRestApi implements IBrandApi {
+	constructor(private readonly client: RestApiCliType) {}
 
 	public async findAll(): Promise<BrandModel[]> {
 		const response = await this.client.get<BrandsDto>("/brands");

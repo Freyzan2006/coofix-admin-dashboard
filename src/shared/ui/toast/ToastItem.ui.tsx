@@ -53,12 +53,12 @@ export function ToastItem({ toast }: { toast: IToastState }) {
 			<div className="flex p-3">
 				<button
 					type="button"
-					className="absolute top-2 right-2 cursor-pointer"
+					className="absolute top-2 left-2 cursor-pointer"
 					onClick={() => remove(toast.id)}
 				>
 					<XIcon size={20} />
 				</button>
-				<div className="absolute top-2 left-2">{variantsIcon[toast.type]}</div>
+				<div className="absolute top-2 right-2">{variantsIcon[toast.type]}</div>
 				<span>{toast.message}</span>
 			</div>
 		</motion.div>

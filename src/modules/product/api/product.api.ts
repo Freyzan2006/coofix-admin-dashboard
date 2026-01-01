@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "axios";
+import type { RestApiCliType } from "@shared/api/rest-api/client";
 import type { CreateProductDto } from "../model/create-product.model";
 import type { ProductModel, ProductsModel } from "../model/product.model";
 
@@ -9,11 +9,7 @@ interface IProductApi {
 }
 
 class ProductRestApi implements IProductApi {
-	private readonly client: AxiosInstance;
-
-	constructor(client: AxiosInstance) {
-		this.client = client;
-	}
+	constructor(private readonly client: RestApiCliType) {}
 
 	public async findAll(page: number, limit: number): Promise<ProductsModel> {
 		const response = await this.client.get<ProductsModel>("/products", {

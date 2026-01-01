@@ -36,8 +36,8 @@ export const CreateProduct: React.FC = () => {
 			description: "Product test. description",
 			price: 300,
 			oldPrice: 200,
-			category: "Product test. category",
-			brand: "Product test. brand",
+			category: "",
+			brand: "",
 			images: ["https://images.hello", "https://images.hello"],
 			characteristics: [{ name: "Частота", value: "33Гц" }],
 			quantity: 30,
@@ -55,8 +55,11 @@ export const CreateProduct: React.FC = () => {
 		isPending,
 		isSuccess,
 		brands,
-		BrandsIsError,
-		BrandsIsLoading,
+		brandsIsError,
+		brandsIsLoading,
+		categories,
+		categoriesIsError,
+		categoriesIsLoading,
 	} = useCreateProduct();
 
 	const {
@@ -125,17 +128,17 @@ export const CreateProduct: React.FC = () => {
 		// ---------- 7. SEND ----------
 		await doCreateAsync(payload);
 	};
-
-	const categories = [
-		{
-			label: "Категория 1",
-			value: "category-1",
-		},
-		{
-			label: "Категория 2",
-			value: "category-2",
-		},
-	];
+	console.log(categories);
+	// const categories = [
+	// 	{
+	// 		label: "Категория 1",
+	// 		value: "category-1",
+	// 	},
+	// 	{
+	// 		label: "Категория 2",
+	// 		value: "category-2",
+	// 	},
+	// ];
 
 	// const brands = [
 	// 	{
@@ -261,29 +264,38 @@ export const CreateProduct: React.FC = () => {
 						<Space align="center" axis="horizontal" fullWidth>
 							<Space gap={3} axis="vertical" fullWidth>
 								<Label htmlFor="category">Категория</Label>
-								<Select
-									id="category"
-									items={categories}
-									defaultValue={categories[0].value}
-									{...register("category", { required: true })}
-									error={errors.category?.message}
-								/>
+
+								{categoriesIsLoading ? (
+									<Spinner />
+								) : (
+									<Select
+										id="category"
+										items={categories}
+										{...register("category", { required: true })}
+										error={errors.category?.message}
+									/>
+								)}
+
+								{categoriesIsError && (
+									<Alert variant="danger">
+										Произошла ошибка при загрузке категорий
+									</Alert>
+								)}
 							</Space>
 
 							<Space gap={3} axis="vertical" fullWidth>
 								<Label htmlFor="brand">Бренд</Label>
-								{BrandsIsLoading ? (
+								{brandsIsLoading ? (
 									<Spinner />
 								) : (
 									<Select
 										id={"brand"}
-										defaultValue={categories[0].value}
 										items={brands}
 										{...register("brand", { required: true })}
 										error={errors.brand?.message}
 									/>
 								)}
-								{BrandsIsError && (
+								{brandsIsError && (
 									<Alert variant="danger">
 										Произошла ошибка при загрузке брендов
 									</Alert>

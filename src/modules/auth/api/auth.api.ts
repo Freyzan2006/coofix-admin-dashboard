@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "axios";
+import type { RestApiCliType } from "@shared/api/rest-api/client";
 import type {
 	LoginGoogleDtoRequest,
 	LoginGoogleDtoResponse,
@@ -17,10 +17,7 @@ interface IAuthApi {
 }
 
 class AuthRestApi implements IAuthApi {
-	private readonly client: AxiosInstance;
-	constructor(client: AxiosInstance) {
-		this.client = client;
-	}
+	constructor(private readonly client: RestApiCliType) {}
 
 	public async loginLocal(
 		dto: LoginLocalDtoRequest,
