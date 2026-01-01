@@ -27,14 +27,14 @@ export function useCreateProduct() {
 	const categoriesForForm = categories.map((category: CategoryModel) => {
 		return {
 			label: category.name,
-			value: category.slug,
+			value: category._id,
 		};
 	});
 
 	const brandsForForm = brands.map((brand: BrandModel) => {
 		return {
 			label: brand.name,
-			value: brand.slug,
+			value: brand._id,
 		};
 	});
 
