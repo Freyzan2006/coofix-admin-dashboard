@@ -13,7 +13,8 @@ import {
 	ModalTrigger,
 } from "@shared/ui/modal";
 import { Space } from "@shared/ui/Space.ui";
-import { Heading } from "@shared/ui/text";
+import { Spinner } from "@shared/ui/Spinner.ui";
+import { Heading, Label } from "@shared/ui/text";
 import { PlusIcon, XIcon } from "lucide-react";
 import type React from "react";
 import {
@@ -48,7 +49,15 @@ export const CreateProduct: React.FC = () => {
 		reValidateMode: "onChange",
 	});
 
-	const { doCreateAsync, isError, isPending, isSuccess } = useCreateProduct();
+	const {
+		doCreateAsync,
+		isError,
+		isPending,
+		isSuccess,
+		brands,
+		BrandsIsError,
+		BrandsIsLoading,
+	} = useCreateProduct();
 
 	const {
 		register,
@@ -128,16 +137,16 @@ export const CreateProduct: React.FC = () => {
 		},
 	];
 
-	const brands = [
-		{
-			label: "Бренд 1",
-			value: "brand-1",
-		},
-		{
-			label: "Бренд 2",
-			value: "brand-2",
-		},
-	];
+	// const brands = [
+	// 	{
+	// 		label: "Бренд 1",
+	// 		value: "brand-1",
+	// 	},
+	// 	{
+	// 		label: "Бренд 2",
+	// 		value: "brand-2",
+	// 	},
+	// ];
 
 	return (
 		<FormProvider {...methods}>
@@ -249,18 +258,37 @@ export const CreateProduct: React.FC = () => {
 							/>
 						</Space>
 
-						<Space align="center" axis="horizontal">
-							<Select
-								items={categories}
-								defaultValue={categories[0].value}
-								{...register("category", { required: true })}
-							/>
+						<Space align="center" axis="horizontal" fullWidth>
+							<Space gap={3} axis="vertical" fullWidth>
+								<Label htmlFor="category">Категория</Label>
+								<Select
+									id="category"
+									items={categories}
+									defaultValue={categories[0].value}
+									{...register("category", { required: true })}
+									error={errors.category?.message}
+								/>
+							</Space>
 
-							<Select
-								defaultValue={categories[0].value}
-								items={brands}
-								{...register("brand", { required: true })}
-							/>
+							<Space gap={3} axis="vertical" fullWidth>
+								<Label htmlFor="brand">Бренд</Label>
+								{BrandsIsLoading ? (
+									<Spinner />
+								) : (
+									<Select
+										id={"brand"}
+										defaultValue={categories[0].value}
+										items={brands}
+										{...register("brand", { required: true })}
+										error={errors.brand?.message}
+									/>
+								)}
+								{BrandsIsError && (
+									<Alert variant="danger">
+										Произошла ошибка при загрузке брендов
+									</Alert>
+								)}
+							</Space>
 						</Space>
 
 						<Space axis="horizontal" gap={4} fullWidth align="center">

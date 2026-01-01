@@ -1,1 +1,2 @@
-export type { BrandModel } from "./api/model/brand.model";
+export { useBrands } from "./adapters/useBrands.hook";
+export type { BrandModel } from "./model/brand.model";

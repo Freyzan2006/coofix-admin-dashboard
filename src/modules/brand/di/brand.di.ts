@@ -1,9 +1,10 @@
 import { newRestApiCli } from "@shared/api/rest-api/client";
 import { environmentConfig } from "@shared/config";
-import { AuthRestApi } from "../api/auth.api";
+import { BrandApi } from "../api/brand.api";
+import { BrandService } from "../service/brand.service";
 
 const clientRestApi = await newRestApiCli(
 	environmentConfig.get<string>("VITE_API_URL"),
 );
-
-export const authApi = new AuthRestApi(clientRestApi);
+const brandApi = new BrandApi(clientRestApi);
+export const brandService = new BrandService(brandApi);
