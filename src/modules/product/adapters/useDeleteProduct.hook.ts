@@ -1,14 +1,23 @@
 import { queryClient } from "@app/providers/TanStackProvider";
+import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
+import React from "react";
 import { productService } from "../di/product.di";
 
 export function useDeleteProduct(id: string) {
+	const [confirmationDeleteInput, setConfirmationDeleteInput] =
+		React.useState<string>("");
 	const { mutate, mutateAsync, isPending, isSuccess, isError } = useMutation({
 		mutationFn: async () => {
 			await productService.deleteProductById(id);
-			queryClient.invalidateQueries({ queryKey: ["products"] });
 		},
-		onSuccess: () => {},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["products"] });
+			toast.success("Продукт успешно удален");
+		},
+		onError: () => {
+			toast.error("Произошла ошибка при удалении продукта");
+		},
 	});
 
 	return {
@@ -17,5 +26,8 @@ export function useDeleteProduct(id: string) {
 		isPending,
 		isSuccess,
 		isError,
+
+		confirmationDeleteInput,
+		setConfirmationDeleteInput,
 	};
 }

@@ -22,7 +22,7 @@ export const CarouselImg: React.FC<ICarouselImgProps> = ({ images }) => {
 	const renderImages = useMemo(() => {
 		return images.map((image, index) => (
 			<div
-				key={image}
+				key={String(image + index)}
 				id={`slide${index + 1}`}
 				className="carousel-item relative w-full"
 			>
