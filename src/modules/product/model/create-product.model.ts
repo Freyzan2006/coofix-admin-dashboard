@@ -21,6 +21,3 @@ export interface CreateProductModel {
 	isSale: boolean;
 }
 
-export type CreateProductDto = Omit<CreateProductModel, "characteristics"> & {
-	characteristics: Record<string, string>;
-};

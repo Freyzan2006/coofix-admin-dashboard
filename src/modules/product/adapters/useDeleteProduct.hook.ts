@@ -1,4 +1,4 @@
-import { queryClient } from "@app/providers/TanStackProvider";
+import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";

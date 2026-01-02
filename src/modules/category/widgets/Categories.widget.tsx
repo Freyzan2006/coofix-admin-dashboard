@@ -25,7 +25,7 @@ export const Categories: React.FC = () => {
 		});
 		await updateCategoryAsync({
 			id: "1",
-			category: { name: "test", slug: "test", parent: "", image: "" },
+			dto: { name: "test", slug: "test", parent: "", image: "" },
 		});
 		await deleteCategoryAsync("1");
 		console.log(category);

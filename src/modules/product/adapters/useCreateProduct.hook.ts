@@ -1,6 +1,6 @@
-import { queryClient } from "@app/providers/TanStackProvider";
 import { type BrandModel, useBrands } from "@modules/brand";
 import { type CategoryModel, useCategories } from "@modules/category";
+import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 import { productService } from "../di/product.di";

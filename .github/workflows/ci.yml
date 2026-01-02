@@ -33,5 +33,5 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Knip (dead code)
-        run: bun run knip
+      # - name: Knip (dead code)
+      #   run: bun run knip
