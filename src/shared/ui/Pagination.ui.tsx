@@ -42,7 +42,7 @@ export const Pagination: React.FC<IPaginationProps> = ({
 	current,
 	total,
 	onChange,
-	maxVisible = 4,
+	maxVisible = 3,
 }) => {
 	if (total <= 1) return null;
 

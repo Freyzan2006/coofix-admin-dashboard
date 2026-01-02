@@ -26,8 +26,7 @@ export const Input: React.FC<IInputProps> = ({
 		baseClass,
 		props.className,
 		fullWidth && "w-full",
-		variants[variant],
-		error && "input-error",
+		error ? "input-error" : variants[variant],
 	);
 
 	return (

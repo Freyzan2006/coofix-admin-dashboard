@@ -1,1 +1,1 @@
-export { CreateProduct } from "./CreateProduct.feature";
+export { CreateProductModal } from "./CreateProductModal.feature";

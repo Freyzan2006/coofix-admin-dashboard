@@ -38,20 +38,22 @@ export const Select: React.FC<SelectProps> = ({
 	} as const;
 
 	return (
-		<select
-			{...props}
-			className={cn(
-				"select",
-				variants[variant],
-				error && "select-error",
-				className,
-			)}
-		>
-			{items.map((item) => (
-				<option key={item.value} value={item.value}>
-					{item.label}
-				</option>
-			))}
-		</select>
+		<div>
+			<select
+				{...props}
+				className={cn(
+					"select",
+					error ? "select-error" : variants[variant],
+					className,
+				)}
+			>
+				{items.map((item) => (
+					<option key={item.value} value={item.value}>
+						{item.label}
+					</option>
+				))}
+			</select>
+			{error && <span className=" text-error mt-1 text-sm">{error}</span>}
+		</div>
 	);
 };
