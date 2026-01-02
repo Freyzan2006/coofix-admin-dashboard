@@ -1,5 +1,9 @@
 import type { IProductApi } from "../api/product.api";
-import type { CreateProductDto, ProductFilterQueryParams, UpdateProductDto } from "../api/product.dto";
+import type {
+	CreateProductDto,
+	ProductFilterQueryParams,
+	UpdateProductDto,
+} from "../api/product.dto";
 
 import type { ProductModel, ProductsModel } from "../model/product.model";
 
@@ -7,8 +11,14 @@ interface IProductService {
 	allProducts(page: number, limit: number): Promise<ProductsModel>;
 	createProduct(product: CreateProductDto): Promise<ProductModel>;
 	deleteProductById(id: string): Promise<void>;
-	updateProductById(id: string, product: UpdateProductDto): Promise<ProductModel>;
-	updateQuantityProductById(id: string, quantity: number): Promise<ProductModel>;
+	updateProductById(
+		id: string,
+		product: UpdateProductDto,
+	): Promise<ProductModel>;
+	updateQuantityProductById(
+		id: string,
+		quantity: number,
+	): Promise<ProductModel>;
 	findProductBySlug(slug: string): Promise<ProductModel>;
 	searchProduct(query: string): Promise<ProductModel[]>;
 	filterProduct(queries: ProductFilterQueryParams): Promise<ProductsModel>;
@@ -21,11 +31,17 @@ class ProductService implements IProductService {
 	constructor(productApi: IProductApi) {
 		this.productApi = productApi;
 	}
-	public async updateProductById(id: string, product: UpdateProductDto): Promise<ProductModel> {
+	public async updateProductById(
+		id: string,
+		product: UpdateProductDto,
+	): Promise<ProductModel> {
 		const response = await this.productApi.update(id, product);
 		return response;
 	}
-	public async updateQuantityProductById(id: string, quantity: number): Promise<ProductModel> {
+	public async updateQuantityProductById(
+		id: string,
+		quantity: number,
+	): Promise<ProductModel> {
 		const response = await this.productApi.updateStock(id, quantity);
 		return response;
 	}
@@ -37,7 +53,9 @@ class ProductService implements IProductService {
 		const response = await this.productApi.search(query);
 		return response;
 	}
-	public async filterProduct(queries: ProductFilterQueryParams): Promise<ProductsModel> {
+	public async filterProduct(
+		queries: ProductFilterQueryParams,
+	): Promise<ProductsModel> {
 		const response = await this.productApi.filter(queries);
 		return response;
 	}

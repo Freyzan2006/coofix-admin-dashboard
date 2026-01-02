@@ -1,9 +1,12 @@
 import type { RestApiCliType } from "@shared/api/rest-api/client";
 
 import type { ProductModel, ProductsModel } from "../model/product.model";
-import type { CreateProductDto, ProductDto, ProductFilterQueryParams, UpdateProductDto } from "./product.dto";
-
-
+import type {
+	CreateProductDto,
+	ProductDto,
+	ProductFilterQueryParams,
+	UpdateProductDto,
+} from "./product.dto";
 
 interface IProductApi {
 	findAll(page: number, limit: number): Promise<ProductsModel>;
@@ -21,18 +24,24 @@ interface IProductApi {
 class ProductRestApi implements IProductApi {
 	constructor(private readonly client: RestApiCliType) {}
 
-	public async update(id: string, product: UpdateProductDto): Promise<ProductModel> {
+	public async update(
+		id: string,
+		product: UpdateProductDto,
+	): Promise<ProductModel> {
 		const response = await this.client.put<ProductDto>(
 			`/admin/products/${id}`,
 			product,
 		);
 		return response.data.product;
 	}
-	public async updateStock(id: string, quantity: number): Promise<ProductModel> {
+	public async updateStock(
+		id: string,
+		quantity: number,
+	): Promise<ProductModel> {
 		const response = await this.client.patch<ProductDto>(
 			`/admin/products/${id}/stock`,
 			{ quantity },
-		)
+		);
 
 		return response.data.product;
 	}
@@ -51,14 +60,16 @@ class ProductRestApi implements IProductApi {
 	public async search(query: string): Promise<ProductModel[]> {
 		const response = await this.client.get<ProductsModel>(
 			`/products/search?query=${query}`,
-		)
+		);
 
 		return response.data.products;
 	}
-	public async filter(queries: ProductFilterQueryParams): Promise<ProductsModel> {
+	public async filter(
+		queries: ProductFilterQueryParams,
+	): Promise<ProductsModel> {
 		const response = await this.client.get<ProductsModel>("/products", {
-			params: queries
-		})
+			params: queries,
+		});
 
 		return response.data;
 	}

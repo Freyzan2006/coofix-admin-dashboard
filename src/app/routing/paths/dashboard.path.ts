@@ -72,17 +72,6 @@ export const dashboardPaths = [
 				],
 			},
 			{
-				path: "brands",
-				children: [
-					{
-						index: true,
-						Component: wrapperProtected(
-							() => import("@pages/dashboard/brands/page"),
-						),
-					},
-				],
-			},
-			{
 				path: "favorites",
 				children: [
 					{

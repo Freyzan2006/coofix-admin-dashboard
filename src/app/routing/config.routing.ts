@@ -1,5 +1,4 @@
 import {
-	BookCheckIcon,
 	ChartBarStackedIcon,
 	LayoutDashboardIcon,
 	type LucideIcon,
@@ -31,11 +30,6 @@ export const sideBarLinks: ISideBarLink[] = [
 		to: "/dashboard/categories",
 		label: "Категории",
 		icon: ChartBarStackedIcon,
-	},
-	{
-		to: "/dashboard/brands",
-		label: "Бренды",
-		icon: BookCheckIcon,
 	},
 	{
 		to: "/dashboard/users",

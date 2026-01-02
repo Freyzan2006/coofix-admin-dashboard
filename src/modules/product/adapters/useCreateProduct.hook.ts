@@ -3,8 +3,8 @@ import { type CategoryModel, useCategories } from "@modules/category";
 import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
+import type { CreateProductDto } from "../api/product.dto";
 import { productService } from "../di/product.di";
-import type { CreateProductDto } from "../model/create-product.model";
 
 export function useCreateProduct() {
 	const { brands, brandsIsError, brandsIsLoading } = useBrands();

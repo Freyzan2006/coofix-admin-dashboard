@@ -20,4 +20,3 @@ export interface CreateProductModel {
 	isNew: boolean;
 	isSale: boolean;
 }
-

@@ -1,3 +1,4 @@
+import type { CreateProductDto } from "@modules/product/api/product.dto";
 import { ImageDropzone } from "@shared/features/UploadFile";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Button } from "@shared/ui/Button.ui";
@@ -24,10 +25,7 @@ import {
 	useForm,
 } from "react-hook-form";
 import { useCreateProduct } from "../../adapters/useCreateProduct.hook";
-import type {
-	CreateProductDto,
-	CreateProductModel,
-} from "../../model/create-product.model";
+import type { CreateProductModel } from "../../model/create-product.model";
 
 export const CreateProduct: React.FC = () => {
 	const methods = useForm<CreateProductModel>({
