@@ -13,9 +13,12 @@ import { SliceText } from "@shared/ui/text";
 
 import { useCategories } from "../adapters/useCategories.hook";
 import { useCategoryStore } from "../store/category.store";
+import { useCategoryActionsStore } from "../store/category-action.store";
 
 export const CategoryTable: React.FC = () => {
 	const { headerTable } = useCategoryStore();
+
+	const { openModal } = useCategoryActionsStore();
 
 	const {
 		categories,
@@ -45,6 +48,7 @@ export const CategoryTable: React.FC = () => {
 							<TableRow
 								key={item._id}
 								className="hover:bg-base-200 cursor-pointer"
+								onClick={() => openModal(item)}
 							>
 								<TableData>
 									<SliceText text={item._id} slice={20} />

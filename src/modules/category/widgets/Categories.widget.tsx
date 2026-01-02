@@ -8,11 +8,12 @@ import { useUpdateCategory } from "../adapters/useUpdateCategory.hook";
 import { CategoryTable } from "../features/CategoryTable.feature";
 import { CategoryInstructionsTable } from "../ui/CategoryInstructionsTable.ui";
 import { CategoryTitle } from "../ui/CategoryTitle.ui";
+import { CategoriesActions } from "./CategoriesActions.widget";
 
 export const Categories: React.FC = () => {
 	const { createCategoryAsync } = useCreateCategory();
 	const { updateCategoryAsync } = useUpdateCategory();
-	const { deleteCategoryAsync } = useDeleteCategory();
+	const { doDeleteAsync: deleteCategoryAsync } = useDeleteCategory();
 	const { category } = useDetailsCategory("");
 
 	const handler = async (run: boolean) => {
@@ -37,6 +38,7 @@ export const Categories: React.FC = () => {
 				<CategoryTitle />
 				<CategoryTable />
 				<CategoryInstructionsTable />
+				<CategoriesActions />
 
 				<Button onClick={() => handler(false)}>test</Button>
 			</Space>

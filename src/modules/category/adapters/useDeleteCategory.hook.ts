@@ -1,6 +1,7 @@
 import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { categoryService } from "../di/category.di";
 
 export function useDeleteCategory() {
@@ -17,11 +18,17 @@ export function useDeleteCategory() {
 		},
 	});
 
+	const [confirmationDeleteInput, setConfirmationDeleteInput] =
+		useState<string>("");
+
 	return {
-		deleteCategory: mutate,
-		deleteCategoryAsync: mutateAsync,
-		isErrorDeleteCategory: isError,
-		isPendingCategory: isPending,
-		isSuccessCategory: isSuccess,
+		doDelete: mutate,
+		doDeleteAsync: mutateAsync,
+		isError: isError,
+		isPending: isPending,
+		isSuccess: isSuccess,
+
+		confirmationDeleteInput,
+		setConfirmationDeleteInput,
 	};
 }
