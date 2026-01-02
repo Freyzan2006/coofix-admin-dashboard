@@ -1,4 +1,3 @@
-import { PopUpAppearance, SmoothAppearance } from "@shared/ui/animation";
 import { Container } from "@shared/ui/Container.ui";
 import { Screen } from "@shared/widgets/Screen.component";
 import { SidebarApp } from "@shared/widgets/SidebarApp";
@@ -10,11 +9,11 @@ export default function DashboardLayout() {
 		<Screen>
 			<SidebarApp>
 				<Container>
-					<SmoothAppearance>
-						<PopUpAppearance>
-							<Outlet />
-						</PopUpAppearance>
-					</SmoothAppearance>
+					{/* <SmoothAppearance>
+						<PopUpAppearance> */}
+					<Outlet />
+					{/* </PopUpAppearance>
+					</SmoothAppearance> */}
 				</Container>
 			</SidebarApp>
 		</Screen>

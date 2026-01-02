@@ -20,7 +20,7 @@ export const Table: React.FC<ITableProps> = ({
 
 	return (
 		<div className="overflow-x-auto">
-			<table className={className} {...props}>
+			<table {...props} className={className}>
 				{children}
 			</table>
 		</div>

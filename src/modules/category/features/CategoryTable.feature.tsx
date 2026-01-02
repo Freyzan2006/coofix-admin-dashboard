@@ -27,10 +27,8 @@ export const CategoryTable: React.FC = () => {
 	if (categoriesIsError)
 		return <Alert variant="danger">{categoriesError?.message}</Alert>;
 
-	console.log(categories);
-
 	return (
-		<Space fullWidth>
+		<Space fullWidth axis="vertical">
 			{categoriesIsLoading ? (
 				<TableSkeleton row={categories.length + 1} />
 			) : (

@@ -56,7 +56,7 @@ export const DeleteConfirmation: React.FC<IDeleteConfirmationProps> = ({
 			)}
 			<Paragraph variant="danger">
 				Вы уверены что хотите удалить{" "}
-				<Strong variant="danger">{product.name}</Strong> ?
+				<Strong variant="info">{product.name}</Strong> ?
 			</Paragraph>
 			<Input
 				value={confirmationDeleteInput}

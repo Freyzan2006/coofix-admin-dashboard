@@ -25,9 +25,9 @@ export const TableProducts: React.FC = () => {
 	return (
 		<Space className="w-full">
 			{isLoading ? (
-				<TableSkeleton row={limit + 1} />
+				<TableSkeleton className="min-h-[150px]" row={limit + 1} />
 			) : (
-				<Table>
+				<Table className="min-h-[150px]">
 					<Thead>
 						<TableRow>
 							{headerTable.map((item: string) => (

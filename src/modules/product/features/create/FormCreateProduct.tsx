@@ -6,13 +6,13 @@ import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { PlusIcon } from "lucide-react";
 import { FormProvider } from "react-hook-form";
+import { useFormProductCreate } from "./hooks/useForm";
 import { BaseFields } from "./ui/BaseFields.ui";
 import { CategoryAndBrandFields } from "./ui/CategoryAndBrandFields.ui";
 import { CharacteristicsFields } from "./ui/CharacteristicsFields.ui";
 import { ImageFields } from "./ui/ImageFields.ui";
 import { PriceAndQuantityFields } from "./ui/PriceAndQuantityFields.ui";
 import { SaleAndNewFields } from "./ui/SaleAndNewFields.ui";
-import { useFormProductCreate } from "./useForm";
 
 export const FormCreateProduct: React.FC = () => {
 	const { methods, onSubmit, isSubmitting } = useFormProductCreate();
@@ -20,7 +20,7 @@ export const FormCreateProduct: React.FC = () => {
 
 	return (
 		<FormProvider {...methods}>
-			<Form title="Создание продукта" onSubmit={onSubmit} className="space-y-6">
+			<Form onSubmit={onSubmit} className="space-y-6">
 				<BaseFields />
 
 				<PriceAndQuantityFields />

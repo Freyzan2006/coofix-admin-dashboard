@@ -2,7 +2,7 @@ import { cn } from "@shared/lib/utils";
 
 interface IFormProps extends React.HTMLAttributes<HTMLFormElement> {
 	variant?: "primary" | "secondary" | "default";
-	title: string;
+	title?: string;
 }
 
 export const Form: React.FC<IFormProps> = ({

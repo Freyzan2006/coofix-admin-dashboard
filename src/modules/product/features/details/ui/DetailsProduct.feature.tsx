@@ -16,7 +16,7 @@ export const DetailsProduct: React.FC<IDetailsProductProps> = ({ product }) => {
 		<Space axis="vertical" align="start" gap={4}>
 			<Heading variant="secondary">Подробная информация:</Heading>
 
-			<CarouselImg images={product.images} />
+			<CarouselImg images={product.images || []} />
 
 			<Space axis="vertical" gap={2} fullWidth>
 				{details.map(({ label, value }) => (
@@ -28,7 +28,7 @@ export const DetailsProduct: React.FC<IDetailsProductProps> = ({ product }) => {
 				<Heading variant="primary">Характеристики:</Heading>
 
 				<Space axis="vertical" gap={1}>
-					{Object.entries(product.characteristics).map(([key, value]) => (
+					{Object.entries(product.characteristics || {}).map(([key, value]) => (
 						<DetailRow
 							key={key}
 							label={key}

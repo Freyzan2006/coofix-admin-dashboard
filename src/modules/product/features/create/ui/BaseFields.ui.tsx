@@ -2,7 +2,7 @@ import type { CreateProductModel } from "@modules/product/model/create-product.m
 import { Input, Textarea } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { useFormContext } from "react-hook-form";
-import { fieldsProductRules } from "../config";
+import { fieldsProductRules } from "../hooks/config";
 
 export const BaseFields: React.FC = () => {
 	const {

@@ -1,3 +1,4 @@
+import { EnterAnimation } from "@shared/ui/animation";
 import { ToastContainer } from "@shared/ui/toast";
 import { Screen } from "@shared/widgets/Screen.component";
 
@@ -7,7 +8,9 @@ export default function RootLayout() {
 	return (
 		<Screen>
 			<ToastContainer />
-			<Outlet />
+			<EnterAnimation>
+				<Outlet />
+			</EnterAnimation>
 		</Screen>
 	);
 }

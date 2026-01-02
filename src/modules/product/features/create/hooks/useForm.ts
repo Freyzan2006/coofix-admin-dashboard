@@ -1,7 +1,7 @@
 import { useCreateProduct } from "@modules/product/adapters/useCreateProduct.hook";
 import type { CreateProductDto } from "@modules/product/api/product.dto";
 import type { CreateProductModel } from "@modules/product/model/create-product.model";
-import { type SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { getDefaultValues } from "./config";
 
 export function useFormProductCreate() {
@@ -17,14 +17,8 @@ export function useFormProductCreate() {
 	const {
 		register,
 		handleSubmit,
-		control,
 		formState: { errors, isSubmitting },
 	} = methods;
-
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: "characteristics",
-	});
 
 	const onSubmit: SubmitHandler<CreateProductModel> = async (data) => {
 		// ---------- 1. Валидация характеристик ----------
@@ -87,11 +81,5 @@ export function useFormProductCreate() {
 		onSubmit: handleSubmit(onSubmit),
 		errors,
 		isSubmitting,
-
-		characteristics: {
-			fields,
-			append,
-			remove,
-		},
 	};
 }

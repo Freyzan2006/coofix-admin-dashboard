@@ -72,7 +72,7 @@ import { Space } from "@shared/ui/Space.ui";
 import { Spinner } from "@shared/ui/Spinner.ui";
 import { Label } from "@shared/ui/text";
 import { Controller, useFormContext } from "react-hook-form";
-import { fieldsProductRules } from "../config";
+import { fieldsProductRules } from "../hooks/config";
 
 export const CategoryAndBrandFields: React.FC = () => {
 	const {

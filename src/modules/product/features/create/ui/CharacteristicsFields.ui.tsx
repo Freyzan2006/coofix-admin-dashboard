@@ -4,28 +4,34 @@ import { Input } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { PlusIcon, XIcon } from "lucide-react";
-import { useFormContext } from "react-hook-form";
-import { fieldsProductRules } from "../config";
-import { useFormProductCreate } from "../useForm";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { fieldsProductRules } from "../hooks/config";
 
 export const CharacteristicsFields: React.FC = () => {
 	const {
 		register,
+		control,
 		formState: { errors },
 	} = useFormContext<CreateProductModel>();
 
-	const { characteristics } = useFormProductCreate();
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: "characteristics",
+	});
 
-	function handlerAdd() {
-		characteristics.append({
+	function handleAdd() {
+		append({
 			name: "",
 			value: "",
 		});
 	}
 
-	function handlerRemove(index: number) {
-		characteristics.remove(index);
+	function handleRemove(index: number) {
+		remove(index);
 	}
+
+	// Добавьте console.log для отладки
+	console.log("Characteristics fields:", fields);
 
 	return (
 		<Space
@@ -36,7 +42,7 @@ export const CharacteristicsFields: React.FC = () => {
 		>
 			<Heading variant="primary">Характеристики:</Heading>
 
-			{characteristics.fields.map((field, index) => (
+			{fields.map((field, index) => (
 				<Space
 					key={field.id}
 					axis="horizontal"
@@ -63,13 +69,13 @@ export const CharacteristicsFields: React.FC = () => {
 						placeholder="Значение (33Гц)"
 						error={errors.characteristics?.[index]?.value?.message}
 					/>
-					<Button variant="danger" onClick={() => handlerRemove(index)}>
+					<Button variant="danger" onClick={() => handleRemove(index)}>
 						<XIcon />
 					</Button>
 				</Space>
 			))}
 
-			<Button className="max-w-[280px]" variant="success" onClick={handlerAdd}>
+			<Button className="max-w-[280px]" variant="success" onClick={handleAdd}>
 				<PlusIcon /> Добавить характеристику
 			</Button>
 		</Space>

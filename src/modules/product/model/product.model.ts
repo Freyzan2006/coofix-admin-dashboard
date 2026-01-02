@@ -12,7 +12,7 @@ export interface ProductModel {
 	category: CategoryModel;
 	brand: BrandModel;
 	images: string[];
-	characteristics: CharacteristicsType;
+	characteristics?: CharacteristicsType;
 	inStock: boolean;
 	quantity: number;
 	isNew: boolean;

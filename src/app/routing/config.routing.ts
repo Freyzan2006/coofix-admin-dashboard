@@ -1,12 +1,11 @@
 import {
 	ChartBarStackedIcon,
-	LayoutDashboardIcon,
 	type LucideIcon,
 	MessageSquareDiffIcon,
 	PackageSearchIcon,
+	ScaleIcon,
 	SendToBackIcon,
 	StarIcon,
-	UserSearchIcon,
 } from "lucide-react";
 
 interface ISideBarLink {
@@ -17,11 +16,6 @@ interface ISideBarLink {
 
 export const sideBarLinks: ISideBarLink[] = [
 	{
-		to: "/dashboard",
-		label: "Доска",
-		icon: LayoutDashboardIcon,
-	},
-	{
 		to: "/dashboard/products",
 		label: "Продукты",
 		icon: PackageSearchIcon,
@@ -30,11 +24,6 @@ export const sideBarLinks: ISideBarLink[] = [
 		to: "/dashboard/categories",
 		label: "Категории",
 		icon: ChartBarStackedIcon,
-	},
-	{
-		to: "/dashboard/users",
-		label: "Пользователи",
-		icon: UserSearchIcon,
 	},
 	{
 		to: "/dashboard/reviews",
@@ -50,5 +39,10 @@ export const sideBarLinks: ISideBarLink[] = [
 		to: "/dashboard/favorites",
 		label: "Избранное",
 		icon: StarIcon,
+	},
+	{
+		to: "/dashboard/compare",
+		label: "Настройки",
+		icon: ScaleIcon,
 	},
 ];

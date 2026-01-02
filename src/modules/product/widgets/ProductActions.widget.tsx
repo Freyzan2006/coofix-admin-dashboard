@@ -51,6 +51,8 @@ export const ProductActions: React.FC = () => {
 		},
 	];
 
+	console.log(selectedProduct);
+
 	return (
 		<Modal controlledOpen={isModalOpen} onOpenChange={(v) => setIsModalOpen(v)}>
 			<ModalContent size="lg" className="min-h-[750px]">

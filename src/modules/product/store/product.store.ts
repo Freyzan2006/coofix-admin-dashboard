@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 const ProductState = {
 	page: 1,
-	limit: 2,
+	limit: 4,
 	headerTable: [
 		"ID",
 		"name",
