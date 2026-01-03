@@ -1,7 +1,6 @@
 import { Card } from "@shared/ui/Card.ui";
 import { CreateProductModal } from "../features/create";
-import { PaginationProducts } from "../features/PaginationProducts.feature";
-import { TableProducts } from "../features/TableProducts.feature";
+import { PaginationProducts, TableProducts } from "../features/table";
 import { InstructionsTable } from "../ui/InstructionsTable";
 import { ProductActions } from "./ProductActions.widget";
 

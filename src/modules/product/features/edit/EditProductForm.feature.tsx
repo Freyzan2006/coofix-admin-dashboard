@@ -1,4 +1,4 @@
-import type { ProductModel } from "../model/product.model";
+import type { ProductModel } from "@modules/product/model/product.model";
 
 interface IEditProductFormProps {
 	product: ProductModel;

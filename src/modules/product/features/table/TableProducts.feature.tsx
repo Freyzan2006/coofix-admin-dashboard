@@ -1,3 +1,6 @@
+import { useProducts } from "@modules/product/adapters/useProducts.hook";
+import { useProductStore } from "@modules/product/store/product.store";
+import { useProductActionsStore } from "@modules/product/store/product-actions.store";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Space } from "@shared/ui/Space.ui";
 import {
@@ -10,9 +13,6 @@ import {
 	Thead,
 } from "@shared/ui/table";
 import { SliceText } from "@shared/ui/text";
-import { useProducts } from "../adapters/useProducts.hook";
-import { useProductStore } from "../store/product.store";
-import { useProductActionsStore } from "../store/product-actions.store";
 
 export const TableProducts: React.FC = () => {
 	const { headerTable } = useProductStore();

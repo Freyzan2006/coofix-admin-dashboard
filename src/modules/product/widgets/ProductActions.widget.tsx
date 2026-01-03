@@ -10,7 +10,7 @@ import { InfoIcon, SquarePenIcon, TrashIcon } from "lucide-react";
 import type React from "react";
 import { DeleteConfirmationContainer } from "../features/delete";
 import { DetailsProduct } from "../features/details";
-import { EditProductForm } from "../features/EditProductForm.feature";
+import { EditProductForm } from "../features/edit";
 import { useProductActionsStore } from "../store/product-actions.store";
 
 /**
