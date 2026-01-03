@@ -3,50 +3,31 @@ import { Button } from "@shared/ui/Button.ui";
 import { Input } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { Paragraph, Strong } from "@shared/ui/text";
-import { toast } from "@shared/ui/toast";
+
 import { TrashIcon } from "lucide-react";
 import type React from "react";
-import { useCallback } from "react";
-import { useDeleteProduct } from "../adapters/useDeleteProduct.hook";
-import type { ProductModel } from "../model/product.model";
-import { useProductActionsStore } from "../store/product-actions.store";
+
+import type { ProductModel } from "../../model/product.model";
 
 interface IDeleteConfirmationProps {
 	product: ProductModel;
+	isError: boolean;
+	isConfirmedError: boolean;
+	isPending: boolean;
+	confirmationDeleteInput: string;
+	setConfirmationDeleteInput: React.Dispatch<React.SetStateAction<string>>;
+	handlerDelete: () => Promise<void>;
 }
 
 export const DeleteConfirmation: React.FC<IDeleteConfirmationProps> = ({
 	product,
+	isError,
+	isPending,
+	confirmationDeleteInput,
+	setConfirmationDeleteInput,
+	handlerDelete,
+	isConfirmedError,
 }) => {
-	const {
-		doDeleteAsync,
-		isError,
-		isPending,
-		confirmationDeleteInput,
-		setConfirmationDeleteInput,
-	} = useDeleteProduct(product._id);
-
-	const { closeModal } = useProductActionsStore();
-
-	const handlerDelete = useCallback(async () => {
-		if (
-			confirmationDeleteInput.trim().toLowerCase() !==
-			product.name.trim().toLowerCase()
-		) {
-			toast.error("Подтвердите удаление");
-			return;
-		}
-
-		await doDeleteAsync();
-		if (!isError) closeModal();
-	}, [
-		doDeleteAsync,
-		isError,
-		closeModal,
-		confirmationDeleteInput,
-		product.name,
-	]);
-
 	return (
 		<Space axis="vertical">
 			{isError && (
@@ -61,6 +42,7 @@ export const DeleteConfirmation: React.FC<IDeleteConfirmationProps> = ({
 			<Input
 				value={confirmationDeleteInput}
 				onChange={(e) => setConfirmationDeleteInput(e.target.value)}
+				error={isConfirmedError ? "Подтвердите удаление" : ""}
 			/>
 			<Button onClick={handlerDelete} variant="danger" disabled={isPending}>
 				<TrashIcon /> Подтвердить удаление

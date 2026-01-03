@@ -3,6 +3,7 @@ import { useCreateProduct } from "@modules/product/adapters/useCreateProduct.hoo
 import type { CreateProductModel } from "@modules/product/model/create-product.model";
 import { toast } from "@shared/ui/toast";
 import { type SubmitHandler, useForm } from "react-hook-form";
+import { isProductValidPipe } from "../pipe/validate";
 import { getDefaultValues } from "./config";
 
 export function useFormProductCreate() {
@@ -22,14 +23,14 @@ export function useFormProductCreate() {
 	} = methods;
 
 	const onSubmit: SubmitHandler<CreateProductModel> = async (data) => {
-		const names = data.characteristics.map((c) => c.name.trim());
+		const isValidated = await isProductValidPipe(data);
 
-		if (new Set(names).size !== names.length) {
-			toast.error("Названия характеристик должны быть уникальны");
-			return;
+		if (isValidated) {
+			await doCreateAsync(data);
+			toast.success("Продукт успешно создан");
+		} else {
+			toast.error("Произошла ошибка при создании продукта");
 		}
-
-		await doCreateAsync(data);
 	};
 
 	return {

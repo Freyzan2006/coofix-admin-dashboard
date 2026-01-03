@@ -8,10 +8,9 @@ import {
 import { type TabItem, Tabs } from "@shared/ui/tabs";
 import { InfoIcon, SquarePenIcon, TrashIcon } from "lucide-react";
 import type React from "react";
-import { DeleteConfirmation } from "../features/DeleteConfirmation.feature";
+import { DeleteConfirmationContainer } from "../features/delete";
 import { DetailsProduct } from "../features/details";
 import { EditProductForm } from "../features/EditProductForm.feature";
-
 import { useProductActionsStore } from "../store/product-actions.store";
 
 /**
@@ -46,12 +45,10 @@ export const ProductActions: React.FC = () => {
 			label: "Удалить",
 			icon: <TrashIcon />,
 			content: selectedProduct && (
-				<DeleteConfirmation product={selectedProduct} />
+				<DeleteConfirmationContainer product={selectedProduct} />
 			),
 		},
 	];
-
-	console.log(selectedProduct);
 
 	return (
 		<Modal controlledOpen={isModalOpen} onOpenChange={(v) => setIsModalOpen(v)}>
