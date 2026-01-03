@@ -3,8 +3,9 @@ import { type CategoryModel, useCategories } from "@modules/category";
 import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
-import type { CreateProductDto } from "../api/product.dto";
+
 import { productService } from "../di/product.di";
+import type { CreateProductModel } from "../model/create-product.model";
 
 export function useCreateProduct() {
 	const { brands, brandsIsError, brandsIsLoading } = useBrands();
@@ -12,12 +13,12 @@ export function useCreateProduct() {
 		useCategories();
 
 	const { mutate, mutateAsync, isError, isPending, isSuccess } = useMutation({
-		mutationFn: async (data: CreateProductDto) => {
+		mutationFn: async (data: CreateProductModel) => {
 			await productService.createProduct(data);
-			queryClient.invalidateQueries({ queryKey: ["products"] });
 		},
 		onSuccess: () => {
 			toast.success("Продукт успешно создан");
+			queryClient.invalidateQueries({ queryKey: ["products"] });
 		},
 		onError: () => {
 			toast.error("Произошла ошибка при создании продукта");

@@ -30,9 +30,6 @@ export const CharacteristicsFields: React.FC = () => {
 		remove(index);
 	}
 
-	// Добавьте console.log для отладки
-	console.log("Characteristics fields:", fields);
-
 	return (
 		<Space
 			axis="vertical"

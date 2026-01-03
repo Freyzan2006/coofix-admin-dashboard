@@ -1,15 +1,16 @@
+import type { IUploadImageService } from "@modules/upload";
 import type { IProductApi } from "../api/product.api";
 import type {
 	CreateProductDto,
 	ProductFilterQueryParams,
 	UpdateProductDto,
 } from "../api/product.dto";
-
+import type { CreateProductModel } from "../model/create-product.model";
 import type { ProductModel, ProductsModel } from "../model/product.model";
 
 interface IProductService {
 	allProducts(page: number, limit: number): Promise<ProductsModel>;
-	createProduct(product: CreateProductDto): Promise<ProductModel>;
+	createProduct(product: CreateProductModel): Promise<ProductModel>;
 	deleteProductById(id: string): Promise<void>;
 	updateProductById(
 		id: string,
@@ -27,10 +28,11 @@ interface IProductService {
 }
 
 class ProductService implements IProductService {
-	private readonly productApi: IProductApi;
-	constructor(productApi: IProductApi) {
-		this.productApi = productApi;
-	}
+	constructor(
+		private readonly productApi: IProductApi,
+		private readonly uploadService: IUploadImageService,
+	) {}
+
 	public async updateProductById(
 		id: string,
 		product: UpdateProductDto,
@@ -74,8 +76,27 @@ class ProductService implements IProductService {
 		return products;
 	}
 
-	public async createProduct(product: CreateProductDto): Promise<ProductModel> {
-		const newProduct = await this.productApi.create(product);
+	public async createProduct(
+		product: CreateProductModel,
+	): Promise<ProductModel> {
+		const dto: CreateProductDto = {
+			...product,
+			images: [],
+			characteristics: {},
+		};
+
+		if (product.images.length) {
+			const urls = await this.uploadService.uploadImages(product.images);
+			dto.images = urls;
+		}
+
+		dto.characteristics = Object.fromEntries(
+			product.characteristics
+				.filter((c) => c.name.trim())
+				.map((c) => [c.name.trim(), c.value]),
+		);
+
+		const newProduct = await this.productApi.create(dto);
 		return newProduct;
 	}
 

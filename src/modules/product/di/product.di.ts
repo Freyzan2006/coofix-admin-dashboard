@@ -1,3 +1,4 @@
+import { factoryUploadImageService } from "@modules/upload";
 import { newRestApiCli } from "@shared/api/rest-api/client";
 import { environmentConfig } from "@shared/config";
 import { ProductRestApi } from "../api/product.api";
@@ -7,11 +8,13 @@ import {
 } from "../service/product.service";
 
 async function factoryProductService(): Promise<IProductService> {
+	const uploadImageService = await factoryUploadImageService();
+
 	const clientRestApi = await newRestApiCli(
 		environmentConfig.get<string>("VITE_API_URL"),
 	);
 	const productApi = new ProductRestApi(clientRestApi);
-	const productService = new ProductService(productApi);
+	const productService = new ProductService(productApi, uploadImageService);
 	return productService;
 }
 

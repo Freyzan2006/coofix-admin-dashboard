@@ -1,6 +1,6 @@
 // shared/api/newRestApiCli.ts
 import axios, { type AxiosInstance } from "axios";
-import { RequestInterceptor, ResponseInterceptor } from "./middleware";
+import { RequestInterceptor, ResponseInterceptor } from "./middlewares";
 
 export async function newRestApiCli(
 	baseURL: string = "https://coofix-server.onrender.com/api",

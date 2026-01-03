@@ -9,9 +9,15 @@ export interface ProductFilterQueryParams {
 	maxPrice?: number;
 }
 
-export type CreateProductDto = Omit<CreateProductModel, "characteristics"> & {
+// export type CreateProductDto = Omit<CreateProductModel, "characteristics"> & {
+// 	characteristics: Record<string, string>;
+// };
+
+export interface CreateProductDto
+	extends Omit<CreateProductModel, "characteristics" | "images"> {
 	characteristics: Record<string, string>;
-};
+	images: string[];
+}
 
 export type UpdateProductDto = Omit<CreateProductModel, "characteristics"> & {
 	characteristics: Record<string, string>;

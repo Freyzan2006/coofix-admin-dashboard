@@ -1,7 +1,7 @@
+import type { ProductModel } from "@modules/product/model/product.model";
 import { CarouselImg } from "@shared/ui/carousel";
 import { Space } from "@shared/ui/Space.ui";
 import { CopyText, Heading } from "@shared/ui/text";
-import type { ProductModel } from "../../../model/product.model";
 import { buildProductDetails } from "../data";
 import { DetailRow } from "./DetailRow.ui";
 
@@ -11,7 +11,7 @@ interface IDetailsProductProps {
 
 export const DetailsProduct: React.FC<IDetailsProductProps> = ({ product }) => {
 	const details = buildProductDetails(product);
-
+	console.log(product);
 	return (
 		<Space axis="vertical" align="start" gap={4}>
 			<Heading variant="secondary">Подробная информация:</Heading>

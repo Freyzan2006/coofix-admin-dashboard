@@ -3,7 +3,7 @@ export const getDefaultValues = () => ({
 	description: "Product test. description",
 	price: 300,
 	oldPrice: 200,
-	images: ["https://images.hello", "https://images.hello"],
+	images: [],
 	characteristics: [{ name: "Частота", value: "33Гц" }],
 	quantity: 30,
 	isNew: true,
