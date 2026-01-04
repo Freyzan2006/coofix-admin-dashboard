@@ -1,9 +1,9 @@
-import type { UploadedFile } from "../types";
+import type { UploadedFileUI } from "../../types";
 import { UploadFilesList } from "./UploadedFilesList.ui";
 import { UploadFileController } from "./UploadFileController.ui";
 
 interface UploadedFilesProps {
-	uploadedFiles: UploadedFile[];
+	uploadedFiles: UploadedFileUI[];
 	isLoading: boolean;
 	maxFiles: number;
 	handleRemoveFile: (id: string) => void;

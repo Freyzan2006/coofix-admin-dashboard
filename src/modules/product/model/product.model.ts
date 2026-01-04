@@ -1,6 +1,6 @@
 import type { BrandModel } from "@modules/brand";
 import type { CategoryModel } from "@modules/category";
-import type { CharacteristicsType } from "./types";
+import type { CharacteristicsDto } from "./types";
 
 export interface ProductModel {
 	_id: string;
@@ -12,7 +12,7 @@ export interface ProductModel {
 	category: CategoryModel;
 	brand: BrandModel;
 	images: string[];
-	characteristics?: CharacteristicsType;
+	characteristics?: CharacteristicsDto;
 	inStock: boolean;
 	quantity: number;
 	isNew: boolean;

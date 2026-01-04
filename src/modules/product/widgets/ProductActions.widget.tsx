@@ -10,7 +10,7 @@ import { InfoIcon, SquarePenIcon, TrashIcon } from "lucide-react";
 import type React from "react";
 import { DeleteConfirmationContainer } from "../features/delete";
 import { DetailsProduct } from "../features/details";
-import { EditProductForm } from "../features/edit";
+import { EditProduct } from "../features/update";
 import { useProductActionsStore } from "../store/product-actions.store";
 
 /**
@@ -32,13 +32,15 @@ export const ProductActions: React.FC = () => {
 			id: "details",
 			label: "Подробнее",
 			icon: <InfoIcon />,
-			content: selectedProduct && <DetailsProduct product={selectedProduct} />,
+			content: selectedProduct && (
+				<DetailsProduct slug={selectedProduct.slug} />
+			),
 		},
 		{
 			id: "edit",
 			label: "Редактировать",
 			icon: <SquarePenIcon />,
-			content: selectedProduct && <EditProductForm product={selectedProduct} />,
+			content: selectedProduct && <EditProduct slug={selectedProduct.slug} />,
 		},
 		{
 			id: "delete",

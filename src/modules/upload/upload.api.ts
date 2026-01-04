@@ -38,8 +38,6 @@ export class UploadRestApi implements IUploadApi {
 			formData.append("images", f);
 		});
 
-		console.log(files);
-
 		const response = await this.client.post<{ urls: string[] }>(
 			"/upload/multiple",
 			formData,

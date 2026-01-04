@@ -3,10 +3,6 @@ type CharacteristicItem = {
 	value: string;
 };
 
-// export type CharacteristicsType = {
-// 	[key: string]: string;
-// };
-
 export interface CreateProductModel {
 	name: string;
 	description: string;

@@ -1,17 +1,54 @@
-import type { ProductModel } from "@modules/product/model/product.model";
+import { useProduct } from "@modules/product/adapters/useProduct.hook";
+import { productCharacteristicsMapper } from "@modules/product/di/product.di";
+import { Alert } from "@shared/ui/Alert.ui";
 import { CarouselImg } from "@shared/ui/carousel";
+import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { CopyText, Heading } from "@shared/ui/text";
 import { buildProductDetails } from "../data";
 import { DetailRow } from "./DetailRow.ui";
 
 interface IDetailsProductProps {
-	product: ProductModel;
+	slug: string;
 }
 
-export const DetailsProduct: React.FC<IDetailsProductProps> = ({ product }) => {
+export const DetailsProduct: React.FC<IDetailsProductProps> = ({ slug }) => {
+	const { product, productIsLoading, productIsError } = useProduct(slug);
+
+	if (productIsLoading) {
+		return (
+			<Space gap={3} align="center" justify="center">
+				<Loading />
+			</Space>
+		);
+	}
+
+	if (productIsError) {
+		return (
+			<Space gap={3} align="center" justify="center">
+				<Alert variant="danger">
+					Произошла ошибка при загрузке продукта. Попробуйте ещё раз потом
+				</Alert>
+			</Space>
+		);
+	}
+
+	if (!product) {
+		return (
+			<Space gap={3} align="center" justify="center">
+				<Alert variant="danger">
+					Произошла ошибка при загрузке продукта. Попробуйте ещё раз потом
+				</Alert>
+			</Space>
+		);
+	}
+
 	const details = buildProductDetails(product);
-	console.log(product);
+
+	const prepareData = productCharacteristicsMapper.toModel(
+		product.characteristics || {},
+	);
+
 	return (
 		<Space axis="vertical" align="start" gap={4}>
 			<Heading variant="secondary">Подробная информация:</Heading>
@@ -28,10 +65,18 @@ export const DetailsProduct: React.FC<IDetailsProductProps> = ({ product }) => {
 				<Heading variant="primary">Характеристики:</Heading>
 
 				<Space axis="vertical" gap={1}>
-					{Object.entries(product.characteristics || {}).map(([key, value]) => (
+					{/* {Object.entries(product.characteristics || {}).map(([index, value]) => (
 						<DetailRow
-							key={key}
-							label={key}
+							key={index}
+							label={String(value.name)}
+							value={<CopyText text={String(value.value)} />}
+						/>
+					))} */}
+
+					{prepareData.map(({ name, value }) => (
+						<DetailRow
+							key={name}
+							label={String(name)}
 							value={<CopyText text={String(value)} />}
 						/>
 					))}

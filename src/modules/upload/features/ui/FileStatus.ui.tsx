@@ -1,7 +1,7 @@
-import type { UploadedFile } from "../types";
+import type { UploadedFileUI } from "../../types";
 
 interface FileStatusProps {
-	file: UploadedFile;
+	file: UploadedFileUI;
 }
 
 export const FileStatus: React.FC<FileStatusProps> = ({ file }) => {

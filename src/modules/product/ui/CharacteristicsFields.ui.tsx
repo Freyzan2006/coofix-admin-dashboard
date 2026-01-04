@@ -5,14 +5,15 @@ import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { PlusIcon, XIcon } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { fieldsProductRules } from "../hooks/config";
+import type { UpdateProductModel } from "../api/product.dto";
+import { fieldsProductRules } from "../config";
 
 export const CharacteristicsFields: React.FC = () => {
 	const {
 		register,
 		control,
 		formState: { errors },
-	} = useFormContext<CreateProductModel>();
+	} = useFormContext<CreateProductModel | UpdateProductModel>();
 
 	const { fields, append, remove } = useFieldArray({
 		control,

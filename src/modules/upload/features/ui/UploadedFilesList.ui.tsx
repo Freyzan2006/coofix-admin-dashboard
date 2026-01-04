@@ -1,8 +1,9 @@
-import type { UploadedFile } from "../types";
+import { SliceText } from "@shared/ui/text";
+import type { UploadedFileUI } from "../../types";
 import { FileStatus } from "./FileStatus.ui";
 
 interface IUploadFilesListProps {
-	uploadedFiles: UploadedFile[];
+	uploadedFiles: UploadedFileUI[];
 	handleRemoveFile: (id: string) => void;
 	isLoading: boolean;
 }
@@ -30,7 +31,12 @@ export const UploadFilesList: React.FC<IUploadFilesListProps> = ({
 					<div className="card-body p-4 flex-1">
 						<div className="flex justify-between items-start">
 							<div className="flex-1">
-								<h4 className="font-medium truncate">{file.name}</h4>
+								{/* <h4 className="font-medium truncate">{file.name}</h4> */}
+								<SliceText
+									text={String(file.id)}
+									title={file.name}
+									slice={30}
+								/>
 								<p className="text-sm text-base-content/60">{file.size}</p>
 								<div className="mt-2">
 									<FileStatus file={file} />

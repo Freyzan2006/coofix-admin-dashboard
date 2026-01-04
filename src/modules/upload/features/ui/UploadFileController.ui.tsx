@@ -1,8 +1,8 @@
-import type { UploadedFile } from "../types";
+import type { UploadedFileUI } from "../../types";
 
 interface IUploadFileControllerProps {
 	maxFiles: number;
-	uploadedFiles: UploadedFile[];
+	uploadedFiles: UploadedFileUI[];
 	isLoading: boolean;
 	handleClearAll: () => void;
 }

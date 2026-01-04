@@ -1,9 +1,9 @@
-import type { UploadedFile } from "../types";
+import type { UploadedFileUI } from "../../types";
 import { UploadedDropZone } from "./UploadedDropZone.feature";
 import { UploadedFiles } from "./UploadedFiles.widget";
 
 interface UploadedProps {
-	uploadedFiles: UploadedFile[];
+	uploadedFiles: UploadedFileUI[];
 	isLoading: boolean;
 	maxFiles: number;
 	handleRemoveFile: (id: string) => void;
