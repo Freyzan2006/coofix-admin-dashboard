@@ -38,7 +38,7 @@ export const Select: React.FC<SelectProps> = ({
 	} as const;
 
 	return (
-		<div>
+		<div className="flex flex-col">
 			<select
 				{...props}
 				className={cn(

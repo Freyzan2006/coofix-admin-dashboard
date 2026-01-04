@@ -10,11 +10,6 @@ export interface CategoryDto {
 	category: CategoryModel;
 }
 
-export type CreateCategoryDto = Omit<
-	CategoryModel,
-	"_id" | "createdAt" | "updatedAt"
->;
-
 export type UpdateCategoryDto = Omit<
 	CategoryModel,
 	"_id" | "createdAt" | "updatedAt"

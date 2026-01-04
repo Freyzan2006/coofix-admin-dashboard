@@ -7,8 +7,8 @@ import { UserCheckIcon } from "lucide-react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 import { useLoginLocal } from "../adapters/login.hook";
+import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 
 export const LoginForm: React.FC = () => {
 	const mode = environmentConfig.get<"development" | "prod">("MODE");

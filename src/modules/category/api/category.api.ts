@@ -1,15 +1,17 @@
 import type { RestApiCliType } from "@shared/api/rest-api/client";
-import type { CategoryModel } from "../model/category.model";
+import type {
+	CategoryModel,
+	CreateCategoryModel,
+} from "../model/category.model";
 import type {
 	CategoriesDto,
 	CategoryDto,
-	CreateCategoryDto,
 	UpdateCategoryDto,
 } from "./category.dto";
 
 export interface ICategoryApi {
 	findAll(): Promise<CategoryModel[]>;
-	create(category: CreateCategoryDto): Promise<CategoryModel>;
+	create(category: CreateCategoryModel): Promise<CategoryModel>;
 	findBySlug(slug: string): Promise<CategoryModel>;
 	update(id: string, category: UpdateCategoryDto): Promise<CategoryModel>;
 	delete(id: string): Promise<void>;
@@ -23,7 +25,7 @@ export class CategoryRestApi implements ICategoryApi {
 		return response.data.categories;
 	}
 
-	public async create(category: CategoryModel): Promise<CategoryModel> {
+	public async create(category: CreateCategoryModel): Promise<CategoryModel> {
 		const response = await this.client.post<CategoryDto>(
 			"/categories",
 			category,

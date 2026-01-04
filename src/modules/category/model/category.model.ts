@@ -1,3 +1,5 @@
+import type { UploadedImage } from "@modules/upload";
+
 export interface CategoryModel {
 	_id: string;
 	name: string;
@@ -6,4 +8,10 @@ export interface CategoryModel {
 	image: string;
 	createdAt: Date;
 	updatedAt: Date;
+}
+
+export interface CreateCategoryModel {
+	name: string;
+	parent: string;
+	image: UploadedImage | null;
 }

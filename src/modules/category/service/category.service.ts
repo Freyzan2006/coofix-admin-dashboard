@@ -1,11 +1,14 @@
 import type { ICategoryApi } from "../api/category.api";
-import type { CreateCategoryDto, UpdateCategoryDto } from "../api/category.dto";
-import type { CategoryModel } from "../model/category.model";
+import type { UpdateCategoryDto } from "../api/category.dto";
+import type {
+	CategoryModel,
+	CreateCategoryModel,
+} from "../model/category.model";
 
 export interface ICategoryService {
 	getAllCategories(): Promise<CategoryModel[]>;
 	getCategoryBySlug(slug: string): Promise<CategoryModel>;
-	createCategory(category: CreateCategoryDto): Promise<CategoryModel>;
+	createCategory(category: CreateCategoryModel): Promise<CategoryModel>;
 	updateCategory(
 		id: string,
 		category: UpdateCategoryDto,
@@ -24,7 +27,7 @@ export class CategoryService implements ICategoryService {
 	}
 
 	public async createCategory(
-		category: CreateCategoryDto,
+		category: CreateCategoryModel,
 	): Promise<CategoryModel> {
 		return await this.api.create(category);
 	}
