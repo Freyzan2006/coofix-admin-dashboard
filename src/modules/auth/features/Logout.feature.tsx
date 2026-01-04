@@ -1,17 +1,21 @@
 import { Button } from "@shared/ui/Button.ui";
 import { LogOutIcon } from "lucide-react";
-import { authApi } from "../di/auth.di";
-import { useAuthStore } from "../store/auth.store";
+
+import { useLogout } from "../adapters/logout.hook";
+import { Loading } from "@shared/ui/Loading.ui";
 
 export const Logout: React.FC = () => {
-	const handlerLogout = async () => {
-		await authApi.logout();
-		useAuthStore.getState().setAccessToken(null);
-	};
+	const { logoutAsync, isPendingLogout } = useLogout();
+
+	const handlerLogout = async () => await logoutAsync();
 
 	return (
-		<Button size="sm" onClick={handlerLogout}>
-			<LogOutIcon />
+		<Button 
+			size="sm" 
+			onClick={handlerLogout} 
+			disabled={isPendingLogout}
+		>
+			{!isPendingLogout ? <LogOutIcon /> : <Loading /> } Выйти
 		</Button>
 	);
 };
