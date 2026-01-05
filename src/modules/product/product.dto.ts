@@ -1,7 +1,9 @@
 import type { BaseResponse } from "@shared/api/rest-api/types";
-import type { CreateProductModel } from "../model/create-product.model";
-import type { ProductModel } from "../model/product.model";
-import type { CharacteristicsDto, CharacteristicsModel } from "../model/types";
+import type {
+	CharacteristicsModel,
+	CreateProductModel,
+	ProductModel,
+} from "./product.model";
 
 export interface ProductFilterQueryParams {
 	category?: string;
@@ -9,10 +11,6 @@ export interface ProductFilterQueryParams {
 	minPrice?: number;
 	maxPrice?: number;
 }
-
-// export type CreateProductDto = Omit<CreateProductModel, "characteristics"> & {
-// 	characteristics: Record<string, string>;
-// };
 
 export interface CreateProductDto
 	extends Omit<CreateProductModel, "characteristics" | "images"> {
@@ -47,3 +45,5 @@ export interface UpdateProductModel
 export interface ProductDto extends BaseResponse {
 	product: ProductModel;
 }
+
+export type CharacteristicsDto = Record<string, string>;

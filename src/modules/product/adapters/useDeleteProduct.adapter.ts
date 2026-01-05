@@ -2,7 +2,7 @@ import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
-import { productService } from "../di/product.di";
+import { productService } from "../product.di";
 
 export function useDeleteProductAdapter(id: string) {
 	const [confirmationDeleteInput, setConfirmationDeleteInput] =

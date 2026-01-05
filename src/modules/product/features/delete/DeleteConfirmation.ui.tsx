@@ -7,7 +7,7 @@ import { Paragraph, Strong } from "@shared/ui/text";
 import { TrashIcon } from "lucide-react";
 import type React from "react";
 
-import type { ProductModel } from "../../model/product.model";
+import type { ProductModel } from "../../product.model";
 
 interface IDeleteConfirmationProps {
 	product: ProductModel;

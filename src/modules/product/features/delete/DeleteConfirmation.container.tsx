@@ -1,5 +1,5 @@
 import { useDeleteProductAdapter } from "@modules/product/adapters/useDeleteProduct.adapter";
-import type { ProductModel } from "@modules/product/model/product.model";
+import type { ProductModel } from "@modules/product/product.model";
 import { useProductActionsStore } from "@modules/product/store/product-actions.store";
 import { toast } from "@shared/ui/toast";
 import { useCallback } from "react";

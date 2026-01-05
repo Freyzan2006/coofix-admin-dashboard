@@ -2,8 +2,9 @@ import type { UploadedImage } from "@modules/upload/types";
 
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
-import type { UpdateProductModel } from "../api/product.dto";
-import { productService } from "../di/product.di";
+
+import { productService } from "../product.di";
+import type { UpdateProductModel } from "../product.dto";
 
 interface UpdateProductFormData {
 	productId: string;

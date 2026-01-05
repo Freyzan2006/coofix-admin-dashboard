@@ -1,12 +1,9 @@
 import { factoryUploadImageService, UploadImageMapper } from "@modules/upload";
 import { newRestApiCli } from "@shared/api/rest-api/client";
 import { environmentConfig } from "@shared/config";
-import { ProductRestApi } from "../api/product.api";
-import { ProductCharacteristicsMapper } from "../mapper/product.mapper";
-import {
-	type IProductService,
-	ProductService,
-} from "../service/product.service";
+import { ProductRestApi } from "./product.api";
+import { ProductCharacteristicsMapper } from "./product.mapper";
+import { type IProductService, ProductService } from "./product.service";
 
 async function factoryProductService(): Promise<IProductService> {
 	const uploadImageService = await factoryUploadImageService();

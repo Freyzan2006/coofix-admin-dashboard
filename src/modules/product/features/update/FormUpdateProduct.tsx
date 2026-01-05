@@ -1,4 +1,4 @@
-import type { ProductModel } from "@modules/product/model/product.model";
+import type { ProductModel } from "@modules/product/product.model";
 import { BaseFields } from "@modules/product/ui/BaseFields.ui";
 import { CategoryAndBrandFields } from "@modules/product/ui/CategoryAndBrandFields.ui";
 import { CharacteristicsFields } from "@modules/product/ui/CharacteristicsFields.ui";
@@ -12,7 +12,7 @@ import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { PlusIcon } from "lucide-react";
 import { FormProvider } from "react-hook-form";
-import { useFormProductUpdate } from "./hooks/useForm";
+import { useFormProductUpdate } from "./useForm";
 
 interface IFormUpdateProductProps {
 	product: ProductModel;

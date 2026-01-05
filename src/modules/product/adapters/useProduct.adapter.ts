@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { productService } from "../di/product.di";
+import { productService } from "../product.di";
 
 export function useProductAdapter(slug: string) {
 	const { data, isError, isLoading } = useQuery({

@@ -5,8 +5,8 @@ import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 
-import { productService } from "../di/product.di";
-import type { CreateProductModel } from "../model/create-product.model";
+import { productService } from "../product.di";
+import type { CreateProductModel } from "../product.model";
 
 interface CrateProductFormData {
 	product: CreateProductModel;

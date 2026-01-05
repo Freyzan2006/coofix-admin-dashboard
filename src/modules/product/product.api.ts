@@ -1,12 +1,11 @@
 import type { RestApiCliType } from "@shared/api/rest-api/client";
-
-import type { ProductModel, ProductsModel } from "../model/product.model";
 import type {
 	CreateProductDto,
 	ProductDto,
 	ProductFilterQueryParams,
 	UpdateProductDto,
 } from "./product.dto";
+import type { ProductModel, ProductsModel } from "./product.model";
 
 interface IProductApi {
 	findAll(page: number, limit: number): Promise<ProductsModel>;

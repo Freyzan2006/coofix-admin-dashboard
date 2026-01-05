@@ -1,13 +1,13 @@
-import { useCreateProductAdapter } from "@modules/product/adapters/useCreateProduct.adapter";
-import type { CreateProductModel } from "@modules/product/model/create-product.model";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Select } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { Spinner } from "@shared/ui/Spinner.ui";
 import { Label } from "@shared/ui/text";
 import { Controller, useFormContext } from "react-hook-form";
-import type { UpdateProductModel } from "../api/product.dto";
+import { useCreateProductAdapter } from "../adapters/useCreateProduct.adapter";
 import { fieldsProductRules } from "../config";
+import type { UpdateProductModel } from "../product.dto";
+import type { CreateProductModel } from "../product.model";
 
 export const CategoryAndBrandFields: React.FC = () => {
 	const {

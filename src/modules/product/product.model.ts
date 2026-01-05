@@ -1,6 +1,6 @@
 import type { BrandModel } from "@modules/brand";
 import type { CategoryModel } from "@modules/category";
-import type { CharacteristicsDto } from "./types";
+import type { CharacteristicsDto } from "./product.dto";
 
 export interface ProductModel {
 	_id: string;
@@ -26,4 +26,28 @@ export interface ProductsModel {
 	success: boolean;
 	products: ProductModel[];
 	total: number;
+}
+
+type CharacteristicItem = {
+	name: string;
+	value: string;
+};
+
+export interface CreateProductModel {
+	name: string;
+	description: string;
+	price: number;
+	oldPrice: number;
+	category: string;
+	brand: string;
+	images: File[];
+	characteristics: CharacteristicItem[];
+	quantity: number;
+	isNew: boolean;
+	isSale: boolean;
+}
+
+export interface CharacteristicsModel {
+	name: string;
+	value: string;
 }

@@ -1,7 +1,7 @@
-import type { CreateProductModel } from "@modules/product/model/create-product.model";
 import { Checkbox } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { useFormContext } from "react-hook-form";
+import type { CreateProductModel } from "../product.model";
 
 export const SaleAndNewFields: React.FC = () => {
 	const {

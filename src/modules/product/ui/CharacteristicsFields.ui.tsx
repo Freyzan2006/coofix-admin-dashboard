@@ -1,12 +1,13 @@
-import type { CreateProductModel } from "@modules/product/model/create-product.model";
 import { Button } from "@shared/ui/Button.ui";
 import { Input } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { PlusIcon, XIcon } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import type { UpdateProductModel } from "../api/product.dto";
+
 import { fieldsProductRules } from "../config";
+import type { UpdateProductModel } from "../product.dto";
+import type { CreateProductModel } from "../product.model";
 
 export const CharacteristicsFields: React.FC = () => {
 	const {

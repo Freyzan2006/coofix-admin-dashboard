@@ -1,4 +1,4 @@
-import type { ProductModel } from "@modules/product/model/product.model";
+import type { ProductModel } from "@modules/product/product.model";
 import { LinkApp } from "@shared/ui/Link.ui";
 import { CopyText } from "@shared/ui/text";
 

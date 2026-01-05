@@ -1,8 +1,8 @@
-import type { CreateProductModel } from "@modules/product/model/create-product.model";
 import { Input, Textarea } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { useFormContext } from "react-hook-form";
 import { fieldsProductRules } from "../config";
+import type { CreateProductModel } from "../product.model";
 
 export const BaseFields: React.FC = () => {
 	const {

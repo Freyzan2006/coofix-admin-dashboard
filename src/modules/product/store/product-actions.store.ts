@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { ProductModel } from "../model/product.model";
+import type { ProductModel } from "../product.model";
 
 const ProductActionsState = {
 	isModalOpen: false,

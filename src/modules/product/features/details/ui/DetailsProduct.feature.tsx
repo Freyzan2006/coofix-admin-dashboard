@@ -1,5 +1,5 @@
 import { useProductAdapter } from "@modules/product/adapters/useProduct.adapter";
-import { productCharacteristicsMapper } from "@modules/product/di/product.di";
+import { productCharacteristicsMapper } from "@modules/product/product.di";
 import { Alert } from "@shared/ui/Alert.ui";
 import { CarouselImg } from "@shared/ui/carousel";
 import { Loading } from "@shared/ui/Loading.ui";

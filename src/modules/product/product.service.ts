@@ -1,14 +1,17 @@
 import type { IUploadImageMapper, IUploadImageService } from "@modules/upload";
 import type { UploadedImage } from "@modules/upload/types";
-import type { IProductApi } from "../api/product.api";
+import type { IProductApi } from "./product.api";
 import type {
-	CreateProductDto,
 	ProductFilterQueryParams,
 	UpdateProductModel,
-} from "../api/product.dto";
-import type { ProductCharacteristicsMapper } from "../mapper/product.mapper";
-import type { CreateProductModel } from "../model/create-product.model";
-import type { ProductModel, ProductsModel } from "../model/product.model";
+} from "./product.dto";
+import type { ProductCharacteristicsMapper } from "./product.mapper";
+
+import type {
+	CreateProductModel,
+	ProductModel,
+	ProductsModel,
+} from "./product.model";
 
 interface IProductService {
 	allProducts(page: number, limit: number): Promise<ProductsModel>;
@@ -41,34 +44,24 @@ class ProductService implements IProductService {
 		private readonly uploadImageMapper: IUploadImageMapper,
 	) {}
 
-	// public async updateProduct(
-	// 	id: string,
-	// 	data: UpdateProductModel,
-	// 	images: UploadedImage[],
-	// ): Promise<ProductModel> {
+	public async createProduct(
+		product: CreateProductModel,
+		images: UploadedImage[],
+	): Promise<ProductModel> {
+		const { remoteUrls, localFiles } = this.uploadImageMapper.split(images);
 
-	// 	data.characteristics = this.productCharacteristicsMapper.toDto(data.characteristics);
+		const uploadedUrls = localFiles.length
+			? await this.uploadService.uploadImages(localFiles)
+			: [];
 
-	// 	const existingUrls = images
-	// 		.filter((img) => img.kind === "remote")
-	// 		.map((img) => img.url);
-
-	// 	const newFiles = images
-	// 		.filter((img) => img.kind === "local")
-	// 		.map((img) => img.file);
-
-	// 	const finalImages = [...existingUrls];
-
-	// 	if (newFiles.length) {
-	// 		const uploadedUrls = await this.uploadService.uploadImages(newFiles);
-	// 		finalImages.push(...uploadedUrls);
-	// 	}
-
-	// 	return this.productApi.update(id, {
-	// 		...data,
-	// 		images: finalImages,
-	// 	});
-	// }
+		return this.productApi.create({
+			...product,
+			characteristics: this.productCharacteristicsMapper.toDto(
+				product.characteristics,
+			),
+			images: [...remoteUrls, ...uploadedUrls],
+		});
+	}
 
 	public async updateProduct(
 		id: string,
@@ -124,63 +117,6 @@ class ProductService implements IProductService {
 	): Promise<ProductsModel> {
 		const products = await this.productApi.findAll(page, limit);
 		return products;
-	}
-
-	// public async createProduct(
-	// 	product: CreateProductModel,
-	// ): Promise<ProductModel> {
-	// 	const dto: CreateProductDto = {
-	// 		...product,
-	// 		images: [],
-	// 		characteristics: {},
-	// 	};
-
-	// 	if (product.images.length) {
-	// 		const urls = await this.uploadService.uploadImages(product.images);
-	// 		dto.images = urls;
-	// 	}
-
-	// 	dto.characteristics = Object.fromEntries(
-	// 		product.characteristics
-	// 			.filter((c) => c.name.trim())
-	// 			.map((c) => [c.name.trim(), c.value]),
-	// 	);
-
-	// 	const newProduct = await this.productApi.create(dto);
-	// 	return newProduct;
-	// }
-
-	public async createProduct(
-		product: CreateProductModel,
-		images: UploadedImage[],
-	): Promise<ProductModel> {
-		const dto: CreateProductDto = {
-			...product,
-			images: [],
-			characteristics: {},
-		};
-
-		const newFiles = images
-			.filter((img) => img.kind === "local")
-			.map((img) => img.file);
-		const existingUrls = images
-			.filter((img) => img.kind === "remote")
-			.map((img) => img.url);
-
-		const finalImages = [...existingUrls];
-		if (newFiles.length) {
-			const uploadedUrls = await this.uploadService.uploadImages(newFiles);
-			finalImages.push(...uploadedUrls);
-		}
-		dto.images = finalImages;
-
-		dto.characteristics = Object.fromEntries(
-			product.characteristics
-				.filter((c) => c.name.trim())
-				.map((c) => [c.name.trim(), c.value]),
-		);
-
-		return this.productApi.create(dto);
 	}
 
 	public async deleteProductById(id: string): Promise<void> {

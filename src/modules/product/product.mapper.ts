@@ -1,4 +1,5 @@
-import type { CharacteristicsDto, CharacteristicsModel } from "../model/types";
+import type { CharacteristicsDto } from "./product.dto";
+import type { CharacteristicsModel } from "./product.model";
 
 export class ProductCharacteristicsMapper {
 	public toDto(characteristics: CharacteristicsModel[]): CharacteristicsDto {

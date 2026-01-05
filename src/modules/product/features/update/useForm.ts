@@ -1,13 +1,12 @@
 import { useUpdateProductAdapter } from "@modules/product/adapters/useUpdateProduct.adapter";
-import type { UpdateProductModel } from "@modules/product/api/product.dto";
+
 import {
 	productCharacteristicsMapper,
 	uploadImageMapper,
-} from "@modules/product/di/product.di";
-
-import type { ProductModel } from "@modules/product/model/product.model";
+} from "@modules/product/product.di";
+import type { UpdateProductModel } from "@modules/product/product.dto";
+import type { ProductModel } from "@modules/product/product.model";
 import type { UploadedImage } from "@modules/upload/types";
-
 import { useRef, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 

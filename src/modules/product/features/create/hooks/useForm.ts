@@ -1,8 +1,6 @@
 import { useCreateProductAdapter } from "@modules/product/adapters/useCreateProduct.adapter";
-
-import type { CreateProductModel } from "@modules/product/model/create-product.model";
+import type { CreateProductModel } from "@modules/product/product.model";
 import type { UploadedImage } from "@modules/upload/types";
-
 import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { getDefaultValues } from "../../../config";
