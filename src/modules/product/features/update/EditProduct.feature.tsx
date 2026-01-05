@@ -1,4 +1,4 @@
-import { useProduct } from "@modules/product/adapters/useProduct.hook";
+import { useProductAdapter } from "@modules/product/adapters/useProduct.adapter";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
@@ -9,7 +9,7 @@ interface IEditProductFormProps {
 }
 
 export const EditProduct: React.FC<IEditProductFormProps> = ({ slug }) => {
-	const { product, productIsError, productIsLoading } = useProduct(slug);
+	const { product, productIsError, productIsLoading } = useProductAdapter(slug);
 
 	if (productIsError) {
 		return (

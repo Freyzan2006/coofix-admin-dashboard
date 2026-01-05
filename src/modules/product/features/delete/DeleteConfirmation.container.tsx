@@ -1,4 +1,4 @@
-import { useDeleteProduct } from "@modules/product/adapters/useDeleteProduct.hook";
+import { useDeleteProductAdapter } from "@modules/product/adapters/useDeleteProduct.adapter";
 import type { ProductModel } from "@modules/product/model/product.model";
 import { useProductActionsStore } from "@modules/product/store/product-actions.store";
 import { toast } from "@shared/ui/toast";
@@ -20,7 +20,7 @@ export const DeleteConfirmationContainer: React.FC<
 		setConfirmationDeleteInput,
 		isConfirmedError,
 		setIsConfirmedError,
-	} = useDeleteProduct(product._id);
+	} = useDeleteProductAdapter(product._id);
 
 	const { closeModal } = useProductActionsStore();
 

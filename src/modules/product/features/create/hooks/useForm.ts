@@ -1,4 +1,4 @@
-import { useCreateProduct } from "@modules/product/adapters/useCreateProduct.hook";
+import { useCreateProductAdapter } from "@modules/product/adapters/useCreateProduct.adapter";
 
 import type { CreateProductModel } from "@modules/product/model/create-product.model";
 import type { UploadedImage } from "@modules/upload/types";
@@ -8,7 +8,7 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { getDefaultValues } from "../../../config";
 
 export function useFormProductCreate() {
-	const { doCreateAsync } = useCreateProduct();
+	const { doCreateAsync } = useCreateProductAdapter();
 
 	const methods = useForm<CreateProductModel>({
 		defaultValues: getDefaultValues(),

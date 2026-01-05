@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "../di/product.di";
 
-export function useProduct(slug: string) {
+export function useProductAdapter(slug: string) {
 	const { data, isError, isLoading } = useQuery({
 		queryKey: ["product", slug],
 		queryFn: async () => await productService.findProductBySlug(slug),

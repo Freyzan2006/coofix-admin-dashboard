@@ -1,4 +1,4 @@
-import { useCreateProduct } from "@modules/product/adapters/useCreateProduct.hook";
+import { useCreateProductAdapter } from "@modules/product/adapters/useCreateProduct.adapter";
 import { BaseFields } from "@modules/product/ui/BaseFields.ui";
 import { CategoryAndBrandFields } from "@modules/product/ui/CategoryAndBrandFields.ui";
 import { CharacteristicsFields } from "@modules/product/ui/CharacteristicsFields.ui";
@@ -17,7 +17,7 @@ import { useFormProductCreate } from "./hooks/useForm";
 export const FormCreateProduct: React.FC = () => {
 	const { methods, onSubmit, isSubmitting, images, setImages } =
 		useFormProductCreate();
-	const { isError, isPending, isSuccess } = useCreateProduct();
+	const { isError, isPending, isSuccess } = useCreateProductAdapter();
 
 	return (
 		<FormProvider {...methods}>

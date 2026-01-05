@@ -1,4 +1,4 @@
-import { useProduct } from "@modules/product/adapters/useProduct.hook";
+import { useProductAdapter } from "@modules/product/adapters/useProduct.adapter";
 import { productCharacteristicsMapper } from "@modules/product/di/product.di";
 import { Alert } from "@shared/ui/Alert.ui";
 import { CarouselImg } from "@shared/ui/carousel";
@@ -13,7 +13,7 @@ interface IDetailsProductProps {
 }
 
 export const DetailsProduct: React.FC<IDetailsProductProps> = ({ slug }) => {
-	const { product, productIsLoading, productIsError } = useProduct(slug);
+	const { product, productIsLoading, productIsError } = useProductAdapter(slug);
 
 	if (productIsLoading) {
 		return (

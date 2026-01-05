@@ -1,4 +1,4 @@
-import { useUpdateProduct } from "@modules/product/adapters/useUpdateProduct.hook";
+import { useUpdateProductAdapter } from "@modules/product/adapters/useUpdateProduct.adapter";
 import type { UpdateProductModel } from "@modules/product/api/product.dto";
 import {
 	productCharacteristicsMapper,
@@ -31,7 +31,7 @@ function defaultValues(product: ProductModel) {
 }
 
 export function useFormProductUpdate(product: ProductModel) {
-	const { doUpdateAsync } = useUpdateProduct();
+	const { doUpdateAsync } = useUpdateProductAdapter();
 
 	const methods = useForm<UpdateProductModel>({
 		defaultValues: defaultValues(product),

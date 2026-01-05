@@ -1,4 +1,4 @@
-import { useProducts } from "@modules/product/adapters/useProducts.hook";
+import { useProductsAdapter } from "@modules/product/adapters/useProducts.adapter";
 import { useProductStore } from "@modules/product/store/product.store";
 import { useProductActionsStore } from "@modules/product/store/product-actions.store";
 import { Alert } from "@shared/ui/Alert.ui";
@@ -18,7 +18,7 @@ export const TableProducts: React.FC = () => {
 	const { headerTable } = useProductStore();
 	const { openModal } = useProductActionsStore();
 
-	const { products, isError, isLoading, error, limit } = useProducts();
+	const { products, isError, isLoading, error, limit } = useProductsAdapter();
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 

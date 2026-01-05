@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { productService } from "../di/product.di";
 
-export function useDeleteProduct(id: string) {
+export function useDeleteProductAdapter(id: string) {
 	const [confirmationDeleteInput, setConfirmationDeleteInput] =
 		React.useState<string>("");
 	const [isConfirmedError, setIsConfirmedError] =

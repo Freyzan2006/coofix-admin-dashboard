@@ -2,10 +2,10 @@ import { Pagination } from "@shared/ui/Pagination.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { PackageSearchIcon } from "lucide-react";
-import { useProducts } from "../../adapters/useProducts.hook";
+import { useProductsAdapter } from "../../adapters/useProducts.adapter";
 
 export const PaginationProducts: React.FC = () => {
-	const { total, currentPage, handlerPageChange, limit } = useProducts();
+	const { total, currentPage, handlerPageChange, limit } = useProductsAdapter();
 
 	const totalPages = Math.ceil(total / limit) || 1;
 

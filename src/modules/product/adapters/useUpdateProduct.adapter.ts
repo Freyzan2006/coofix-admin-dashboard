@@ -11,7 +11,7 @@ interface UpdateProductFormData {
 	images: UploadedImage[];
 }
 
-export function useUpdateProduct() {
+export function useUpdateProductAdapter() {
 	const { mutate, mutateAsync, isPending, isError, isSuccess } = useMutation({
 		mutationFn: async (data: UpdateProductFormData) => {
 			await productService.updateProduct(

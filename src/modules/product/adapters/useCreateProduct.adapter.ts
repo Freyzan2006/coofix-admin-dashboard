@@ -13,7 +13,7 @@ interface CrateProductFormData {
 	images: UploadedImage[];
 }
 
-export function useCreateProduct() {
+export function useCreateProductAdapter() {
 	const { brands, brandsIsError, brandsIsLoading } = useBrands();
 	const { categories, categoriesIsError, categoriesIsLoading } =
 		useCategories();

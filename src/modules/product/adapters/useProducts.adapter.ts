@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { productService } from "../di/product.di";
 import { useProductStore } from "../store/product.store";
 
-export const useProducts = () => {
+export const useProductsAdapter = () => {
 	const { page, setPage, limit } = useProductStore();
 
 	const { data, isError, isLoading, error, isPending } = useQuery({
