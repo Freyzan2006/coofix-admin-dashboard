@@ -1,19 +1,20 @@
+import { Mapper } from "@shared/abstract";
 import type { CharacteristicsDto } from "./product.dto";
 import type { CharacteristicsModel } from "./product.model";
 
-export class ProductCharacteristicsMapper {
-	public toDto(characteristics: CharacteristicsModel[]): CharacteristicsDto {
-		return characteristics.reduce<Record<string, string>>(
-			(acc, { name, value }) => {
-				if (name) acc[name] = value;
-				return acc;
-			},
-			{},
-		);
+export class ProductCharacteristicsMapper extends Mapper<
+	CharacteristicsDto,
+	CharacteristicsModel[]
+> {
+	public toDto(model: CharacteristicsModel[]): CharacteristicsDto {
+		return model.reduce<Record<string, string>>((acc, { name, value }) => {
+			if (name) acc[name] = value;
+			return acc;
+		}, {});
 	}
 
-	public toModel(characteristics: CharacteristicsDto): CharacteristicsModel[] {
-		return Object.entries(characteristics).map(([name, value]) => ({
+	public toModel(dto: CharacteristicsDto): CharacteristicsModel[] {
+		return Object.entries(dto).map(([name, value]) => ({
 			name,
 			value,
 		}));

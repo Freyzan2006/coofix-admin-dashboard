@@ -1,13 +1,16 @@
 import type { IUploadImageMapper, IUploadImageService } from "@modules/upload";
 import type { UploadedImage } from "@modules/upload/types";
+import type { IMapper } from "@shared/abstract";
 import type { IProductApi } from "./product.api";
 import type {
+	CharacteristicsDto,
+	CreateProductDto,
 	ProductFilterQueryParams,
+	UpdateProductDto,
 	UpdateProductModel,
 } from "./product.dto";
-import type { ProductCharacteristicsMapper } from "./product.mapper";
-
 import type {
+	CharacteristicsModel,
 	CreateProductModel,
 	ProductModel,
 	ProductsModel,
@@ -40,7 +43,10 @@ class ProductService implements IProductService {
 	constructor(
 		private readonly productApi: IProductApi,
 		private readonly uploadService: IUploadImageService,
-		private readonly productCharacteristicsMapper: ProductCharacteristicsMapper,
+		private readonly productCharacteristicsMapper: IMapper<
+			CharacteristicsDto,
+			CharacteristicsModel[]
+		>,
 		private readonly uploadImageMapper: IUploadImageMapper,
 	) {}
 
@@ -54,13 +60,15 @@ class ProductService implements IProductService {
 			? await this.uploadService.uploadImages(localFiles)
 			: [];
 
-		return this.productApi.create({
+		const dto: CreateProductDto = {
 			...product,
 			characteristics: this.productCharacteristicsMapper.toDto(
 				product.characteristics,
 			),
 			images: [...remoteUrls, ...uploadedUrls],
-		});
+		};
+
+		return this.productApi.create(dto);
 	}
 
 	public async updateProduct(
@@ -74,13 +82,15 @@ class ProductService implements IProductService {
 			? await this.uploadService.uploadImages(localFiles)
 			: [];
 
-		return this.productApi.update(id, {
+		const dto: UpdateProductDto = {
 			...data,
 			characteristics: this.productCharacteristicsMapper.toDto(
 				data.characteristics,
 			),
 			images: [...remoteUrls, ...uploadedUrls],
-		});
+		};
+
+		return this.productApi.update(id, dto);
 	}
 
 	public async updateQuantityProductById(
