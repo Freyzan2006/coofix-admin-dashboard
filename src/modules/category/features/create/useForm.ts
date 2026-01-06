@@ -1,10 +1,10 @@
 import { useCategories } from "@modules/category/adapters/useCategories.hook";
 import { useCreateCategory } from "@modules/category/adapters/useCreateCategory.hook";
-import { getDefaultValues } from "@modules/category/config";
 import type {
 	CategoryModel,
 	CreateCategoryModel,
-} from "@modules/category/model/category.model";
+} from "@modules/category/category.model";
+import { getDefaultValues } from "@modules/category/config";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
 export function useFormCategoryCreate() {

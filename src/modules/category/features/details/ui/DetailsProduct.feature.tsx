@@ -1,4 +1,4 @@
-import type { CategoryModel } from "@modules/category/model/category.model";
+import type { CategoryModel } from "@modules/category/category.model";
 import { CarouselImg } from "@shared/ui/carousel";
 import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";

@@ -8,7 +8,7 @@ import { TrashIcon } from "lucide-react";
 import type React from "react";
 import { useCallback } from "react";
 import { useDeleteCategory } from "../adapters/useDeleteCategory.hook";
-import type { CategoryModel } from "../model/category.model";
+import type { CategoryModel } from "../category.model";
 import { useCategoryActionsStore } from "../store/category-action.store";
 
 interface IDeleteCategoryConfirmationProps {

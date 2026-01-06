@@ -1,4 +1,4 @@
-import type { CategoryModel } from "@modules/category/model/category.model";
+import type { CategoryModel } from "@modules/category/category.model";
 import { CopyText } from "@shared/ui/text";
 
 export const buildCategoryDetails = (category: CategoryModel) => [

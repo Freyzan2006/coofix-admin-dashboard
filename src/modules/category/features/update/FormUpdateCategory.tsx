@@ -1,6 +1,6 @@
+import type { CategoryModel } from "@modules/category/category.model";
 import { fieldsCategoryRules } from "@modules/category/config";
-import type { UploadedImage } from "@modules/upload";
-import { ImageDropzone } from "@modules/upload";
+import { ImageDropzone, type UploadedImage } from "@modules/upload";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
 import { Input, Select } from "@shared/ui/fields";
@@ -9,11 +9,17 @@ import { Space } from "@shared/ui/Space.ui";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { Controller, FormProvider } from "react-hook-form";
-import { useFormCategoryCreate } from "./useForm";
+import { useFormCategoryUpdate } from "./useForm";
 
-export const FormCreateCategory: React.FC = () => {
+interface IFormUpdateCategoryProps {
+	category: CategoryModel;
+}
+
+export const FormUpdateCategory: React.FC<IFormUpdateCategoryProps> = ({
+	category,
+}) => {
 	const { methods, onSubmit, isSubmitting, categories } =
-		useFormCategoryCreate();
+		useFormCategoryUpdate(category);
 
 	const [images, setImages] = useState<UploadedImage[]>([]);
 
@@ -28,7 +34,6 @@ export const FormCreateCategory: React.FC = () => {
 					placeholder="Название категории"
 					{...methods.register("name", fieldsCategoryRules.name)}
 					error={methods.formState.errors.name?.message}
-					title="Название категории"
 				/>
 
 				<Controller
@@ -41,7 +46,6 @@ export const FormCreateCategory: React.FC = () => {
 							value={field.value}
 							onChange={field.onChange}
 							error={methods.formState.errors.parent?.message}
-							title="Подкатегория"
 						/>
 					)}
 				/>
@@ -51,7 +55,7 @@ export const FormCreateCategory: React.FC = () => {
 				<Space className="mt-6">
 					<Button
 						type="submit"
-						variant="success"
+						variant="warning"
 						disabled={isSubmitting}
 						className="w-full"
 					>
@@ -59,7 +63,7 @@ export const FormCreateCategory: React.FC = () => {
 							<Loading />
 						) : (
 							<>
-								<PlusIcon /> Создать категорию
+								<PlusIcon /> Обновить категорию
 							</>
 						)}
 					</Button>

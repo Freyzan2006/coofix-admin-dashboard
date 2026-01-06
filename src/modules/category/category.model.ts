@@ -15,3 +15,9 @@ export interface CreateCategoryModel {
 	parent: string;
 	image: UploadedImage | null;
 }
+
+export interface UpdateCategoryModel {
+	name: string;
+	parent: string;
+	image: UploadedImage | null;
+}

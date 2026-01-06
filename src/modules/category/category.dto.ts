@@ -1,4 +1,4 @@
-import type { CategoryModel } from "../model/category.model";
+import type { CategoryModel } from "./category.model";
 
 export interface CategoriesDto {
 	success: boolean;
@@ -12,5 +12,5 @@ export interface CategoryDto {
 
 export type UpdateCategoryDto = Omit<
 	CategoryModel,
-	"_id" | "createdAt" | "updatedAt"
+	"_id" | "createdAt" | "updatedAt" | "slug"
 >;

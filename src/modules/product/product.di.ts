@@ -1,4 +1,8 @@
-import { factoryUploadImageService, UploadImageMapper } from "@modules/upload";
+import {
+	factoryUploadImageMapper,
+	factoryUploadImageService,
+	UploadImageMapper,
+} from "@modules/upload";
 import { newRestApiCli } from "@shared/api/rest-api/client";
 import { environmentConfig } from "@shared/config";
 import { ProductRestApi } from "./product.api";
@@ -24,5 +28,5 @@ async function factoryProductService(): Promise<IProductService> {
 }
 
 export const productCharacteristicsMapper = new ProductCharacteristicsMapper();
-export const uploadImageMapper = new UploadImageMapper();
+export const uploadImageMapper = await factoryUploadImageMapper();
 export const productService = await factoryProductService();

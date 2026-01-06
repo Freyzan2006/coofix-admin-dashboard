@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { CategoryModel } from "../model/category.model";
+import type { CategoryModel } from "../category.model";
 
 const CategoryActionsState = {
 	isModalOpen: false,

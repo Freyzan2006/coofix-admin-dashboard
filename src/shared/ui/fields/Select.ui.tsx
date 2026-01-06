@@ -38,7 +38,8 @@ export const Select: React.FC<SelectProps> = ({
 	} as const;
 
 	return (
-		<div className="flex flex-col">
+		<div className="fieldset">
+			{props.title && <span className="label">{props.title}</span>}
 			<select
 				{...props}
 				className={cn(

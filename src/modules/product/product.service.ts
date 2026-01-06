@@ -54,7 +54,7 @@ class ProductService implements IProductService {
 		product: CreateProductModel,
 		images: UploadedImage[],
 	): Promise<ProductModel> {
-		const { remoteUrls, localFiles } = this.uploadImageMapper.split(images);
+		const { remoteUrls, localFiles } = this.uploadImageMapper.splits(images);
 
 		const uploadedUrls = localFiles.length
 			? await this.uploadService.uploadImages(localFiles)
@@ -76,7 +76,7 @@ class ProductService implements IProductService {
 		data: UpdateProductModel,
 		images: UploadedImage[],
 	): Promise<ProductModel> {
-		const { remoteUrls, localFiles } = this.uploadImageMapper.split(images);
+		const { remoteUrls, localFiles } = this.uploadImageMapper.splits(images);
 
 		const uploadedUrls = localFiles.length
 			? await this.uploadService.uploadImages(localFiles)

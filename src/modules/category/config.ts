@@ -1,5 +1,5 @@
 import type { RegisterOptions } from "react-hook-form";
-import type { CreateCategoryModel } from "./model/category.model";
+import type { CreateCategoryModel } from "./category.model";
 
 export const getDefaultValues = (parent: string): CreateCategoryModel => ({
 	name: "",

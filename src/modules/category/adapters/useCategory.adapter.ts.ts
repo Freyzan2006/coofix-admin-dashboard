@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { categoryService } from "../di/category.di";
+import { categoryService } from "../category.factory";
 
-export function useDetailsCategory(slug: string) {
+export function useCategoryAdapter(slug: string) {
 	const { data, isLoading, isError, error } = useQuery({
 		queryKey: ["category", slug],
 		queryFn: async () => await categoryService.getCategoryBySlug(slug),

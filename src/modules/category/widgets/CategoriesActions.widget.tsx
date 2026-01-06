@@ -10,6 +10,7 @@ import { InfoIcon, TrashIcon } from "lucide-react";
 import type React from "react";
 import { DeleteCategoryConfirmation } from "../features/DeleteCategoryConfirmation.feature";
 import { DetailsCategory } from "../features/details";
+import { UpdateCategory } from "../features/update";
 import { useCategoryActionsStore } from "../store/category-action.store";
 
 /**
@@ -27,6 +28,12 @@ export const CategoriesActions: React.FC = () => {
 			label: "Подробнее",
 			icon: <InfoIcon />,
 			content: selected && <DetailsCategory category={selected} />,
+		},
+		{
+			id: "edit",
+			label: "Редактировать",
+			icon: <InfoIcon />,
+			content: <UpdateCategory slug={selected?.slug || ""} />,
 		},
 		{
 			id: "delete",

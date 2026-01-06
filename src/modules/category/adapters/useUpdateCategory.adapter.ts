@@ -1,17 +1,21 @@
-import { queryClient, type UpdateData } from "@shared/api/tanstack-query";
+import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
-import type { UpdateCategoryDto } from "../api/category.dto";
-import { categoryService } from "../di/category.di";
 
-export function useUpdateCategory() {
+import { categoryService } from "../category.factory";
+import type { CategoryModel, UpdateCategoryModel } from "../category.model";
+
+export function useUpdateCategoryAdapter(categoryId: string) {
 	const { mutate, mutateAsync, isError, isPending, isSuccess } = useMutation({
-		mutationFn: async (data: UpdateData<UpdateCategoryDto>) => {
-			await categoryService.updateCategory(data.id, data.dto);
+		mutationFn: async (data: UpdateCategoryModel) => {
+			await categoryService.updateCategory(categoryId, data);
 		},
 		onSuccess: () => {
 			toast.success("Категория успешно обновлена");
-			queryClient.invalidateQueries({ queryKey: ["categories"] });
+			queryClient.setQueryData(
+				["category", categoryId],
+				(data: CategoryModel) => data,
+			);
 		},
 		onError: () => {
 			toast.error("Произошла ошибка при обновлении категории");

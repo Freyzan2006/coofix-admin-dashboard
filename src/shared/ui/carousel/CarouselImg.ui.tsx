@@ -89,7 +89,7 @@ export const CarouselImg: React.FC<ICarouselImgProps> = ({ images }) => {
 					>
 						<img
 							alt={`Product ${index + 1}`}
-							src={image}
+							src={image || DEFAULT_IMAGE}
 							onError={handleImageError}
 							loading="lazy"
 						/>

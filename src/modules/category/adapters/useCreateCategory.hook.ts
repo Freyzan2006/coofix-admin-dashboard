@@ -2,8 +2,8 @@ import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 
-import { categoryService } from "../di/category.di";
-import type { CreateCategoryModel } from "../model/category.model";
+import { categoryService } from "../category.factory";
+import type { CreateCategoryModel } from "../category.model";
 
 export function useCreateCategory() {
 	const { mutate, mutateAsync, isError, isPending, isSuccess } = useMutation({

@@ -1,13 +1,10 @@
 import type { RestApiCliType } from "@shared/api/rest-api/client";
 import type {
-	CategoryModel,
-	CreateCategoryModel,
-} from "../model/category.model";
-import type {
 	CategoriesDto,
 	CategoryDto,
 	UpdateCategoryDto,
 } from "./category.dto";
+import type { CategoryModel, CreateCategoryModel } from "./category.model";
 
 export interface ICategoryApi {
 	findAll(): Promise<CategoryModel[]>;
