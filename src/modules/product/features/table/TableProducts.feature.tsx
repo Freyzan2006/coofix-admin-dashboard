@@ -73,7 +73,10 @@ export const TableProducts: React.FC = () => {
 									/>
 								</TableData>
 								<TableData>
-									<SliceText text={item.images.join(", ")} slice={20} />
+									<SliceText
+										text={item.images ? item.images.join(", ") : "-"}
+										slice={20}
+									/>
 								</TableData>
 								<TableData>
 									{Object.entries(item.characteristics ?? {})
