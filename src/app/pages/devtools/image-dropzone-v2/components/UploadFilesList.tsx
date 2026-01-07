@@ -21,11 +21,10 @@ export const UploadFilesList: React.FC<IUploadFilesListProps> = ({
 	minFiles = 0,
 	currentCount = 0,
 }) => {
-
 	const canRemoveFile = (index: number) => {
 		if (!canRemove) return false;
 		if (minFiles === 0) return true;
-		
+
 		if (index === 0) return currentCount - 2 >= minFiles;
 		return currentCount - 1 >= minFiles;
 	};
@@ -48,6 +47,3 @@ export const UploadFilesList: React.FC<IUploadFilesListProps> = ({
 		</div>
 	);
 };
-
-
-

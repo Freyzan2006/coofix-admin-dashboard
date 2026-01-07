@@ -25,7 +25,7 @@ export default function DevToolsPage() {
 			control,
 			minFiles: 0,
 			maxFiles: 5,
-			required: true,
+			required: false,
 		});
 
 	const onSubmit = (data: FormValues) => {

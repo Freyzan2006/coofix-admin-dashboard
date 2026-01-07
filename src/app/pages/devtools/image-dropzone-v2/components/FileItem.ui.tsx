@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import type { UploadedFileUI } from "../types";
-import { BanIcon, CheckIcon, LockIcon, XIcon } from "lucide-react";
 import { Loading } from "@shared/ui/Loading.ui";
 import { SliceText } from "@shared/ui/text";
+import { BanIcon, CheckIcon, LockIcon, XIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import type { UploadedFileUI } from "../types";
 import { FileStatus } from "./FileStatus.ui";
 
 interface FileItemProps {

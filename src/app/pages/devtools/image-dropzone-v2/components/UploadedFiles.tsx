@@ -6,7 +6,7 @@ interface UploadedFilesProps {
 	uploadedFiles: UploadedFileUI[];
 	isLoading: boolean;
 	maxFiles: number;
-	minFiles: number; 
+	minFiles: number;
 	handleRemoveFile: (id: string) => void;
 	handleClearAll: () => void;
 	disabled?: boolean;
