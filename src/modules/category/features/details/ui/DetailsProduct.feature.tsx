@@ -13,7 +13,6 @@ export const DetailsCategory: React.FC<IDetailsProductProps> = ({
 	category,
 }) => {
 	const details = buildCategoryDetails(category);
-
 	return (
 		<Space axis="vertical" align="start" gap={4}>
 			<Heading variant="secondary">Подробная информация:</Heading>

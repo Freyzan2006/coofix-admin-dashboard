@@ -2,9 +2,10 @@ import { useCategories } from "@modules/category/adapters/useCategories.hook";
 import { useCreateCategory } from "@modules/category/adapters/useCreateCategory.hook";
 import type {
 	CategoryModel,
-	CreateCategoryModel,
+	MutationCategoryModel,
 } from "@modules/category/category.model";
 import { getDefaultValues } from "@modules/category/config";
+import { useUploadForm } from "@modules/upload/features/image-dropzone-v2";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
 export function useFormCategoryCreate() {
@@ -12,16 +13,25 @@ export function useFormCategoryCreate() {
 	const { categories, categoriesIsLoading, categoriesIsError } =
 		useCategories();
 
-	const methods = useForm<CreateCategoryModel>({
+	const methods = useForm<MutationCategoryModel>({
 		defaultValues: getDefaultValues(categories[0]._id),
 		mode: "onChange",
 	});
 
-	const onSubmit: SubmitHandler<CreateCategoryModel> = async (data) => {
+	const images = useUploadForm<MutationCategoryModel>({
+		name: "images",
+		control: methods.control,
+		minFiles: 0,
+		maxFiles: 1,
+		required: false,
+		defaultValue: [],
+	});
+
+	const onSubmit: SubmitHandler<MutationCategoryModel> = async (data) => {
 		await createCategoryAsync({
 			name: data.name,
 			parent: data.parent,
-			image: data.image,
+			images: data.images,
 		});
 	};
 
@@ -42,5 +52,7 @@ export function useFormCategoryCreate() {
 			isLoading: categoriesIsLoading,
 			isError: categoriesIsError,
 		},
+
+		images,
 	};
 }

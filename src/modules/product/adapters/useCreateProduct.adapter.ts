@@ -1,10 +1,9 @@
 import { type BrandModel, useBrands } from "@modules/brand";
 import { type CategoryModel, useCategories } from "@modules/category";
-import type { UploadedImage } from "@modules/upload/types";
+import type { UploadedImage } from "@modules/upload";
 import { queryClient } from "@shared/api/tanstack-query";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
-
 import { productService } from "../product.di";
 import type { CreateProductModel } from "../product.model";
 

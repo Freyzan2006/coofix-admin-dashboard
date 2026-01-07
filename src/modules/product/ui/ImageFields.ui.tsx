@@ -1,47 +1,19 @@
-import { ImageDropzone } from "@modules/upload";
-import type { UploadedImage } from "@modules/upload/types";
+import { ImageDropzoneV2, type IUseUploadFormReturn } from "@modules/upload";
+
 import type React from "react";
-import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
 
 interface ImageFieldsProps {
-	initialImages: UploadedImage[];
-	onChange?: (images: UploadedImage[]) => void;
+	images: IUseUploadFormReturn;
 }
 
-export const ImageFields: React.FC<ImageFieldsProps> = ({
-	initialImages,
-	onChange,
-}) => {
-	const { setValue } = useFormContext();
-	const [images, setLocalImages] = useState<UploadedImage[]>(
-		initialImages || [],
-	);
-
-	useEffect(() => {
-		setLocalImages(initialImages || []);
-	}, [initialImages]);
-
-	const handleChange = (newImages: UploadedImage[]) => {
-		setLocalImages(newImages);
-
-		// передаём наверх
-		if (onChange) onChange(newImages);
-
-		// только локальные файлы в форму
-		setValue(
-			"images",
-			newImages.filter((img) => img.kind === "local").map((img) => img.file),
-		);
-	};
-
+export const ImageFields: React.FC<ImageFieldsProps> = ({ images }) => {
 	return (
-		<ImageDropzone
-			images={images}
-			onChange={handleChange}
-			maxFiles={5}
-			maxSize={10 * 1024 * 1024}
-			isLoading={false}
+		<ImageDropzoneV2
+			images={images.field.value}
+			onChange={images.field.onChange}
+			maxFiles={images.maxFiles}
+			minFiles={images.minFiles}
+			required={images.required}
 		/>
 	);
 };

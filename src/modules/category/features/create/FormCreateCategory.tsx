@@ -1,25 +1,19 @@
 import { fieldsCategoryRules } from "@modules/category/config";
-import type { UploadedImage } from "@modules/upload";
-import { ImageDropzone } from "@modules/upload";
+
+import { ImageDropzoneV2 } from "@modules/upload";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
 import { Input, Select } from "@shared/ui/fields";
 import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { PlusIcon } from "lucide-react";
-import { useState } from "react";
+
 import { Controller, FormProvider } from "react-hook-form";
 import { useFormCategoryCreate } from "./useForm";
 
 export const FormCreateCategory: React.FC = () => {
-	const { methods, onSubmit, isSubmitting, categories } =
+	const { methods, onSubmit, isSubmitting, categories, images } =
 		useFormCategoryCreate();
-
-	const [images, setImages] = useState<UploadedImage[]>([]);
-
-	const onChange = (images: UploadedImage[]) => {
-		setImages(images);
-	};
 
 	return (
 		<FormProvider {...methods}>
@@ -46,7 +40,13 @@ export const FormCreateCategory: React.FC = () => {
 					)}
 				/>
 
-				<ImageDropzone images={images} onChange={onChange} maxFiles={1} />
+				<ImageDropzoneV2
+					images={images.field.value}
+					onChange={images.field.onChange}
+					maxFiles={images.maxFiles}
+					minFiles={images.minFiles}
+					required={images.required}
+				/>
 
 				<Space className="mt-6">
 					<Button

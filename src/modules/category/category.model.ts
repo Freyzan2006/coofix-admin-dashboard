@@ -10,14 +10,20 @@ export interface CategoryModel {
 	updatedAt: Date;
 }
 
-export interface CreateCategoryModel {
-	name: string;
-	parent: string;
-	image: UploadedImage | null;
-}
+// export interface CreateCategoryModel {
+// 	name: string;
+// 	parent: string;
+// 	image: UploadedImage | null;
+// }
 
-export interface UpdateCategoryModel {
+// export interface UpdateCategoryModel {
+// 	name: string;
+// 	parent: string;
+// 	image: UploadedImage | null;
+// }
+
+export interface MutationCategoryModel {
 	name: string;
 	parent: string;
-	image: UploadedImage | null;
+	images: UploadedImage[] | null;
 }

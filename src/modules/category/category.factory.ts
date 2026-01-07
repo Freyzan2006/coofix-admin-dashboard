@@ -25,4 +25,5 @@ async function factoryCategoryService(): Promise<ICategoryService> {
 	return categoryService;
 }
 
+export const uploadImageMapper = await factoryUploadImageMapper();
 export const categoryService = await factoryCategoryService();

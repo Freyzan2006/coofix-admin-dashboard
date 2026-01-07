@@ -15,8 +15,7 @@ import { FormProvider } from "react-hook-form";
 import { useFormProductCreate } from "./hooks/useForm";
 
 export const FormCreateProduct: React.FC = () => {
-	const { methods, onSubmit, isSubmitting, images, setImages } =
-		useFormProductCreate();
+	const { methods, onSubmit, isSubmitting, images } = useFormProductCreate();
 	const { isError, isPending, isSuccess } = useCreateProductAdapter();
 
 	return (
@@ -27,7 +26,7 @@ export const FormCreateProduct: React.FC = () => {
 				<PriceAndQuantityFields />
 				<CategoryAndBrandFields />
 				<SaleAndNewFields />
-				<ImageFields initialImages={images} onChange={setImages} />
+				<ImageFields images={images} />
 				<CharacteristicsFields />
 
 				{isError && (

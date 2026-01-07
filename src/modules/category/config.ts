@@ -1,14 +1,17 @@
 import type { RegisterOptions } from "react-hook-form";
-import type { CreateCategoryModel } from "./category.model";
+import type { MutationCategoryModel } from "./category.model";
 
-export const getDefaultValues = (parent: string): CreateCategoryModel => ({
+export const getDefaultValues = (parent: string): MutationCategoryModel => ({
 	name: "",
 	parent: parent,
-	image: null,
+	images: null,
 });
 
 type CategoryRules = {
-	[K in keyof CreateCategoryModel]?: RegisterOptions<CreateCategoryModel, K>;
+	[K in keyof MutationCategoryModel]?: RegisterOptions<
+		MutationCategoryModel,
+		K
+	>;
 };
 
 export const fieldsCategoryRules: CategoryRules = {
@@ -26,7 +29,7 @@ export const fieldsCategoryRules: CategoryRules = {
 	parent: {
 		required: "Поле обязательно для заполнения",
 	},
-	image: {
+	images: {
 		required: "Поле обязательно для заполнения",
 	},
 };

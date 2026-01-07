@@ -1,19 +1,15 @@
 import type { IUploadImageMapper, IUploadImageService } from "@modules/upload";
 import type { ICategoryApi } from "./category.api";
 import type { UpdateCategoryDto } from "./category.dto";
-import type {
-	CategoryModel,
-	CreateCategoryModel,
-	UpdateCategoryModel,
-} from "./category.model";
+import type { CategoryModel, MutationCategoryModel } from "./category.model";
 
 export interface ICategoryService {
 	getAllCategories(): Promise<CategoryModel[]>;
 	getCategoryBySlug(slug: string): Promise<CategoryModel>;
-	createCategory(category: CreateCategoryModel): Promise<CategoryModel>;
+	createCategory(category: MutationCategoryModel): Promise<CategoryModel>;
 	updateCategory(
 		id: string,
-		category: UpdateCategoryModel,
+		category: MutationCategoryModel,
 	): Promise<CategoryModel>;
 	deleteCategory(id: string): Promise<void>;
 }
@@ -33,29 +29,28 @@ export class CategoryService implements ICategoryService {
 	}
 
 	public async createCategory(
-		category: CreateCategoryModel,
+		category: MutationCategoryModel,
 	): Promise<CategoryModel> {
 		return await this.api.create(category);
 	}
 
 	public async updateCategory(
 		id: string,
-		category: UpdateCategoryModel,
+		category: MutationCategoryModel,
 	): Promise<CategoryModel> {
-		console.log(this.uploadImageMapper.toUrl(category.image));
+		const { remoteUrls, localFiles } = this.uploadImageMapper.splits(
+			category.images || [],
+		);
 
-		const uploadedUrl =
-			category.image?.kind === "local"
-				? await this.uploadImageService.uploadImage(category.image.file)
-				: category.image?.url;
+		const uploadedUrls = localFiles.length
+			? await this.uploadImageService.uploadImages(localFiles)
+			: [];
 
 		const dto: UpdateCategoryDto = {
 			name: category.name,
 			parent: category.parent,
-			image: uploadedUrl || "",
+			image: [...remoteUrls, ...uploadedUrls][0],
 		};
-
-		console.log(dto);
 
 		return await this.api.update(id, dto);
 	}

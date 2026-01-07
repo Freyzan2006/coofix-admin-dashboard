@@ -1,4 +1,4 @@
-import type { UploadedImage } from "./types";
+import type { UploadedImage } from "@modules/upload/features/image-dropzone-v2";
 
 export interface ImageSplitsResult {
 	remoteUrls: string[];
@@ -6,8 +6,8 @@ export interface ImageSplitsResult {
 }
 
 export interface ImageSplitResult {
-	remoteUrls: string;
-	localFiles: File;
+	remoteUrl?: string;
+	localFile?: File;
 }
 
 export interface IUploadImageMapper {
@@ -17,28 +17,44 @@ export interface IUploadImageMapper {
 	toUploadedImages(items: (File | string)[]): UploadedImage[];
 	toUploadedImage(item: File | string): UploadedImage;
 
-	toUrl(images: UploadedImage | null): string;
+	toUrl(image: UploadedImage | null): string;
 	toUrls(images: UploadedImage[]): string[];
 }
 
 export class UploadImageMapper implements IUploadImageMapper {
 	public split(image: UploadedImage): ImageSplitResult {
-		return {
-			remoteUrls: image.kind === "remote" ? image.url : "",
-			localFiles: image.kind === "local" ? image.file : new File([], ""),
-		};
+		if (image.kind === "remote") {
+			return {
+				remoteUrl: image.url, // url может быть undefined
+			};
+		} else {
+			return {
+				localFile: image.file, // file может быть undefined
+			};
+		}
 	}
 
 	public splits(images: UploadedImage[]): ImageSplitsResult {
-		return {
-			remoteUrls: images
-				.filter((img) => img.kind === "remote")
-				.map((img) => img.url),
+		if (!images || images.length === 0) {
+			return { remoteUrls: [], localFiles: [] };
+		}
 
-			localFiles: images
-				.filter((img) => img.kind === "local")
-				.map((img) => img.file),
-		};
+		// Фильтруем undefined значения
+		const remoteUrls = images
+			.filter(
+				(img): img is UploadedImage & { kind: "remote"; url: string } =>
+					img.kind === "remote" && img.url !== undefined,
+			)
+			.map((img) => img.url);
+
+		const localFiles = images
+			.filter(
+				(img): img is UploadedImage & { kind: "local"; file: File } =>
+					img.kind === "local" && img.file !== undefined,
+			)
+			.map((img) => img.file);
+
+		return { remoteUrls, localFiles };
 	}
 
 	public toUploadedImages(items: (File | string)[]): UploadedImage[] {
@@ -63,8 +79,21 @@ export class UploadImageMapper implements IUploadImageMapper {
 
 	public toUrl(image: UploadedImage | null): string {
 		if (!image) return "";
-		if (image.kind === "remote") return image.url;
-		return URL.createObjectURL(image.file);
+
+		if (image.kind === "remote") {
+			return image.url || "";
+		}
+
+		// Для local файлов
+		if (image.preview) {
+			return image.preview;
+		}
+
+		if (image.file) {
+			return URL.createObjectURL(image.file);
+		}
+
+		return "";
 	}
 
 	public toUrls(images: UploadedImage[]): string[] {

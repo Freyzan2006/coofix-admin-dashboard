@@ -4,11 +4,11 @@ import type {
 	CategoryDto,
 	UpdateCategoryDto,
 } from "./category.dto";
-import type { CategoryModel, CreateCategoryModel } from "./category.model";
+import type { CategoryModel, MutationCategoryModel } from "./category.model";
 
 export interface ICategoryApi {
 	findAll(): Promise<CategoryModel[]>;
-	create(category: CreateCategoryModel): Promise<CategoryModel>;
+	create(category: MutationCategoryModel): Promise<CategoryModel>;
 	findBySlug(slug: string): Promise<CategoryModel>;
 	update(id: string, category: UpdateCategoryDto): Promise<CategoryModel>;
 	delete(id: string): Promise<void>;
@@ -22,7 +22,7 @@ export class CategoryRestApi implements ICategoryApi {
 		return response.data.categories;
 	}
 
-	public async create(category: CreateCategoryModel): Promise<CategoryModel> {
+	public async create(category: MutationCategoryModel): Promise<CategoryModel> {
 		const response = await this.client.post<CategoryDto>(
 			"/categories",
 			category,

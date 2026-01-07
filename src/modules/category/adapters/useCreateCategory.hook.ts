@@ -3,11 +3,11 @@ import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 
 import { categoryService } from "../category.factory";
-import type { CreateCategoryModel } from "../category.model";
+import type { MutationCategoryModel } from "../category.model";
 
 export function useCreateCategory() {
 	const { mutate, mutateAsync, isError, isPending, isSuccess } = useMutation({
-		mutationFn: async (dto: CreateCategoryModel) => {
+		mutationFn: async (dto: MutationCategoryModel) => {
 			await categoryService.createCategory(dto);
 		},
 		onSuccess: () => {

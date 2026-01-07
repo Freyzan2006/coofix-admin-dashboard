@@ -1,5 +1,8 @@
-import type { IUploadImageMapper, IUploadImageService } from "@modules/upload";
-import type { UploadedImage } from "@modules/upload/types";
+import type {
+	IUploadImageMapper,
+	IUploadImageService,
+	UploadedImage,
+} from "@modules/upload";
 import type { IMapper } from "@shared/abstract";
 import type { IProductApi } from "./product.api";
 import type {

@@ -1,13 +1,12 @@
 import { useUpdateProductAdapter } from "@modules/product/adapters/useUpdateProduct.adapter";
-
 import {
 	productCharacteristicsMapper,
 	uploadImageMapper,
 } from "@modules/product/product.di";
 import type { UpdateProductModel } from "@modules/product/product.dto";
 import type { ProductModel } from "@modules/product/product.model";
-import type { UploadedImage } from "@modules/upload/types";
-import { useRef, useState } from "react";
+import { useUploadForm } from "@modules/upload/features/image-dropzone-v2";
+
 import { type SubmitHandler, useForm } from "react-hook-form";
 
 function defaultValues(product: ProductModel) {
@@ -25,7 +24,6 @@ function defaultValues(product: ProductModel) {
 		quantity: product.quantity,
 		isNew: product.isNew,
 		isSale: product.isSale,
-		images: [],
 	};
 }
 
@@ -37,25 +35,33 @@ export function useFormProductUpdate(product: ProductModel) {
 		mode: "onChange",
 	});
 
-	const [images, setImages] = useState<UploadedImage[]>(
-		uploadImageMapper.toUploadedImages(product.images || []),
-	);
-	const fileInputRef = useRef<HTMLInputElement>(null);
+	const defaultImages = product.images
+		? uploadImageMapper.toUploadedImages(product.images)
+		: [];
+
+	const imagesField = useUploadForm<UpdateProductModel>({
+		name: "images",
+		control: methods.control,
+		minFiles: 0,
+		maxFiles: 5,
+		required: false,
+		defaultValue: defaultImages,
+	});
 
 	const onSubmit: SubmitHandler<UpdateProductModel> = async (data) => {
 		await doUpdateAsync({
 			productId: product._id,
 			formData: data,
-			images,
+			images: imagesField.field.value,
 		});
 	};
 
 	return {
 		methods,
-		images,
-		fileInputRef,
+
 		onSubmit: methods.handleSubmit(onSubmit),
 		isSubmitting: methods.formState.isSubmitting,
-		setImages,
+
+		images: imagesField,
 	};
 }

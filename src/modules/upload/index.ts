@@ -1,5 +1,9 @@
-export { ImageDropzone } from "./features/Image-dropzone.feature";
-export type { UploadedImage } from "./types";
+export type {
+	IUseUploadFormReturn,
+	UploadedImage,
+} from "./features/image-dropzone-v2";
+export { ImageDropzoneV2, useUploadForm } from "./features/image-dropzone-v2";
+
 export {
 	factoryUploadImageMapper,
 	factoryUploadImageService,

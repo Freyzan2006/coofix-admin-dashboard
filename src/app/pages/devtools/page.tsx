@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
 import {
 	ImageDropzoneV2,
 	type UploadedImage,
 	useUploadForm,
-} from "./image-dropzone-v2";
+} from "@modules/upload";
+import { useForm } from "react-hook-form";
 
 interface FormValues {
 	images: UploadedImage[];
@@ -19,7 +19,7 @@ export default function DevToolsPage() {
 		mode: "onChange",
 	});
 
-	const { imagesField, imagesError, minFiles, maxFiles, required } =
+	const { field, error, minFiles, maxFiles, required } =
 		useUploadForm<FormValues>({
 			name: "images",
 			control,
@@ -37,11 +37,11 @@ export default function DevToolsPage() {
 			<input {...control.register("title")} />
 
 			<ImageDropzoneV2
-				images={imagesField.value}
-				onChange={imagesField.onChange}
+				images={field.value}
+				onChange={field.onChange}
 				maxFiles={maxFiles}
 				minFiles={minFiles}
-				error={imagesError}
+				error={error}
 				required={required}
 			/>
 

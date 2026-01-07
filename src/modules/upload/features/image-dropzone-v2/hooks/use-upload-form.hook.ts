@@ -12,14 +12,15 @@ interface IUseUploadForm<T extends FieldValues> {
 	minFiles?: number;
 	maxFiles?: number;
 	required?: boolean;
+	defaultValue?: UploadedImage[];
 }
 
-interface IUseUploadFormReturn {
-	imagesField: {
+export interface IUseUploadFormReturn {
+	field: {
 		value: UploadedImage[];
 		onChange: (images: UploadedImage[]) => void;
 	};
-	imagesError: string | undefined;
+	error: string | undefined;
 	minFiles: number;
 	maxFiles: number;
 	required: boolean;
@@ -37,6 +38,7 @@ export function useUploadForm<T extends FieldValues>({
 	minFiles = 0,
 	maxFiles = 10,
 	required = false,
+	defaultValue = [],
 }: IUseUploadForm<T>): IUseUploadFormReturn {
 	const {
 		field,
@@ -46,8 +48,8 @@ export function useUploadForm<T extends FieldValues>({
 		control,
 		rules: {
 			required: required ? "Это поле обязательно для заполнения" : false,
-			validate: (value: unknown) => {
-				const images = (value as UploadedImage[]) || [];
+			validate: (value: UploadedImage[]) => {
+				const images = value || [];
 
 				if (minFiles > 0 && images.length < minFiles) {
 					return `Минимум ${minFiles} фото требуется`;
@@ -64,12 +66,12 @@ export function useUploadForm<T extends FieldValues>({
 
 	const typedField = {
 		...field,
-		value: (field.value as UploadedImage[]) || [],
+		value: field.value || defaultValue,
 	};
 
 	return {
-		imagesField: typedField,
-		imagesError: error?.message,
+		field: typedField,
+		error: error?.message,
 		minFiles,
 		maxFiles,
 		required,

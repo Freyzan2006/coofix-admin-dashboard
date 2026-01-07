@@ -1,8 +1,8 @@
-import type { UploadedImage } from "@modules/upload/types";
+// import type { UploadedImage } from "@modules/upload/types";
 
+import type { UploadedImage } from "@modules/upload";
 import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
-
 import { productService } from "../product.di";
 import type { UpdateProductModel } from "../product.dto";
 

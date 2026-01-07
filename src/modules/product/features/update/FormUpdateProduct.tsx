@@ -21,7 +21,7 @@ interface IFormUpdateProductProps {
 export const FormUpdateProduct: React.FC<IFormUpdateProductProps> = ({
 	product,
 }) => {
-	const { methods, onSubmit, isSubmitting, images, setImages } =
+	const { methods, onSubmit, isSubmitting, images } =
 		useFormProductUpdate(product);
 
 	return (
@@ -32,7 +32,7 @@ export const FormUpdateProduct: React.FC<IFormUpdateProductProps> = ({
 				<PriceAndQuantityFields />
 				<CategoryAndBrandFields />
 				<SaleAndNewFields />
-				<ImageFields initialImages={images} onChange={setImages} />
+				<ImageFields images={images} />
 				<CharacteristicsFields />
 
 				{/* {isError && (
