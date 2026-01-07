@@ -1,5 +1,9 @@
-import { useController, useForm } from "react-hook-form";
-import { ImageDropzoneV2, type UploadedImage } from "./image-dropzone-v2";
+import { useForm } from "react-hook-form";
+import {
+	ImageDropzoneV2,
+	type UploadedImage,
+	useUploadForm,
+} from "./image-dropzone-v2";
 
 interface FormValues {
 	images: UploadedImage[];
@@ -12,25 +16,17 @@ export default function DevToolsPage() {
 			images: [],
 			title: "",
 		},
+		mode: "onChange",
 	});
 
-	const {
-		field,
-		fieldState: { error },
-	} = useController({
-		name: "images",
-		control,
-		rules: {
-			required: "Загрузите хотя бы 2 фото",
-			validate: (value) => {
-				const images = value || [];
-				if (images.length < 2) {
-					return "Минимум 2 фото требуется";
-				}
-				return true;
-			},
-		},
-	});
+	const { imagesField, imagesError, minFiles, maxFiles, required } =
+		useUploadForm<FormValues>({
+			name: "images",
+			control,
+			minFiles: 0,
+			maxFiles: 5,
+			required: true,
+		});
 
 	const onSubmit = (data: FormValues) => {
 		console.log(data);
@@ -41,12 +37,12 @@ export default function DevToolsPage() {
 			<input {...control.register("title")} />
 
 			<ImageDropzoneV2
-				images={field.value}
-				onChange={field.onChange}
-				maxFiles={5}
-				minFiles={2}
-				error={error?.message}
-				required={true}
+				images={imagesField.value}
+				onChange={imagesField.onChange}
+				maxFiles={maxFiles}
+				minFiles={minFiles}
+				error={imagesError?.message}
+				required={required}
 			/>
 
 			<button type="submit">Submit</button>

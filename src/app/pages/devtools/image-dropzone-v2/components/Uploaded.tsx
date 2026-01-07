@@ -1,67 +1,3 @@
-// // components/ui/Uploaded.widget.tsx
-
-// import type { UploadedFileUI } from "../types";
-// import { UploadedDropZone } from "./UploadedDropZone";
-// import { UploadedFiles } from "./UploadedFiles";
-
-// interface UploadedProps {
-//   uploadedFiles: UploadedFileUI[];
-//   isLoading: boolean;
-//   maxFiles: number;
-//   handleRemoveFile: (id: string) => void;
-//   handleClearAll: () => void;
-//   handleFiles: (files: FileList) => void;
-//   fileInputRef: React.RefObject<HTMLInputElement | null>;
-//   maxSize: number;
-//   error?: string;
-//   accept?: string;
-//   canAddMore?: boolean;
-//   disabled?: boolean;
-// }
-
-// export const Uploaded: React.FC<UploadedProps> = ({
-//   uploadedFiles,
-//   isLoading,
-//   maxFiles,
-//   handleRemoveFile,
-//   handleClearAll,
-//   handleFiles,
-//   fileInputRef,
-//   maxSize,
-//   error,
-//   accept = "image/*",
-//   canAddMore = true,
-//   disabled = false,
-// }) => {
-//   return (
-//     <div className={`${disabled ? "opacity-60" : ""}`}>
-//       {error && <p className="text-error text-sm mt-1 mb-2">{error}</p>}
-
-//       {canAddMore && !disabled && (
-//         <UploadedDropZone
-//           handleFiles={handleFiles}
-//           fileInputRef={fileInputRef}
-//           isLoading={isLoading}
-//           maxSize={maxSize}
-//           maxFiles={maxFiles}
-//           accept={accept}
-//           canAddMore={canAddMore}
-//         />
-//       )}
-
-//       <UploadedFiles
-//         uploadedFiles={uploadedFiles}
-//         isLoading={isLoading || disabled}
-//         maxFiles={maxFiles}
-//         handleRemoveFile={handleRemoveFile}
-//         handleClearAll={handleClearAll}
-//         disabled={disabled}
-//       />
-//     </div>
-//   );
-// };
-
-// components/ui/Uploaded.widget.tsx
 import type { UploadedFileUI } from "../types";
 import { UploadedDropZone } from "./UploadedDropZone";
 import { UploadedFiles } from "./UploadedFiles";
@@ -70,7 +6,7 @@ interface UploadedProps {
 	uploadedFiles: UploadedFileUI[];
 	isLoading: boolean;
 	maxFiles: number;
-	minFiles: number; // <-- Добавляем
+	minFiles: number;
 	handleRemoveFile: (id: string) => void;
 	handleClearAll: () => void;
 	handleFiles: (files: FileList) => void;
@@ -79,7 +15,7 @@ interface UploadedProps {
 	error?: string;
 	accept?: string;
 	canAddMore?: boolean;
-	canRemove?: boolean; // <-- Добавляем
+	canRemove?: boolean;
 	disabled?: boolean;
 
 	isMinFilesReached?: boolean;
@@ -98,13 +34,12 @@ export const Uploaded: React.FC<UploadedProps> = ({
 	error,
 	accept = "image/*",
 	canAddMore = true,
-	canRemove = true, // По умолчанию можно удалять
+	canRemove = true,
 	disabled = false,
 	isMinFilesReached = true,
 }) => {
 	return (
 		<div className={`${disabled ? "opacity-60" : ""}`}>
-			{/* Индикатор минимального количества */}
 			{minFiles > 0 && (
 				<div
 					className={`
