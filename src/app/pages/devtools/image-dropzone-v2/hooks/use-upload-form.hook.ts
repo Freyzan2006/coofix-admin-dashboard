@@ -14,13 +14,30 @@ interface IUseUploadForm<T extends FieldValues> {
 	required?: boolean;
 }
 
+interface IUseUploadFormReturn {
+	imagesField: {
+		value: UploadedImage[];
+		onChange: (images: UploadedImage[]) => void;
+	};
+	imagesError: string | undefined;
+	minFiles: number;
+	maxFiles: number;
+	required: boolean;
+}
+
+/**
+ * Hook для работы с полем загрузки файлов.
+ * Он возвращает объект с полями imagesField (поле для ввода файлов), imagesError (ошибка валидации), minFiles, maxFiles, required.
+ * @param {IUseUploadForm<T>} props - объект с настройками
+ * @returns {IUseUploadFormReturn} - объект с полями imagesField, imagesError, minFiles, maxFiles, required
+ */
 export function useUploadForm<T extends FieldValues>({
 	name,
 	control,
 	minFiles = 0,
 	maxFiles = 10,
 	required = false,
-}: IUseUploadForm<T>) {
+}: IUseUploadForm<T>): IUseUploadFormReturn {
 	const {
 		field,
 		fieldState: { error },
@@ -52,7 +69,7 @@ export function useUploadForm<T extends FieldValues>({
 
 	return {
 		imagesField: typedField,
-		imagesError: error,
+		imagesError: error?.message,
 		minFiles,
 		maxFiles,
 		required,

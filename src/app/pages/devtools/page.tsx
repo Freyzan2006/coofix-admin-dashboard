@@ -41,7 +41,7 @@ export default function DevToolsPage() {
 				onChange={imagesField.onChange}
 				maxFiles={maxFiles}
 				minFiles={minFiles}
-				error={imagesError?.message}
+				error={imagesError}
 				required={required}
 			/>
 
