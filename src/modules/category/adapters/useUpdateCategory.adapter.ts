@@ -1,7 +1,6 @@
+import { noticeToastSvc } from "@modules/notification";
 import { queryClient } from "@shared/api/tanstack-query";
-import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
-
 import { categoryService } from "../category.factory";
 import type { CategoryModel, MutationCategoryModel } from "../category.model";
 
@@ -11,14 +10,14 @@ export function useUpdateCategoryAdapter(categoryId: string) {
 			await categoryService.updateCategory(categoryId, data);
 		},
 		onSuccess: () => {
-			toast.success("Категория успешно обновлена");
+			noticeToastSvc.success("Категория успешно обновлена");
 			queryClient.setQueryData(
 				["category", categoryId],
 				(data: CategoryModel) => data,
 			);
 		},
 		onError: () => {
-			toast.error("Произошла ошибка при обновлении категории");
+			noticeToastSvc.error("Произошла ошибка при обновлении категории");
 		},
 	});
 

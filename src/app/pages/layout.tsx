@@ -1,5 +1,5 @@
+import { ToastContainer } from "@modules/notification";
 import { EnterAnimation } from "@shared/ui/animation";
-import { ToastContainer } from "@shared/ui/toast";
 import { Screen } from "@shared/widgets/Screen.component";
 
 import { Outlet } from "react-router";

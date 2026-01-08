@@ -1,6 +1,12 @@
 import { useToastStore } from "./toast.store";
 
-export const toast = {
+export interface IToastApi {
+	success: (message: string) => void;
+	error: (message: string) => void;
+	info: (message: string) => void;
+}
+
+export const toast: IToastApi = {
 	success: (message: string) =>
 		useToastStore.getState().push({ type: "success", message }),
 

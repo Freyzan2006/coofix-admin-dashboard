@@ -1,5 +1,5 @@
+import { noticeToastSvc } from "@modules/notification";
 import { queryClient } from "@shared/api/tanstack-query";
-import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { categoryService } from "../category.factory";
@@ -10,11 +10,11 @@ export function useDeleteCategory() {
 			await categoryService.deleteCategory(id);
 		},
 		onSuccess: () => {
-			toast.success("Категория успешно удалена");
+			noticeToastSvc.success("Категория успешно удалена");
 			queryClient.invalidateQueries({ queryKey: ["categories"] });
 		},
 		onError: () => {
-			toast.error("Произошла ошибка при удалении категории");
+			noticeToastSvc.error("Произошла ошибка при удалении категории");
 		},
 	});
 

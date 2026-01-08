@@ -1,7 +1,7 @@
+import { noticeToastSvc } from "@modules/notification";
 import { useDeleteProductAdapter } from "@modules/product/adapters/useDeleteProduct.adapter";
 import type { ProductModel } from "@modules/product/product.model";
 import { useProductActionsStore } from "@modules/product/store/product-actions.store";
-import { toast } from "@shared/ui/toast";
 import { useCallback } from "react";
 import { DeleteConfirmation } from "./DeleteConfirmation.ui";
 
@@ -29,7 +29,7 @@ export const DeleteConfirmationContainer: React.FC<
 			confirmationDeleteInput.trim().toLowerCase() !==
 			product.name.trim().toLowerCase()
 		) {
-			toast.error("Подтвердите удаление");
+			noticeToastSvc.error("Подтвердите удаление");
 			setIsConfirmedError(true);
 			return;
 		}

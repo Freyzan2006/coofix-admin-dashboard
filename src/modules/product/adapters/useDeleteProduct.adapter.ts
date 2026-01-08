@@ -1,5 +1,5 @@
+import { noticeToastSvc } from "@modules/notification";
 import { queryClient } from "@shared/api/tanstack-query";
-import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { productService } from "../product.di";
@@ -16,11 +16,11 @@ export function useDeleteProductAdapter(id: string) {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["products"] });
-			toast.success("Продукт успешно удален");
+			noticeToastSvc.success("Продукт успешно удален");
 			setIsConfirmedError(false);
 		},
 		onError: () => {
-			toast.error("Произошла ошибка при удалении продукта");
+			noticeToastSvc.error("Произошла ошибка при удалении продукта");
 			setIsConfirmedError(true);
 		},
 	});

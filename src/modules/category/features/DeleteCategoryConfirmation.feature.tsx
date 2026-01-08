@@ -1,9 +1,9 @@
+import { noticeToastSvc } from "@modules/notification";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Button } from "@shared/ui/Button.ui";
 import { Input } from "@shared/ui/fields";
 import { Space } from "@shared/ui/Space.ui";
 import { Paragraph, Strong } from "@shared/ui/text";
-import { toast } from "@shared/ui/toast";
 import { TrashIcon } from "lucide-react";
 import type React from "react";
 import { useCallback } from "react";
@@ -33,7 +33,7 @@ export const DeleteCategoryConfirmation: React.FC<
 			confirmationDeleteInput.trim().toLowerCase() !==
 			category.name.trim().toLowerCase()
 		) {
-			toast.error("Подтвердите удаление");
+			noticeToastSvc.error("Подтвердите удаление");
 			return;
 		}
 

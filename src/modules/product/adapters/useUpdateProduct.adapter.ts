@@ -1,7 +1,7 @@
 // import type { UploadedImage } from "@modules/upload/types";
 
+import { noticeToastSvc } from "@modules/notification";
 import type { UploadedImage } from "@modules/upload";
-import { toast } from "@shared/ui/toast";
 import { useMutation } from "@tanstack/react-query";
 import { productService } from "../product.di";
 import type { UpdateProductModel } from "../product.dto";
@@ -22,10 +22,10 @@ export function useUpdateProductAdapter() {
 			);
 		},
 		onSuccess: () => {
-			toast.success("Продукт успешно обновлен");
+			noticeToastSvc.success("Продукт успешно обновлен");
 		},
 		onError: () => {
-			toast.error("Произошла ошибка при обновлении продукта");
+			noticeToastSvc.error("Произошла ошибка при обновлении продукта");
 		},
 	});
 

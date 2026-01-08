@@ -1,4 +1,4 @@
-import { toast } from "@shared/ui/toast";
+import { noticeToastSvc } from "@modules/notification";
 import { useMutation } from "@tanstack/react-query";
 import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 import { authApi } from "../di/auth.di";
@@ -8,11 +8,11 @@ export const useLoginLocal = () => {
 	const mutation = useMutation({
 		mutationFn: (data: LoginLocalDtoRequest) => authApi.loginLocal(data),
 		onSuccess: (data) => {
-			toast.success("Вы успешно вошли в систему");
+			noticeToastSvc.success("Вы успешно вошли в систему");
 			useAuthStore.getState().setAccessToken(data.accessToken);
 		},
 		onError: () => {
-			toast.success("Вы успешно вошли в систему");
+			noticeToastSvc.success("Вы успешно вошли в систему");
 		},
 	});
 
