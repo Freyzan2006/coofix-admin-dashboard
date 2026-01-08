@@ -1,4 +1,4 @@
-import type { UserEntity } from "@modules/user";
+import type { UserModel } from "@modules/user";
 
 export interface LoginLocalDtoRequest {
 	email: string;
@@ -7,7 +7,7 @@ export interface LoginLocalDtoRequest {
 
 export interface LoginLocalDtoResponse {
 	success: boolean;
-	user: UserEntity;
+	user: UserModel;
 	accessToken: string;
 	refreshToken: string;
 	token: string;
@@ -20,5 +20,5 @@ export interface LoginGoogleDtoRequest {
 export interface LoginGoogleDtoResponse {
 	success: boolean;
 	token: string;
-	user: UserEntity;
+	user: UserModel;
 }

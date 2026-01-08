@@ -1,3 +1,4 @@
+import { DetailRow } from "@modules/common";
 import { useProductAdapter } from "@modules/product/adapters/useProduct.adapter";
 import { productCharacteristicsMapper } from "@modules/product/product.di";
 import { Alert } from "@shared/ui/Alert.ui";
@@ -6,7 +7,6 @@ import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
 import { CopyText, Heading } from "@shared/ui/text";
 import { buildProductDetails } from "../data";
-import { DetailRow } from "./DetailRow.ui";
 
 interface IDetailsProductProps {
 	slug: string;
@@ -65,14 +65,6 @@ export const DetailsProduct: React.FC<IDetailsProductProps> = ({ slug }) => {
 				<Heading variant="primary">Характеристики:</Heading>
 
 				<Space axis="vertical" gap={1}>
-					{/* {Object.entries(product.characteristics || {}).map(([index, value]) => (
-						<DetailRow
-							key={index}
-							label={String(value.name)}
-							value={<CopyText text={String(value.value)} />}
-						/>
-					))} */}
-
 					{prepareData.map(({ name, value }) => (
 						<DetailRow
 							key={name}

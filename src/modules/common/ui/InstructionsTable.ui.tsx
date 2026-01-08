@@ -2,7 +2,7 @@ import { Alert } from "@shared/ui/Alert.ui";
 import { Paragraph } from "@shared/ui/text";
 import { MessageSquareDotIcon, MousePointerClickIcon } from "lucide-react";
 
-export const CategoryInstructionsTable: React.FC = () => {
+export const InstructionsTable: React.FC = () => {
 	return (
 		<Alert variant="info">
 			<Paragraph variant="default" className="flex gap-3">

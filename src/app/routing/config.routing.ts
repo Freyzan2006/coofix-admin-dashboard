@@ -26,14 +26,14 @@ export const sideBarLinks: ISideBarLink[] = [
 		icon: ChartBarStackedIcon,
 	},
 	{
-		to: "/dashboard/reviews",
-		label: "Отзывы",
-		icon: MessageSquareDiffIcon,
-	},
-	{
 		to: "/dashboard/orders",
 		label: "Заказы",
 		icon: SendToBackIcon,
+	},
+	{
+		to: "/dashboard/reviews",
+		label: "Отзывы",
+		icon: MessageSquareDiffIcon,
 	},
 	{
 		to: "/dashboard/favorites",

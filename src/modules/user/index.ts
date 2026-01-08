@@ -1,1 +1,1 @@
-export type { UserEntity } from "./entities/user.entity";
+export type { UserModel } from "./user.model";
