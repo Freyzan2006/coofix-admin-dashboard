@@ -1,4 +1,6 @@
 import type { UploadedImage } from "@modules/upload/features/image-dropzone-v2";
+import type { ImageModel } from "./upload.model";
+import { isImageModel } from "./upload.utils";
 
 export interface ImageSplitsResult {
 	remoteUrls: string[];
@@ -14,8 +16,8 @@ export interface IUploadImageMapper {
 	split(image: UploadedImage): ImageSplitResult;
 	splits(images: UploadedImage[]): ImageSplitsResult;
 
-	toUploadedImages(items: (File | string)[]): UploadedImage[];
-	toUploadedImage(item: File | string): UploadedImage;
+	toUploadedImages(items: (File | ImageModel | string)[]): UploadedImage[];
+	toUploadedImage(item: File | ImageModel | string): UploadedImage;
 
 	toUrl(image: UploadedImage | null): string;
 	toUrls(images: UploadedImage[]): string[];
@@ -57,11 +59,11 @@ export class UploadImageMapper implements IUploadImageMapper {
 		return { remoteUrls, localFiles };
 	}
 
-	public toUploadedImages(items: (File | string)[]): UploadedImage[] {
+	public toUploadedImages(items: (File | ImageModel)[]): UploadedImage[] {
 		return items.map((item) => this.toUploadedImage(item));
 	}
 
-	public toUploadedImage(item: File | string): UploadedImage {
+	public toUploadedImage(item: File | ImageModel | string): UploadedImage {
 		if (typeof item === "string") {
 			return {
 				id: crypto.randomUUID(),
@@ -69,6 +71,15 @@ export class UploadImageMapper implements IUploadImageMapper {
 				url: item,
 			};
 		}
+
+		if (isImageModel(item)) {
+			return {
+				id: crypto.randomUUID(),
+				kind: "remote",
+				url: item.url,
+			};
+		}
+
 		return {
 			id: crypto.randomUUID(),
 			kind: "local",

@@ -10,4 +10,5 @@ export {
 } from "./upload.factory";
 export type { IUploadImageMapper } from "./upload.mapper";
 export { UploadImageMapper } from "./upload.mapper";
+export type { ImageModel } from "./upload.model";
 export type { IUploadImageService } from "./upload.service";

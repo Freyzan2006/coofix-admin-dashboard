@@ -1,5 +1,6 @@
 import type { BrandModel } from "@modules/brand";
 import type { CategoryModel } from "@modules/category";
+import type { ImageModel } from "@modules/upload";
 import type { CharacteristicsDto } from "./product.dto";
 
 export interface ProductModel {
@@ -11,7 +12,7 @@ export interface ProductModel {
 	oldPrice: number | null;
 	category: CategoryModel;
 	brand: BrandModel;
-	images: string[];
+	images: ImageModel[];
 	characteristics?: CharacteristicsDto;
 	inStock: boolean;
 	quantity: number;

@@ -15,7 +15,6 @@ const ProductState = {
 		"images",
 		"characteristics",
 		"inStock",
-		"quantity",
 		"isNew",
 		"isSale",
 		"ratingAvg",

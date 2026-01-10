@@ -22,6 +22,8 @@ export const TableProducts: React.FC = () => {
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 
+	console.log(products);
+
 	return (
 		<Space className="w-full">
 			{isLoading ? (
@@ -74,7 +76,7 @@ export const TableProducts: React.FC = () => {
 								</TableData>
 								<TableData>
 									<SliceText
-										text={item.images ? item.images.join(", ") : "-"}
+										text={item.images.map((image) => image.url).join(", ")}
 										slice={20}
 									/>
 								</TableData>
@@ -85,9 +87,6 @@ export const TableProducts: React.FC = () => {
 								</TableData>
 								<TableData>
 									<SliceText text={item.inStock ? "Yes" : "No"} />
-								</TableData>
-								<TableData>
-									<SliceText text={String(item.quantity)} slice={20} />
 								</TableData>
 								<TableData>
 									<SliceText text={item.isNew ? "Yes" : "No"} />

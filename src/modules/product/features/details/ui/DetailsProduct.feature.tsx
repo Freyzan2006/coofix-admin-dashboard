@@ -49,11 +49,13 @@ export const DetailsProduct: React.FC<IDetailsProductProps> = ({ slug }) => {
 		product.characteristics || {},
 	);
 
+	const images = product.images.map((image) => image.url) || [];
+
 	return (
 		<Space axis="vertical" align="start" gap={4}>
 			<Heading variant="secondary">Подробная информация:</Heading>
 
-			<CarouselImg images={product.images || []} />
+			<CarouselImg images={images} />
 
 			<Space axis="vertical" gap={2} fullWidth>
 				{details.map(({ label, value }) => (
