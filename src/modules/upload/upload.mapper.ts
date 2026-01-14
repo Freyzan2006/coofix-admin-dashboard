@@ -3,7 +3,7 @@ import type { ImageModel } from "./upload.model";
 import { isImageModel } from "./upload.utils";
 
 export interface ImageSplitsResult {
-	remoteUrls: string[];
+	remoteUrls: ImageModel[];
 	localFiles: File[];
 }
 
@@ -13,7 +13,7 @@ export interface ImageSplitResult {
 }
 
 export interface IUploadImageMapper {
-	split(image: UploadedImage): ImageSplitResult;
+	split(image: UploadedImage | null): ImageSplitResult;
 	splits(images: UploadedImage[]): ImageSplitsResult;
 
 	toUploadedImages(items: (File | ImageModel | string)[]): UploadedImage[];
@@ -24,7 +24,11 @@ export interface IUploadImageMapper {
 }
 
 export class UploadImageMapper implements IUploadImageMapper {
-	public split(image: UploadedImage): ImageSplitResult {
+	public split(image: UploadedImage | null): ImageSplitResult {
+		if (!image) {
+			return {};
+		}
+
 		if (image.kind === "remote") {
 			return {
 				remoteUrl: image.url, // url может быть undefined
@@ -47,7 +51,7 @@ export class UploadImageMapper implements IUploadImageMapper {
 				(img): img is UploadedImage & { kind: "remote"; url: string } =>
 					img.kind === "remote" && img.url !== undefined,
 			)
-			.map((img) => img.url);
+			.map((img) => ({ url: img.url, publicId: img.id }));
 
 		const localFiles = images
 			.filter(

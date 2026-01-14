@@ -1,4 +1,5 @@
-import type { CategoryModel } from "./category.model";
+import type { ImageModel } from "@modules/upload";
+import type { CategoryModel, MutationCategoryModel } from "./category.model";
 
 export interface CategoriesDto {
 	success: boolean;
@@ -10,7 +11,10 @@ export interface CategoryDto {
 	category: CategoryModel;
 }
 
-export type UpdateCategoryDto = Omit<
-	CategoryModel,
-	"_id" | "createdAt" | "updatedAt" | "slug"
->;
+export interface UpdateCategoryDto
+	extends Omit<
+		MutationCategoryModel,
+		"_id" | "createdAt" | "updatedAt" | "slug" | "image"
+	> {
+	image: ImageModel | null;
+}

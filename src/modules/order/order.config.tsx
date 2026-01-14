@@ -75,10 +75,6 @@ export const buildOrderItemsDetails = (orderItems: OrderItemDto[]) => {
 			value: item.product ? <CopyText text={item.product.name} /> : "-",
 		},
 		{
-			label: "Количество",
-			value: <CopyText text={`${String(item.quantity)} шт`} />,
-		},
-		{
 			label: "Цена одной штуки",
 			value: <CopyText text={`${String(item.price)} $`} />,
 		},

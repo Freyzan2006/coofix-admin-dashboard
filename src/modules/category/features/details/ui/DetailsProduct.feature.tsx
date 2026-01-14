@@ -17,7 +17,7 @@ export const DetailsCategory: React.FC<IDetailsProductProps> = ({
 		<Space axis="vertical" align="start" gap={4}>
 			<Heading variant="secondary">Подробная информация:</Heading>
 
-			<CarouselImg images={[category.image || ""]} />
+			<CarouselImg images={[category.image?.url || ""]} />
 
 			<Space axis="vertical" gap={2} fullWidth>
 				{details.map(({ label, value }) => (

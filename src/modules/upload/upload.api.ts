@@ -1,4 +1,9 @@
 import type { RestApiCliType } from "@shared/api/rest-api/client";
+import type {
+	ImageModel,
+	ImageResponseDto,
+	ImagesResponseDto,
+} from "./upload.model";
 
 interface UploadOptions {
 	onProgress?: (percent: number) => void;
@@ -6,18 +11,18 @@ interface UploadOptions {
 }
 
 export interface IUploadApi {
-	single(file: File, options?: UploadOptions): Promise<string>;
-	multiple(files: File[], options?: UploadOptions): Promise<string[]>;
+	single(file: File, options?: UploadOptions): Promise<ImageModel>;
+	multiple(files: File[], options?: UploadOptions): Promise<ImageModel[]>;
 }
 
 export class UploadRestApi implements IUploadApi {
 	constructor(private readonly client: RestApiCliType) {}
 
-	async single(file: File, options?: UploadOptions): Promise<string> {
+	async single(file: File, options?: UploadOptions): Promise<ImageModel> {
 		const formData = new FormData();
 		formData.append("image", file);
 
-		const response = await this.client.post<{ url: string }>(
+		const response = await this.client.post<ImageResponseDto>(
 			"/upload/single",
 			formData,
 			{
@@ -29,16 +34,19 @@ export class UploadRestApi implements IUploadApi {
 			},
 		);
 
-		return response.data.url;
+		return response.data.image;
 	}
 
-	async multiple(files: File[], options?: UploadOptions): Promise<string[]> {
+	async multiple(
+		files: File[],
+		options?: UploadOptions,
+	): Promise<ImageModel[]> {
 		const formData = new FormData();
 		files.forEach((f) => {
 			formData.append("images", f);
 		});
 
-		const response = await this.client.post<{ urls: string[] }>(
+		const response = await this.client.post<ImagesResponseDto>(
 			"/upload/multiple",
 			formData,
 			{
@@ -50,6 +58,6 @@ export class UploadRestApi implements IUploadApi {
 			},
 		);
 
-		return response.data.urls;
+		return response.data.images;
 	}
 }

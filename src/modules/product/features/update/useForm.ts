@@ -21,7 +21,6 @@ function defaultValues(product: ProductModel) {
 		characteristics: productCharacteristicsMapper.toModel(
 			product.characteristics || {},
 		),
-		quantity: product.quantity,
 		isNew: product.isNew,
 		isSale: product.isSale,
 	};

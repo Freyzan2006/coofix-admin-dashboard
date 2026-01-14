@@ -5,7 +5,6 @@ export const getDefaultValues = () => ({
 	oldPrice: 200,
 	images: [],
 	characteristics: [{ name: "Частота", value: "33Гц" }],
-	quantity: 30,
 	isNew: true,
 	isSale: false,
 });
@@ -54,18 +53,6 @@ export const fieldsProductRules = {
 		max: {
 			value: 1000000,
 			message: "Максимальная 1000000 цена",
-		},
-		valueAsNumber: true,
-	},
-	quantity: {
-		required: "Количество обязательно",
-		min: {
-			value: 1,
-			message: "Минимальное количество 1",
-		},
-		max: {
-			value: 1000000,
-			message: "Максимальное количество 1000000",
 		},
 		valueAsNumber: true,
 	},

@@ -1,3 +1,4 @@
+import type { ImageModel } from "@modules/upload";
 import type { BaseResponse } from "@shared/api/rest-api/types";
 import type {
 	CharacteristicsModel,
@@ -15,7 +16,7 @@ export interface ProductFilterQueryParams {
 export interface CreateProductDto
 	extends Omit<CreateProductModel, "characteristics" | "images"> {
 	characteristics: Record<string, string>;
-	images: string[];
+	images: ImageModel[];
 }
 
 export interface UpdateProductDto
@@ -25,7 +26,7 @@ export interface UpdateProductDto
 	> {
 	characteristics: Record<string, string>;
 
-	images: string[];
+	images: ImageModel[];
 	brand: string;
 	category: string;
 }

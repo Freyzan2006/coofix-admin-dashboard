@@ -22,8 +22,6 @@ export const TableProducts: React.FC = () => {
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 
-	console.log(products);
-
 	return (
 		<Space className="w-full">
 			{isLoading ? (

@@ -1,7 +1,14 @@
-import type { IUploadImageMapper, IUploadImageService } from "@modules/upload";
+import type {
+	ImageModel,
+	IUploadImageMapper,
+	IUploadImageService,
+	UploadedImage,
+} from "@modules/upload";
 import type { ICategoryApi } from "./category.api";
 import type { UpdateCategoryDto } from "./category.dto";
 import type { CategoryModel, MutationCategoryModel } from "./category.model";
+
+// type ImageInput = File | ImageModel;
 
 export interface ICategoryService {
 	getAllCategories(): Promise<CategoryModel[]>;
@@ -17,7 +24,7 @@ export interface ICategoryService {
 export class CategoryService implements ICategoryService {
 	constructor(
 		private readonly api: ICategoryApi,
-		private readonly uploadImageMapper: IUploadImageMapper,
+		public readonly uploadImageMapper: IUploadImageMapper,
 		private readonly uploadImageService: IUploadImageService,
 	) {}
 	public async getAllCategories(): Promise<CategoryModel[]> {
@@ -34,23 +41,42 @@ export class CategoryService implements ICategoryService {
 		return await this.api.create(category);
 	}
 
+	private async resolveImage(
+		image: UploadedImage | null,
+	): Promise<ImageModel | undefined> {
+		if (!image) return undefined;
+
+		if (image.kind === "local" && image.file) {
+			// загружаем новый файл
+			const uploaded: ImageModel = await this.uploadImageService.uploadImage(
+				image.file,
+			);
+			return uploaded; // { url, publicId }
+		}
+
+		if (image.kind === "remote" && image.url && image.id) {
+			// старая картинка, оставляем как есть
+			return { url: image.url, publicId: image.id };
+		}
+
+		return undefined; // на случай некорректного объекта
+	}
+
 	public async updateCategory(
 		id: string,
 		category: MutationCategoryModel,
 	): Promise<CategoryModel> {
-		const { remoteUrls, localFiles } = this.uploadImageMapper.splits(
-			category.images || [],
-		);
+		console.log("Category Model:", category);
 
-		const uploadedUrls = localFiles.length
-			? await this.uploadImageService.uploadImages(localFiles)
-			: [];
+		const resolvedImage = await this.resolveImage(category.image);
 
 		const dto: UpdateCategoryDto = {
 			name: category.name,
 			parent: category.parent,
-			image: [...remoteUrls, ...uploadedUrls][0],
+			image: resolvedImage || null, // всегда объект { url, publicId } или undefined
 		};
+
+		console.log("Category DTO: ", dto);
 
 		return await this.api.update(id, dto);
 	}

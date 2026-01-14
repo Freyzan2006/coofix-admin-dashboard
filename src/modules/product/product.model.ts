@@ -15,7 +15,6 @@ export interface ProductModel {
 	images: ImageModel[];
 	characteristics?: CharacteristicsDto;
 	inStock: boolean;
-	quantity: number;
 	isNew: boolean;
 	isSale: boolean;
 	ratingAvg: number;
@@ -43,7 +42,6 @@ export interface CreateProductModel {
 	brand: string;
 	images: File[];
 	characteristics: CharacteristicItem[];
-	quantity: number;
 	isNew: boolean;
 	isSale: boolean;
 }

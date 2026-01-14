@@ -60,7 +60,10 @@ export const CategoryTable: React.FC = () => {
 									<SliceText text={item.slug} slice={20} />
 								</TableData>
 								<TableData>
-									<SliceText text={String(item.parent || "-")} slice={20} />
+									<SliceText
+										text={String(item.parent.name || "-")}
+										slice={20}
+									/>
 								</TableData>
 								<TableData>
 									<SliceText text={String(item.image || "-")} slice={20} />

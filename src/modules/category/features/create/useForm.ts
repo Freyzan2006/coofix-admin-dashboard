@@ -14,12 +14,12 @@ export function useFormCategoryCreate() {
 		useCategories();
 
 	const methods = useForm<MutationCategoryModel>({
-		defaultValues: getDefaultValues(categories[0]._id),
+		defaultValues: getDefaultValues(categories[0].parent),
 		mode: "onChange",
 	});
 
 	const images = useUploadForm<MutationCategoryModel>({
-		name: "images",
+		name: "image",
 		control: methods.control,
 		minFiles: 0,
 		maxFiles: 1,
@@ -31,7 +31,7 @@ export function useFormCategoryCreate() {
 		await createCategoryAsync({
 			name: data.name,
 			parent: data.parent,
-			images: data.images,
+			image: data.image,
 		});
 	};
 

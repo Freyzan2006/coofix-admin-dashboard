@@ -24,10 +24,6 @@ export const buildProductDetails = (product: ProductModel) => [
 		value: <CopyText text={`${product.oldPrice ?? "-"} руб.`} />,
 	},
 	{
-		label: "Количество",
-		value: <CopyText text={`${product.quantity} шт.`} />,
-	},
-	{
 		label: "Категория",
 		value: (
 			<LinkApp

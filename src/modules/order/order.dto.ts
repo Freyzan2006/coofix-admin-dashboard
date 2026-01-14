@@ -28,7 +28,7 @@ export interface OrderDto {
 export interface OrderItemDto {
 	_id: string;
 	product: OrderProductDto | null;
-	quantity: number;
+
 	price: number;
 }
 

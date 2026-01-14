@@ -13,7 +13,7 @@ function defaultValues(category: CategoryModel): MutationCategoryModel {
 	return {
 		name: category.name,
 		parent: category.parent,
-		images: null,
+		image: null,
 	};
 }
 
@@ -31,10 +31,8 @@ export function useFormCategoryUpdate(category: CategoryModel) {
 		? [uploadImageMapper.toUploadedImage(category.image)]
 		: [];
 
-	console.log(defaultImages);
-
 	const imagesField = useUploadForm<MutationCategoryModel>({
-		name: "images",
+		name: "image",
 		control: methods.control,
 		minFiles: 0,
 		maxFiles: 1,
@@ -43,10 +41,11 @@ export function useFormCategoryUpdate(category: CategoryModel) {
 	});
 
 	const onSubmit: SubmitHandler<MutationCategoryModel> = async (data) => {
+		console.log(data);
 		await updateCategoryAsync({
 			name: data.name,
 			parent: data.parent,
-			images: data.images,
+			image: imagesField.field.value[0] || null,
 		});
 	};
 

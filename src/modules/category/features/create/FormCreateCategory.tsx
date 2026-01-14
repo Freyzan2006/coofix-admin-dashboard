@@ -32,7 +32,7 @@ export const FormCreateCategory: React.FC = () => {
 					render={({ field }) => (
 						<Select
 							items={categories.data}
-							value={field.value}
+							value={field.value.name}
 							onChange={field.onChange}
 							error={methods.formState.errors.parent?.message}
 							title="Подкатегория"

@@ -26,14 +26,6 @@ export const PriceAndQuantityFields: React.FC = () => {
 				{...register("oldPrice", fieldsProductRules.oldPrice)}
 				error={errors.oldPrice?.message}
 			/>
-
-			<Input
-				title="Количество"
-				type="number"
-				variant="primary"
-				{...register("quantity", fieldsProductRules.quantity)}
-				error={errors.quantity?.message}
-			/>
 		</Space>
 	);
 };

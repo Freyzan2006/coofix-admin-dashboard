@@ -20,6 +20,8 @@ export const FormUpdateCategory: React.FC<IFormUpdateCategoryProps> = ({
 	const { methods, onSubmit, isSubmitting, categories, images } =
 		useFormCategoryUpdate(category);
 
+	console.log(images.field.value);
+
 	return (
 		<FormProvider {...methods}>
 			<Form onSubmit={onSubmit} className="space-y-6">
@@ -36,7 +38,7 @@ export const FormUpdateCategory: React.FC<IFormUpdateCategoryProps> = ({
 					render={({ field }) => (
 						<Select
 							items={categories.data}
-							value={field.value}
+							value={field.value.name}
 							onChange={field.onChange}
 							error={methods.formState.errors.parent?.message}
 						/>
