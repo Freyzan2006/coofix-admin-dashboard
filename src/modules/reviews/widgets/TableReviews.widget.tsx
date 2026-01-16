@@ -1,6 +1,6 @@
-import { useProductsAdapter } from "@modules/product/adapters/use-products.adapter";
-import { useProductStore } from "@modules/product/store/product.store";
-import { useProductActionsStore } from "@modules/product/store/product-actions.store";
+import { useProductStore, useProductsAdapter } from "@modules/product";
+
+import { useReviewsActionsStore } from "@modules/reviews/reviews.store";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Space } from "@shared/ui/Space.ui";
 import {
@@ -14,9 +14,9 @@ import {
 } from "@shared/ui/table";
 import { SliceText } from "@shared/ui/text";
 
-export const TableProducts: React.FC = () => {
+export const TableReviews: React.FC = () => {
 	const { headerTable } = useProductStore();
-	const { openModal } = useProductActionsStore();
+	const { openModal } = useReviewsActionsStore();
 
 	const { products, isError, isLoading, error, limit } = useProductsAdapter();
 
@@ -40,7 +40,7 @@ export const TableProducts: React.FC = () => {
 							<TableRow
 								key={item._id}
 								className="hover:bg-base-200 cursor-pointer"
-								onClick={() => openModal(item, "details")}
+								onClick={() => openModal(item._id, "details")}
 							>
 								<TableData>
 									<SliceText text={item._id} slice={20} />

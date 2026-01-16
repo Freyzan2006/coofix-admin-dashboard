@@ -33,7 +33,7 @@ export const Input: React.FC<IInputProps> = ({
 		<label className="fieldset">
 			{props.title && <span className="label">{props.title}</span>}
 			<input type={type} {...props} className={className} />
-			{error && <span className=" text-error mt-1 text-sm">{error}</span>}
+			{error && <span className=" text-error label-text-alt">{error}</span>}
 		</label>
 	);
 };

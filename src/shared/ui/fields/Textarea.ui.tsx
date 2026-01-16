@@ -11,7 +11,7 @@ interface ITextareaProps
 		| "warning"
 		| "error";
 	error?: string;
-	title: string;
+	title?: string;
 	fullWidth?: boolean;
 }
 
@@ -38,16 +38,14 @@ export const Textarea: React.FC<ITextareaProps> = ({
 		baseClass,
 		props.className,
 		fullWidth && "w-full",
-		variants[variant],
-		error && "textarea-error",
+		error ? "textarea-error" : variants[variant],
 	);
 
 	return (
-		<div>
-			<label className="label" htmlFor={props.id}>
-				<span className="label-text">{title}</span>
-			</label>
+		<label className="fieldset">
+			{title && <span className="label">{title}</span>}
 			<textarea className={className} {...props}></textarea>
-		</div>
+			{error && <span className="label-text-alt text-error">{error}</span>}
+		</label>
 	);
 };

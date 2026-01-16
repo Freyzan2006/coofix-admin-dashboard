@@ -1,3 +1,5 @@
+import { Reviews } from "@modules/reviews";
+
 export default function ReviewsPage() {
-	return <div>ReviewsPage</div>;
+	return <Reviews />;
 }
