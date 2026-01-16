@@ -61,7 +61,7 @@ export const CategoryTable: React.FC = () => {
 								</TableData>
 								<TableData>
 									<SliceText
-										text={String(item.parent.name || "-")}
+										text={String(item.parent?.name || "-")}
 										slice={20}
 									/>
 								</TableData>
