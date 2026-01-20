@@ -1,4 +1,4 @@
-import { useProductsAdapter } from "@modules/product/adapters/use-products.adapter";
+import type { ProductModel } from "@modules/product/product.model";
 import { useProductStore } from "@modules/product/store/product.store";
 import { useProductActionsStore } from "@modules/product/store/product-actions.store";
 import { Alert } from "@shared/ui/Alert.ui";
@@ -14,11 +14,23 @@ import {
 } from "@shared/ui/table";
 import { SliceText } from "@shared/ui/text";
 
-export const TableProducts: React.FC = () => {
+interface ITableProductsProps {
+	products: ProductModel[];
+	isError: boolean;
+	isLoading: boolean;
+	error: Error | null;
+	limit: number;
+}
+
+export const TableProducts: React.FC<ITableProductsProps> = ({
+	products,
+	isError,
+	isLoading,
+	error,
+	limit,
+}) => {
 	const { headerTable } = useProductStore();
 	const { openModal } = useProductActionsStore();
-
-	const { products, isError, isLoading, error, limit } = useProductsAdapter();
 
 	if (isError) return <Alert variant="danger">{error?.message}</Alert>;
 

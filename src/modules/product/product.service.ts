@@ -36,7 +36,7 @@ interface IProductService {
 		quantity: number,
 	): Promise<ProductModel>;
 	findProductBySlug(slug: string): Promise<ProductModel>;
-	searchProduct(query: string): Promise<ProductModel[]>;
+	searchProducts(query: string): Promise<ProductModel[]>;
 	filterProduct(queries: ProductFilterQueryParams): Promise<ProductsModel>;
 	getNewProducts(): Promise<ProductModel[]>;
 	getSaleProducts(): Promise<ProductModel[]>;
@@ -107,7 +107,8 @@ class ProductService implements IProductService {
 		const response = await this.productApi.findBySlug(slug);
 		return response;
 	}
-	public async searchProduct(query: string): Promise<ProductModel[]> {
+	public async searchProducts(query: string): Promise<ProductModel[]> {
+		console.log("searchProducts");
 		const response = await this.productApi.search(query);
 		return response;
 	}

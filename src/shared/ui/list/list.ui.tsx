@@ -12,7 +12,7 @@ interface IListProps
 	extends Omit<React.HTMLAttributes<HTMLUListElement>, "children"> {
 	variant?: "primary" | "secondary";
 	fullWidth?: boolean;
-	children: ListItemElement | ListItemElement[];
+	children: ListItemElement | ListItemElement[] | null;
 }
 
 export const List: React.FC<IListProps> = ({
@@ -32,6 +32,7 @@ export const List: React.FC<IListProps> = ({
 		variants[variant],
 		baseClassName,
 		fullWidth ? "w-full" : "",
+		props.className,
 	);
 
 	return (

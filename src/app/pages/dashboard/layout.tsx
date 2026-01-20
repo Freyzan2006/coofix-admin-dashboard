@@ -9,11 +9,7 @@ export default function DashboardLayout() {
 		<Screen>
 			<SidebarApp>
 				<Container>
-					{/* <SmoothAppearance>
-						<PopUpAppearance> */}
 					<Outlet />
-					{/* </PopUpAppearance>
-					</SmoothAppearance> */}
 				</Container>
 			</SidebarApp>
 		</Screen>

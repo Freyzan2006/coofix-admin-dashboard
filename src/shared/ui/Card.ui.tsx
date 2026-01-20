@@ -1,7 +1,7 @@
 import { cn } from "@shared/lib/utils";
 
 interface ICardProps extends React.HTMLAttributes<HTMLDivElement> {
-	variant?: "primary";
+	variant?: "primary" | "secondary";
 	size?: "sm" | "md" | "lg";
 }
 
@@ -15,6 +15,7 @@ export const Card: React.FC<ICardProps> = ({
 
 	const variants = {
 		primary: "card-primary bg-base-300 shadow-xl",
+		secondary: "card-secondary bg-primary shadow-md",
 	} as const;
 
 	const sizes = {

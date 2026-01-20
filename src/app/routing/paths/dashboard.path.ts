@@ -7,6 +7,10 @@ export const dashboardPaths = [
 		Component: DashboardLayout,
 		children: [
 			{
+				path: "",
+				Component: wrapperProtected(() => import("@pages/dashboard/page")),
+			},
+			{
 				path: "products",
 				children: [
 					{

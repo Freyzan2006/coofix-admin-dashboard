@@ -57,9 +57,9 @@ class ProductRestApi implements IProductApi {
 		return response.data.products;
 	}
 	public async search(query: string): Promise<ProductModel[]> {
-		const response = await this.client.get<ProductsModel>(
-			`/products/search?query=${query}`,
-		);
+		const response = await this.client.get<ProductsModel>(`/products/search`, {
+			params: { q: query },
+		});
 
 		return response.data.products;
 	}
