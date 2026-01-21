@@ -1,3 +1,6 @@
+import type { FormRules } from "@shared/types";
+import type { StockUpdateProductDto } from "./product.dto";
+
 export const getDefaultValues = () => ({
 	name: "Product test. name",
 	description: "Product test. description",
@@ -97,5 +100,20 @@ export const fieldsProductRules = {
 				message: "Максимум 255 символов",
 			},
 		},
+	},
+};
+
+export const fieldsStockRules: FormRules<StockUpdateProductDto> = {
+	stock: {
+		required: "Количество обязательно",
+		min: {
+			value: 0,
+			message: "Минимальное количество 0",
+		},
+		max: {
+			value: 10000,
+			message: "Максимальное количество 10000",
+		},
+		valueAsNumber: true,
 	},
 };

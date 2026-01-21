@@ -48,3 +48,7 @@ export interface ProductDto extends BaseResponse {
 }
 
 export type CharacteristicsDto = Record<string, string>;
+
+export interface StockUpdateProductDto {
+	stock: number;
+}

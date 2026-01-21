@@ -47,6 +47,10 @@ export const buildProductDetails = (product: ProductModel) => [
 		value: <CopyText text={product.inStock ? "Да" : "Нет"} />,
 	},
 	{
+		label: "Количество",
+		value: <CopyText text={`${String(product.stock)} шт.`} />,
+	},
+	{
 		label: "Новинка",
 		value: <CopyText text={product.isNew ? "Да" : "Нет"} />,
 	},

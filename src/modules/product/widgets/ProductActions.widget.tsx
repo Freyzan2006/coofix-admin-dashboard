@@ -6,10 +6,11 @@ import {
 	ModalHeader,
 } from "@shared/ui/modal";
 import { type TabItem, Tabs } from "@shared/ui/tabs";
-import { InfoIcon, SquarePenIcon, TrashIcon } from "lucide-react";
+import { BlocksIcon, InfoIcon, SquarePenIcon, TrashIcon } from "lucide-react";
 import type React from "react";
 import { DeleteConfirmationContainer } from "../features/delete";
 import { DetailsProduct } from "../features/details";
+import { StockUpdateProduct } from "../features/StockUpdateProduct.feature";
 import { EditProduct } from "../features/update";
 import { useProductActionsStore } from "../store/product-actions.store";
 
@@ -41,6 +42,17 @@ export const ProductActions: React.FC = () => {
 			label: "Редактировать",
 			icon: <SquarePenIcon />,
 			content: selectedProduct && <EditProduct slug={selectedProduct.slug} />,
+		},
+		{
+			id: "stock",
+			label: "Обновить количество",
+			icon: <BlocksIcon />,
+			content: selectedProduct && (
+				<StockUpdateProduct
+					productId={selectedProduct._id}
+					slug={selectedProduct.slug}
+				/>
+			),
 		},
 		{
 			id: "delete",

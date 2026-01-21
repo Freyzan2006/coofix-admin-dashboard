@@ -19,6 +19,7 @@ export interface ProductModel {
 	isSale: boolean;
 	ratingAvg: number;
 	ratingCount: number;
+	stock: number;
 	createdAt: Date;
 }
 
