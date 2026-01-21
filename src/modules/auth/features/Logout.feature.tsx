@@ -9,7 +9,12 @@ export const Logout: React.FC = () => {
 	const handlerLogout = async () => await logoutAsync();
 
 	return (
-		<Button size="sm" onClick={handlerLogout} disabled={isPendingLogout}>
+		<Button
+			variant="primary"
+			size="sm"
+			onClick={handlerLogout}
+			disabled={isPendingLogout}
+		>
 			{!isPendingLogout ? <LogOutIcon /> : <Loading />} Выйти
 		</Button>
 	);

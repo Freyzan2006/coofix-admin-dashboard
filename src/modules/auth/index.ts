@@ -1,5 +1,4 @@
 export type { ProviderEntity } from "./entities/provider.entity";
-export { Logout } from "./features/Logout.feature";
 export {
 	authRequestMiddleware,
 	authResponseMiddleware,
@@ -10,4 +9,5 @@ export {
 	wrapperProtected,
 	wrapperPublicOnly,
 } from "./utils/wrapperProtected.util";
+export { AuthControl } from "./widgets/AuthControl.widget";
 export { LoginWidget } from "./widgets/Login.widget";

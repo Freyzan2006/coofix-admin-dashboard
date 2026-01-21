@@ -10,6 +10,7 @@ export const useLoginLocal = () => {
 		onSuccess: (data) => {
 			noticeToastSvc.success("Вы успешно вошли в систему");
 			useAuthStore.getState().setAccessToken(data.accessToken);
+			useAuthStore.getState().setUser(data.user);
 		},
 		onError: () => {
 			noticeToastSvc.success("Вы успешно вошли в систему");

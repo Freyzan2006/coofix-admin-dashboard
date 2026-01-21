@@ -1,4 +1,4 @@
-import { Logout } from "@modules/auth";
+import { AuthControl } from "@modules/auth";
 import { ThemeSwitcher } from "@shared/features/ThemeSwitcher";
 import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
@@ -20,7 +20,7 @@ export const NavigationApp: React.FC = () => {
 				<Heading variant="primary">{urlPage}</Heading>
 				<Space align="center">
 					<ThemeSwitcher variant="secondary" />
-					<Logout />
+					<AuthControl />
 				</Space>
 			</div>
 		</nav>
