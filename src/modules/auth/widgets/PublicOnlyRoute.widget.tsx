@@ -1,16 +1,15 @@
 import { useAuthStore } from "@modules/auth";
-import { Spinner } from "@shared/ui/Spinner.ui";
+import { Loading } from "@shared/ui/Loading.ui";
 import type { PropsWithChildren } from "react";
 import { Navigate } from "react-router";
-
-const AUTH_REDIRECT = "/dashboard";
+import { AUTH_REDIRECT } from "../auth.config";
 
 export const PublicOnlyRoute: React.FC<PropsWithChildren> = ({ children }) => {
 	const accessToken = useAuthStore((s) => s.accessToken);
 	const isAuthInitialized = useAuthStore((s) => s.isAuthInitialized);
 
 	if (!isAuthInitialized) {
-		return <Spinner />;
+		return <Loading />;
 	}
 
 	if (accessToken) {

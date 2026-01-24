@@ -21,7 +21,7 @@ export const Loading: React.FC<ILoadingProps> = ({
 	} as const;
 
 	const variants = {
-		primary: "loading-bars",
+		primary: "loading-bars bg-primary",
 		secondary: "loading-dots",
 		spinner: "loading-spinner",
 	} as const;

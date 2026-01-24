@@ -11,6 +11,7 @@ export default defineConfig({
 			"@modules": "/src/modules",
 			"@app": "/src/app",
 			"@pages": "/src/app/pages",
+			"@assets": "/src/assets",
 		},
 	},
 	build: {

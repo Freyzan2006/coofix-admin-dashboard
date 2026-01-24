@@ -1,6 +1,6 @@
 import {
+	ChartAreaIcon,
 	ChartBarStackedIcon,
-	LayoutDashboardIcon,
 	type LucideIcon,
 	MessageSquareDiffIcon,
 	PackageSearchIcon,
@@ -16,9 +16,9 @@ interface ISideBarLink {
 
 export const sideBarLinks: ISideBarLink[] = [
 	{
-		to: "/dashboard",
-		label: "Главная",
-		icon: LayoutDashboardIcon,
+		to: "/dashboard/analytics",
+		label: "Аналитика",
+		icon: ChartAreaIcon,
 	},
 	{
 		to: "/dashboard/products",

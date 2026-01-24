@@ -29,7 +29,8 @@
 			"@app/*": ["./app/*"],
 			"@modules/*": ["./modules/*"],
 			"@shared/*": ["./shared/*"],
-			"@pages/*": ["./app/pages/*"]
+			"@pages/*": ["./app/pages/*"],
+			"@assets/*": ["./assets/*"]
 		}
 	},
 	"include": ["src"]

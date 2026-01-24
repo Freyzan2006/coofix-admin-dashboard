@@ -1,35 +1,35 @@
+"use client";
+
 import { environmentConfig } from "@shared/config";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
 import { Input } from "@shared/ui/fields";
-import { UserCheckIcon } from "lucide-react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { LockIcon, MailIcon, UserCheckIcon } from "lucide-react";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useLoginLocal } from "../adapters/login.hook";
 import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
+import { AUTH_REDIRECT } from "../auth.config";
 
 export const LoginForm: React.FC = () => {
 	const mode = environmentConfig.get<"development" | "prod">("MODE");
+	const defaultEmail =
+		mode === "development" ? "ilhomovabubakir12@gmail.com" : "";
+	const defaultPassword = mode === "development" ? "admin" : "";
 
-	const username = mode === "development" ? "ilhomovabubakir12@gmail.com" : "";
-	const password = mode === "development" ? "admin" : "";
-
-	const nav = useNavigate();
+	const navigate = useNavigate();
 
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isSubmitting },
 	} = useForm<LoginLocalDtoRequest>({
 		defaultValues: {
-			email: username,
-			password: password,
+			email: defaultEmail,
+			password: defaultPassword,
 		},
 		mode: "onChange",
-		criteriaMode: "firstError",
-		reValidateMode: "onChange",
 	});
 
 	const {
@@ -40,57 +40,81 @@ export const LoginForm: React.FC = () => {
 		isLoginSuccess,
 	} = useLoginLocal();
 
-	const onSubmit: SubmitHandler<LoginLocalDtoRequest> = async (
-		data: LoginLocalDtoRequest,
-	) => {
+	const onSubmit: SubmitHandler<LoginLocalDtoRequest> = async (data) => {
 		await LoginLocal(data);
-		nav("/dashboard", { replace: true });
+		navigate(AUTH_REDIRECT, { replace: true });
 	};
 
 	return (
-		<Form title="Вход в админ панель" onSubmit={handleSubmit(onSubmit)}>
-			<Input
-				error={errors.email?.message}
-				title="Почта"
-				variant="default"
-				type="email"
-				{...register("email", {
-					required: "Email обязателен",
-					pattern: {
-						value: /^\S+@\S+$/i,
-						message: "Некорректный email",
-					},
-				})}
-			/>
+		<Form
+			title="Вход в админ-панель"
+			description="Введите свои данные для доступа к системе"
+			variant="card"
+			className="mx-auto"
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			<div className="space-y-5">
+				{/* Email */}
+				<div className="relative">
+					<MailIcon className="absolute left-3 top-1/2 z-1 -translate-y-1/2 h-5 w-5 text-base-content/50" />
+					<Input
+						type="email"
+						placeholder="Ваш email"
+						className="pl-11 input-bordered input-md w-full"
+						error={errors.email?.message}
+						{...register("email", {
+							required: "Email обязателен",
+							pattern: {
+								value: /^\S+@\S+$/i,
+								message: "Некорректный email",
+							},
+						})}
+					/>
+				</div>
 
-			<Input
-				error={errors.password?.message}
-				variant="default"
-				title="Пароль"
-				type="password"
-				{...register("password", {
-					required: "Пароль обязателен",
-					minLength: {
-						value: 3,
-						message: "Пароль должен быть минимум 3 символов",
-					},
-				})}
-			/>
+				{/* Password */}
+				<div className="relative">
+					<LockIcon className="absolute left-3 top-1/2 z-1 -translate-y-1/2 h-5 w-5 text-base-content/50" />
+					<Input
+						type="password"
+						placeholder="Пароль"
+						className="pl-11 input-bordered input-md w-full"
+						error={errors.password?.message}
+						{...register("password", {
+							required: "Пароль обязателен",
+							minLength: {
+								value: 3,
+								message: "Пароль должен быть минимум 3 символа",
+							},
+						})}
+					/>
+				</div>
 
-			{isLoginError && (
-				<Alert variant="danger">
-					<span>{errorLogin?.message || "Ошибка входа"}</span>
-				</Alert>
-			)}
+				{/* Сообщения */}
+				{isLoginError && (
+					<Alert variant="danger" className="animate-shake">
+						{errorLogin?.message || "Ошибка входа. Проверьте данные."}
+					</Alert>
+				)}
 
-			{isLoginSuccess && (
-				<Alert variant="success">
-					<span>Вход выполнен успешно!</span>
-				</Alert>
-			)}
+				{isLoginSuccess && (
+					<Alert variant="success" className="animate-fade-in">
+						Успешный вход! Перенаправляем...
+					</Alert>
+				)}
+			</div>
 
-			<Button variant="success" type="submit" loading={isLoginPending}>
-				<UserCheckIcon /> Войти
+			{/* Кнопка */}
+			<Button
+				type="submit"
+				variant="primary"
+				size="lg"
+				className="w-full mt-6 gap-2 font-medium"
+				loading={isLoginPending || isSubmitting}
+				disabled={isLoginPending || isSubmitting}
+			>
+				<UserCheckIcon />
+				Войти
 			</Button>
 		</Form>
 	);

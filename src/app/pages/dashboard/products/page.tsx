@@ -1,5 +1,5 @@
-import { ProductFrame } from "@modules/product";
+import { ProductView } from "@modules/product";
 
 export default function ProductsPage() {
-	return <ProductFrame />;
+	return <ProductView />;
 }

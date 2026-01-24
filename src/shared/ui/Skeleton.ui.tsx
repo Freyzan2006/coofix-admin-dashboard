@@ -4,7 +4,7 @@ interface ISkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Skeleton: React.FC<ISkeletonProps> = ({ variant = "primary" }) => {
 	const renderPrimary = () => {
-		return <div className="skeleton h-32 w-32"></div>;
+		return <div className="skeleton h-32"></div>;
 	};
 
 	const renderSecondary = () => {

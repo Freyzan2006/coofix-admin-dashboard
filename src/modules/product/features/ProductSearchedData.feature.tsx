@@ -7,7 +7,9 @@ interface IProductListProps {
 	products: ProductModel[];
 }
 
-export const ProductList: React.FC<IProductListProps> = ({ products }) => {
+export const ProductSearchedData: React.FC<IProductListProps> = ({
+	products,
+}) => {
 	const { searchQuery } = useProductSearchStore();
 
 	const shouldSearch = searchQuery.length >= 2;

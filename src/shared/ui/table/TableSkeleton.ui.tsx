@@ -2,7 +2,7 @@ import { createMatrixIds } from "@shared/lib/createMatrixIds.lib";
 import { createStableIds } from "@shared/lib/createStableIds.lib";
 import { cn } from "@shared/lib/utils";
 import { useMemo } from "react";
-import { Spinner } from "../Spinner.ui";
+import { Loading } from "../Loading.ui";
 import { TableHeader } from "./TableHeader.ui";
 import { TableRow } from "./TableRow.ui";
 import { Tbody } from "./Tbody.ui";
@@ -58,7 +58,7 @@ export const TableSkeleton: React.FC<ITableSkeletonProps> = ({
 
 	return (
 		<div className="overflow-x-auto relative w-full">
-			<Spinner
+			<Loading
 				className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 				size="lg"
 			/>

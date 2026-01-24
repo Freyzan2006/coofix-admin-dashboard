@@ -1,5 +1,6 @@
 import { useAuthStore } from "@modules/auth";
-import { Spinner } from "@shared/ui/Spinner.ui";
+import { Loading } from "@shared/ui/Loading.ui";
+
 import type { PropsWithChildren } from "react";
 import { Navigate, useLocation } from "react-router";
 
@@ -9,7 +10,7 @@ export const ProtectedRoute: React.FC<PropsWithChildren> = ({ children }) => {
 	const location = useLocation();
 
 	if (!isAuthInitialized) {
-		return <Spinner />;
+		return <Loading />;
 	}
 
 	if (!accessToken) {

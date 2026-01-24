@@ -1,7 +1,7 @@
 import { Alert } from "@shared/ui/Alert.ui";
 import { Select } from "@shared/ui/fields";
+import { Loading } from "@shared/ui/Loading.ui";
 import { Space } from "@shared/ui/Space.ui";
-import { Spinner } from "@shared/ui/Spinner.ui";
 import { Label } from "@shared/ui/text";
 import { Controller, useFormContext } from "react-hook-form";
 import { useCreateProductAdapter } from "../adapters/useCreateProduct.adapter";
@@ -33,7 +33,7 @@ export const CategoryAndBrandFields: React.FC = () => {
 				<Label htmlFor="category">Категория</Label>
 
 				{categoriesIsLoading ? (
-					<Spinner />
+					<Loading />
 				) : (
 					<Controller
 						name="category"
@@ -63,7 +63,7 @@ export const CategoryAndBrandFields: React.FC = () => {
 			<Space gap={3} axis="vertical" fullWidth>
 				<Label htmlFor="brand">Бренд</Label>
 				{brandsIsLoading ? (
-					<Spinner />
+					<Loading />
 				) : (
 					<Controller
 						name="brand"

@@ -1,2 +1,38 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+[data-theme="light"] {
+	--color-primary: #f97316;
+	--color-primary-content: #ffffff;
+
+	--color-secondary: #fb923c;
+	--color-secondary-content: #000000;
+
+	--color-accent: #f97316;
+	--color-accent-content: #ffffff;
+
+	--color-base-100: #ffffff;
+	--color-base-200: #f9fafb;
+	--color-base-300: #e5e7eb;
+
+	--color-neutral: #1f2937;
+	--color-neutral-content: #ffffff;
+}
+
+[data-theme="dark"] {
+	--color-primary: #f97316;
+	--color-primary-content: #ffffff;
+
+	--color-secondary: #fb923c;
+	--color-secondary-content: #000000;
+
+	--color-accent: #f97316;
+	--color-accent-content: #ffffff;
+
+	--color-neutral: #1f2937;
+	--color-neutral-content: #ffffff;
+}
+
+.chart-container {
+	height: 300px;
+}

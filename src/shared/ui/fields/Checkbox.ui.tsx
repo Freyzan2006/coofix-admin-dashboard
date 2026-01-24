@@ -4,6 +4,7 @@ interface ICheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	variant?: "primary" | "secondary" | "accent" | "neutral";
 	error?: string;
 	title: string;
+	// onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const Checkbox: React.FC<ICheckboxProps> = ({
