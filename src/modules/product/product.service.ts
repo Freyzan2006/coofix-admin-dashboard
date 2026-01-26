@@ -108,7 +108,6 @@ class ProductService implements IProductService {
 		return response;
 	}
 	public async searchProducts(query: string): Promise<ProductModel[]> {
-		console.log("searchProducts");
 		const response = await this.productApi.search(query);
 		return response;
 	}

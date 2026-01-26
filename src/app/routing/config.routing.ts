@@ -5,7 +5,6 @@ import {
 	MessageSquareDiffIcon,
 	PackageSearchIcon,
 	SendToBackIcon,
-	StarIcon,
 } from "lucide-react";
 
 interface ISideBarLink {
@@ -39,10 +38,5 @@ export const sideBarLinks: ISideBarLink[] = [
 		to: "/dashboard/reviews",
 		label: "Отзывы",
 		icon: MessageSquareDiffIcon,
-	},
-	{
-		to: "/dashboard/favorites",
-		label: "Избранное",
-		icon: StarIcon,
 	},
 ];

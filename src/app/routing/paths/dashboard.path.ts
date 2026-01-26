@@ -56,17 +56,6 @@ export const dashboardPaths = [
 					},
 				],
 			},
-			{
-				path: "favorites",
-				children: [
-					{
-						index: true,
-						Component: wrapperProtected(
-							() => import("@pages/dashboard/favorites/page"),
-						),
-					},
-				],
-			},
 		],
 	},
 ];

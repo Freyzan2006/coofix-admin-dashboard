@@ -52,3 +52,10 @@ export type CharacteristicsDto = Record<string, string>;
 export interface StockUpdateProductDto {
 	stock: number;
 }
+
+export interface ProductFiltersDto {
+	category: string;
+	brand: string;
+	minPrice: number;
+	maxPrice: number;
+}

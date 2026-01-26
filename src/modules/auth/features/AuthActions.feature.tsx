@@ -10,8 +10,6 @@ import { useAuthStore } from "../store/auth.store";
 export const AuthActions: React.FC = () => {
 	const { user } = useAuthStore();
 
-	console.log(user);
-
 	return (
 		<Dropdown>
 			<DropdownTitle>

@@ -66,7 +66,7 @@ class ProductRestApi implements IProductApi {
 	public async filter(
 		queries: ProductFilterQueryParams,
 	): Promise<ProductsModel> {
-		const response = await this.client.get<ProductsModel>("/products", {
+		const response = await this.client.get<ProductsModel>("/products/filter", {
 			params: queries,
 		});
 

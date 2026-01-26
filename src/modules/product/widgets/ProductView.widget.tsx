@@ -12,7 +12,7 @@ import {
 	Table as TableIcon,
 } from "lucide-react";
 import { useState } from "react";
-import { useProductsAdapter } from "../adapters/use-products.adapter";
+import { useProductsViewAdapter } from "../adapters/use-products-view.adapter";
 import { CreateProductModal } from "../features/create";
 import { PaginationProducts, TableProducts } from "../features/table";
 import { ProductActions } from "./ProductActions.widget";
@@ -20,7 +20,9 @@ import { ProductFilters } from "./ProductFilters.widget";
 import { ProductList } from "./ProductList.widget";
 
 export const ProductView: React.FC = () => {
-	const { products, isError, isLoading, error, limit } = useProductsAdapter();
+	// const { products, isError, isLoading, error, limit } = useProductsAdapter();
+	const { products, isError, isLoading, error, limit } =
+		useProductsViewAdapter();
 
 	const [activeView, setActiveView] = useState<string>("table");
 
