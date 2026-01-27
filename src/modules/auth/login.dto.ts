@@ -22,3 +22,9 @@ export interface LoginGoogleDtoResponse {
 	token: string;
 	user: UserModel;
 }
+
+export interface RefreshTokenDtoResponse {
+	success: boolean;
+	accessToken: string;
+	refreshToken: string;
+}

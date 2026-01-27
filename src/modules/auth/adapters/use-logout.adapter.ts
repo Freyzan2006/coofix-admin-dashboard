@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { authApi } from "../di/auth.di";
 import { useAuthStore } from "../store/auth.store";
 
-export function useLogout() {
+export function useLogoutAdapter() {
 	const { mutate, mutateAsync, isError, isPending, isSuccess } = useMutation({
 		mutationFn: async () => {
 			await authApi.logout();

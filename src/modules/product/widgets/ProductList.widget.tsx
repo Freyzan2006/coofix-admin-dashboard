@@ -20,6 +20,7 @@ import {
 	Tag,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { ProductNotFound } from "../ui/ProductNotFound.ui";
 
 interface ProductListProps {
 	products: ProductModel[];
@@ -63,15 +64,7 @@ export function ProductList({
 	}
 
 	if (products.length === 0) {
-		return (
-			<div className="rounded-xl border bg-card p-10 text-center">
-				<PackageIcon className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-				<h3 className="text-lg font-medium">Нет продуктов</h3>
-				<p className="text-muted-foreground mt-1">
-					Добавьте новые товары в каталог
-				</p>
-			</div>
-		);
+		return <ProductNotFound />;
 	}
 
 	return (

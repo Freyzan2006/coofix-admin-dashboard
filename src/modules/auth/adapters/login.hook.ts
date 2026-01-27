@@ -1,7 +1,7 @@
 import { noticeToastSvc } from "@modules/notification";
 import { useMutation } from "@tanstack/react-query";
-import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 import { authApi } from "../di/auth.di";
+import type { LoginLocalDtoRequest } from "../login.dto";
 import { useAuthStore } from "../store/auth.store";
 
 export const useLoginLocal = () => {

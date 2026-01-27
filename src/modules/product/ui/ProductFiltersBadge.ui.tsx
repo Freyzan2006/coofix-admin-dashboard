@@ -4,6 +4,7 @@ import { noticeToastSvc } from "@modules/notification";
 import { Badge } from "@shared/ui/Badge.ui";
 import { Button } from "@shared/ui/Button.ui";
 import { XIcon } from "lucide-react";
+import { isPositiveNumber } from "../product.util";
 import { useProductFiltersStore } from "../store/product-filters.store";
 
 interface IProductFiltersBadgeProps {
@@ -61,7 +62,7 @@ export const ProductFiltersBadge: React.FC<IProductFiltersBadgeProps> = ({
 						</Badge>
 					)}
 
-					{filters.maxPrice && (
+					{isPositiveNumber(filters.maxPrice) && (
 						<Badge variant="secondary" className="gap-1 px-2">
 							Макс. сумма: {filters.maxPrice}
 							<XIcon
@@ -71,7 +72,7 @@ export const ProductFiltersBadge: React.FC<IProductFiltersBadgeProps> = ({
 						</Badge>
 					)}
 
-					{filters.minPrice >= 0 && (
+					{isPositiveNumber(filters.maxPrice) && (
 						<Badge variant="secondary" className="gap-1 px-2">
 							Мин. сумма: {filters.minPrice}
 							<XIcon

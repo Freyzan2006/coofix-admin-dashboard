@@ -14,10 +14,11 @@ import {
 import { useState } from "react";
 import { useProductsViewAdapter } from "../adapters/use-products-view.adapter";
 import { CreateProductModal } from "../features/create";
-import { PaginationProducts, TableProducts } from "../features/table";
+import { PaginationProducts } from "../features/PaginationProducts.feature";
 import { ProductActions } from "./ProductActions.widget";
 import { ProductFilters } from "./ProductFilters.widget";
 import { ProductList } from "./ProductList.widget";
+import { TableProducts } from "./TableProducts.widget";
 
 export const ProductView: React.FC = () => {
 	// const { products, isError, isLoading, error, limit } = useProductsAdapter();

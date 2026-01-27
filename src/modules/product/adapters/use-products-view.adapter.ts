@@ -1,24 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "../product.di";
 import { useProductStore } from "../store/product.store";
-import { useProductFiltersStore } from "../store/product-filters.store";
-
-const DEFAULT_FILTERS = {
-	category: "",
-	brand: "",
-	minPrice: 0,
-	maxPrice: 0,
-};
+import {
+	cleanFilters,
+	useProductFiltersStore,
+} from "../store/product-filters.store";
 
 export const useProductsViewAdapter = () => {
-	const { filters } = useProductFiltersStore();
 	const { page, limit, setPage } = useProductStore();
 
-	const hasFilters =
-		filters.category !== DEFAULT_FILTERS.category ||
-		filters.brand !== DEFAULT_FILTERS.brand ||
-		filters.minPrice !== DEFAULT_FILTERS.minPrice ||
-		filters.maxPrice !== DEFAULT_FILTERS.maxPrice;
+	const rawFilters = useProductFiltersStore((s) => s.filters);
+	const filters = cleanFilters({
+		category: rawFilters.category,
+		brand: rawFilters.brand,
+		minPrice: rawFilters.minPrice,
+		maxPrice: rawFilters.maxPrice,
+	});
+
+	const hasFilters = Object.keys(filters).length > 0;
 
 	const allQuery = useQuery({
 		queryKey: ["products", "all", page, limit],
@@ -43,6 +42,10 @@ export const useProductsViewAdapter = () => {
 	const query = hasFilters ? filteredQuery : allQuery;
 
 	const handlerPageChange = (newPage: number) => setPage(newPage);
+
+	console.log(hasFilters);
+	console.log(filters);
+	console.log(query.data?.products);
 
 	return {
 		products: query.data?.products ?? [],

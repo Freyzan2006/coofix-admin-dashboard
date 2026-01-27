@@ -3,5 +3,5 @@ interface IDropdownTitleProps {
 }
 
 export const DropdownTitle: React.FC<IDropdownTitleProps> = ({ children }) => {
-	return <summary className="btn m-1"> {children}</summary>;
+	return <summary className="btn m-1 w-full"> {children}</summary>;
 };

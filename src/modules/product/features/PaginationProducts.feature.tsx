@@ -1,7 +1,6 @@
 import { Pagination } from "@shared/ui/Pagination.ui";
 import { Space } from "@shared/ui/Space.ui";
-
-import { useProductsViewAdapter } from "../../adapters/use-products-view.adapter";
+import { useProductsViewAdapter } from "../adapters/use-products-view.adapter";
 
 export const PaginationProducts: React.FC = () => {
 	// const { total, currentPage, handlerPageChange, limit } = useProductsAdapter();

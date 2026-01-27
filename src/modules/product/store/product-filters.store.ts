@@ -10,34 +10,43 @@ type TProductFiltersState = {
 	clearMinPrice: () => void;
 };
 
+export function cleanFilters<T extends Record<string, unknown>>(
+	obj: T,
+): Partial<T> {
+	return Object.fromEntries(
+		Object.entries(obj).filter(
+			([_, value]) =>
+				value !== undefined &&
+				value !== null &&
+				value !== "" &&
+				!(typeof value === "number" && Number.isNaN(value)),
+		),
+	) as Partial<T>;
+}
+
 const useProductFiltersStore = create<TProductFiltersState>((set) => ({
-	filters: {
-		category: "",
-		brand: "",
-		minPrice: 0,
-		maxPrice: 0,
-	},
+	filters: {},
 
 	setFilters: (filters) => set({ filters }),
 
 	clearCategory: () =>
 		set((state) => ({
-			filters: { ...state.filters, category: "" },
+			filters: { ...state.filters, category: undefined },
 		})),
 
 	clearBrand: () =>
 		set((state) => ({
-			filters: { ...state.filters, brand: "" },
+			filters: { ...state.filters, brand: undefined },
 		})),
 
 	clearMinPrice: () =>
 		set((state) => ({
-			filters: { ...state.filters, minPrice: 0 },
+			filters: { ...state.filters, minPrice: undefined },
 		})),
 
 	clearMaxPrice: () =>
 		set((state) => ({
-			filters: { ...state.filters, maxPrice: 0 },
+			filters: { ...state.filters, maxPrice: undefined },
 		})),
 }));
 

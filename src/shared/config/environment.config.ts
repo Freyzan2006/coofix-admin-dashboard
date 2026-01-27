@@ -1,6 +1,6 @@
 import { EnvVarNotFoundException } from "@shared/exceptions/env.exception";
 
-interface IEnvironmentConfig {
+export interface IEnvironmentConfig {
 	get<T>(key: string): T;
 	getArray<T>(key: string): T[];
 }

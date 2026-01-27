@@ -1,3 +1,4 @@
+export { useLogoutAdapter } from "./adapters/use-logout.adapter";
 export type { ProviderEntity } from "./entities/provider.entity";
 export {
 	authRequestMiddleware,
@@ -9,5 +10,5 @@ export {
 	wrapperProtected,
 	wrapperPublicOnly,
 } from "./utils/wrapperProtected.util";
-export { AuthControl } from "./widgets/AuthControl.widget";
+
 export { LoginWidget } from "./widgets/Login.widget";

@@ -54,8 +54,8 @@ export interface StockUpdateProductDto {
 }
 
 export interface ProductFiltersDto {
-	category: string;
-	brand: string;
-	minPrice: number;
-	maxPrice: number;
+	category?: string;
+	brand?: string;
+	minPrice?: number;
+	maxPrice?: number;
 }

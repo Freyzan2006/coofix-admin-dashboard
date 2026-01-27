@@ -3,6 +3,7 @@ import {
 	type UploadedImage,
 	useUploadForm,
 } from "@modules/upload";
+import { UserControler } from "@modules/user";
 import { useForm } from "react-hook-form";
 
 interface FormValues {
@@ -35,6 +36,8 @@ export default function DevToolsPage() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="flex w-300">
 			<input {...control.register("title")} />
+
+			<UserControler />
 
 			<ImageDropzoneV2
 				images={field.value}

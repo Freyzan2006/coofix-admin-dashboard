@@ -1,6 +1,6 @@
 "use client";
 
-import { environmentConfig } from "@shared/config";
+import { settingConfig } from "@shared/config";
 import { Alert } from "@shared/ui/Alert.ui";
 import { Button } from "@shared/ui/Button.ui";
 import { Form } from "@shared/ui/Form.ui";
@@ -9,14 +9,13 @@ import { LockIcon, MailIcon, UserCheckIcon } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useLoginLocal } from "../adapters/login.hook";
-import type { LoginLocalDtoRequest } from "../api/dto/login.dto";
 import { AUTH_REDIRECT } from "../auth.config";
+import type { LoginLocalDtoRequest } from "../login.dto";
 
 export const LoginForm: React.FC = () => {
-	const mode = environmentConfig.get<"development" | "prod">("MODE");
-	const defaultEmail =
-		mode === "development" ? "ilhomovabubakir12@gmail.com" : "";
-	const defaultPassword = mode === "development" ? "admin" : "";
+	const mode = settingConfig.mode();
+	const defaultEmail = mode === "dev" ? "ilhomovabubakir12@gmail.com" : "";
+	const defaultPassword = mode === "dev" ? "admin" : "";
 
 	const navigate = useNavigate();
 

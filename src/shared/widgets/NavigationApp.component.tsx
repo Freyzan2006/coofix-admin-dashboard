@@ -1,10 +1,11 @@
 "use client";
 
-import { AuthControl } from "@modules/auth";
 import { Logo } from "@modules/common";
+import { UserControler } from "@modules/user";
 
 import { ThemeSwitcher } from "@shared/features/ThemeSwitcher";
 import { cn } from "@shared/lib/utils";
+import { Space } from "@shared/ui/Space.ui";
 import { Heading } from "@shared/ui/text";
 import { TableOfContents } from "lucide-react";
 import React from "react";
@@ -60,11 +61,13 @@ export const NavigationApp: React.FC = React.memo(() => {
 					</div>
 				</div>
 
-				{/* Правая часть: переключатель темы + авторизация */}
-				<div className="flex items-center gap-2 md:gap-4">
-					<ThemeSwitcher variant="secondary" />
-					<AuthControl />
-				</div>
+				<Space>
+					<UserControler />
+					<ThemeSwitcher
+						variant="secondary"
+						className="w-full flex justify-center items-center"
+					/>
+				</Space>
 			</div>
 		</nav>
 	);
