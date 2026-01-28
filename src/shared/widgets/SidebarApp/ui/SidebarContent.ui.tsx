@@ -29,7 +29,7 @@ export const SidebarContent: React.FC = () => {
 				"drawer-side transition-all duration-300 ease-in-out",
 				isCollapsed ? "w-16" : "w-64",
 				"lg:static lg:w-64 lg:translate-x-0",
-				"min-h-screen w-full",
+				"h-full w-full",
 			)}
 		>
 			<label
